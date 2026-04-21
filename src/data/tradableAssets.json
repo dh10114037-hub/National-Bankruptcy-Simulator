@@ -1,0 +1,42 @@
+[
+  {
+    "id": "buy_bond",
+    "label": "国债（低价）",
+    "type": "bond",
+    "base_price": 0.2,
+    "description": "趁国家信用危机以极低价格买入国债",
+    "risk": "若政府稳定化则国债升值慢，错失机会",
+    "long_profit_condition": "信用回升 → 国债升值",
+    "short_profit_condition": "违约 → 暴涨赔付金"
+  },
+  {
+    "id": "short_currency",
+    "label": "做空货币",
+    "type": "short_currency",
+    "base_price": 0.92,
+    "description": "押注本国货币继续贬值",
+    "risk": "若政府成功稳住汇率则爆仓",
+    "long_profit_condition": "汇率继续下跌",
+    "short_profit_condition": "汇率暴跌 → 暴利"
+  },
+  {
+    "id": "gold",
+    "label": "黄金避险",
+    "type": "gold",
+    "base_price": 1850,
+    "description": "避险资产，危机越深涨幅越大",
+    "risk": "稳定期黄金跑输其他资产",
+    "long_profit_condition": "危机加深 → 金价上涨",
+    "short_profit_condition": "N/A"
+  },
+  {
+    "id": "short_bank",
+    "label": "做空银行系统",
+    "type": "short_bank",
+    "base_price": 100,
+    "description": "押注银行系统崩溃，高风险高回报",
+    "risk": "一旦政府救助银行，立刻爆仓",
+    "long_profit_condition": "银行挤兑/倒闭 → 暴利",
+    "short_profit_condition": "系统崩溃 → 暴利"
+  }
+]

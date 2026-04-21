@@ -1,0 +1,107 @@
+[
+  {
+    "id": "central_bank_intervention",
+    "name": "央行干预汇率",
+    "description": "央行直接入市买入本币，稳定汇率，消耗外储。",
+    "icon": "🏛️",
+    "cost": { "foreign_reserves": 8 },
+    "costLabel": "消耗外储 -8",
+    "immediateEffect": { "exchange_rate": 0.05, "volatility": -0.05 }
+  },
+  {
+    "id": "media_suppression",
+    "name": "管控媒体报道",
+    "description": "压制负面新闻，短期稳定民心，但信用微损。",
+    "icon": "📺",
+    "cost": { "credit_rating": 4 },
+    "costLabel": "消耗信用 -4",
+    "immediateEffect": { "public_support": 8 }
+  },
+  {
+    "id": "emergency_reserves",
+    "name": "动用战略储备",
+    "description": "释放国家战略物资储备平抑物价，减缓通胀。",
+    "icon": "🏗️",
+    "cost": { "foreign_reserves": 5 },
+    "costLabel": "消耗外储 -5",
+    "immediateEffect": { "inflation": -8, "public_support": 3 }
+  },
+  {
+    "id": "diplomat_talks",
+    "name": "外交斡旋",
+    "description": "向债权国争取延期偿款，缓解当期外储压力。",
+    "icon": "🤝",
+    "cost": { "credit_rating": 3 },
+    "costLabel": "消耗信用 -3",
+    "immediateEffect": { "foreign_reserves": 10 }
+  },
+  {
+    "id": "tax_amnesty",
+    "name": "税务特赦",
+    "description": "宣布对逃税企业实施有限特赦，快速回笼资金。",
+    "icon": "📋",
+    "cost": { "credit_rating": 5 },
+    "costLabel": "消耗信用 -5",
+    "immediateEffect": { "foreign_reserves": 12 },
+    "delayedEffect": {
+      "turns": 3,
+      "effect": { "credit_rating": -3 },
+      "description": "特赦引发国际社会对法治建设的质疑，3月后信用再损 -3"
+    }
+  },
+  {
+    "id": "social_subsidy",
+    "name": "发放民生补贴",
+    "description": "定向发放低收入群体生活补贴，快速回升民心。",
+    "icon": "🎁",
+    "cost": { "foreign_reserves": 6 },
+    "costLabel": "消耗外储 -6",
+    "immediateEffect": { "public_support": 12 }
+  },
+  {
+    "id": "anti_corruption_drive",
+    "name": "反腐整顿",
+    "description": "高调推进反腐运动，提振民心，同时改善信用形象。",
+    "icon": "⚖️",
+    "cost": { "public_support": 3 },
+    "costLabel": "短期阵痛 -3民心",
+    "immediateEffect": { "public_support": -3 },
+    "delayedEffect": {
+      "turns": 2,
+      "effect": { "public_support": 15, "credit_rating": 5 },
+      "description": "反腐成效显现，2月后民心 +15、信用 +5"
+    }
+  },
+  {
+    "id": "bond_buyback",
+    "name": "回购国债",
+    "description": "在市场低位回购部分国债，稳定债券价格。",
+    "icon": "📜",
+    "cost": { "foreign_reserves": 10 },
+    "costLabel": "消耗外储 -10",
+    "immediateEffect": { "credit_rating": 8, "volatility": -0.04 }
+  },
+  {
+    "id": "trade_agreement",
+    "name": "紧急贸易协议",
+    "description": "与友好国家签署临时贸易协议，获得短期外汇收入。",
+    "icon": "🌐",
+    "cost": { "public_support": 5 },
+    "costLabel": "政治代价 -5民心",
+    "immediateEffect": { "public_support": -5 },
+    "delayedEffect": {
+      "turns": 3,
+      "effect": { "foreign_reserves": 20, "credit_rating": 3 },
+      "description": "协议落地，3月后获得外储 +20 和信用 +3"
+    }
+  },
+  {
+    "id": "state_media_broadcast",
+    "name": "领导人电视讲话",
+    "description": "领导人发表信心喊话，短期稳定市场和民心。",
+    "icon": "📡",
+    "cost": {},
+    "costLabel": "无资源消耗",
+    "immediateEffect": { "public_support": 5, "volatility": -0.03 }
+  }
+]

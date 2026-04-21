@@ -1,0 +1,221 @@
+[
+  {
+    "id": "tax_increase",
+    "name": "提高税收",
+    "description": "大幅提升企业税与个人所得税，短期增加财政收入。",
+    "icon": "💹",
+    "effects": {
+      "foreign_reserves": 10,
+      "public_support": -8
+    },
+    "tradeoff": "钱进来了，但民心在流失",
+    "shortEffect": "💰 短期外储 +10，但民众满意度 -8",
+    "risk": "⚠ 连续加税会导致民心螺旋下降，注意控制使用频率",
+    "tip": "✅ 当外储低于40且民心还在60+时，是最佳使用时机",
+    "recommendation": "balanced"
+  },
+  {
+    "id": "print_money",
+    "name": "增发货币",
+    "description": "央行开动印钞机，注入流动性，但国际信用受损。",
+    "icon": "🖨️",
+    "effects": {
+      "foreign_reserves": 15,
+      "credit_rating": -10
+    },
+    "tradeoff": "解近渴，但远水断了",
+    "shortEffect": "💰 短期外储 +15，但国家信用 -10",
+    "risk": "⚠ 信用低于30后将触发债务危机，投机者借此疯狂攻击",
+    "tip": "✅ 仅在外储极度紧张（<25）时使用，不可连续两回合",
+    "recommendation": "negative"
+  },
+  {
+    "id": "cut_welfare",
+    "name": "削减福利",
+    "description": "削减医疗、教育补贴，节省开支但引发广泛不满。",
+    "icon": "✂️",
+    "effects": {
+      "foreign_reserves": 12,
+      "public_support": -8
+    },
+    "tradeoff": "账面好看，街上不安",
+    "shortEffect": "💰 外储 +12，民心 -8",
+    "risk": "⚠ 民心低于20将直接失败，此牌出错将加速崩溃",
+    "tip": "✅ 仅在外储告急且民心仍在50+时才能考虑，切勿连续使用",
+    "recommendation": "negative"
+  },
+  {
+    "id": "imf_bailout",
+    "name": "申请IMF援助",
+    "description": "接受国际货币基金组织条件性救助，换取外汇注入。",
+    "icon": "🏛️",
+    "effects": {
+      "foreign_reserves": 25,
+      "credit_rating": 5,
+      "public_support": -6
+    },
+    "tradeoff": "援助到位，但主权受限",
+    "shortEffect": "💰 外储大幅 +25，信用微增 +5，但民心 -6",
+    "risk": "⚠ 民心损失较大，舆论会批评\"卖国求援\"",
+    "tip": "✅ 外储危急时最佳续命选择，每场游戏建议使用1-2次",
+    "recommendation": "survival"
+  },
+  {
+    "id": "raise_interest",
+    "name": "紧急加息",
+    "description": "大幅提高利率吸引外资回流，但打压国内投资意愿。",
+    "icon": "📊",
+    "effects": {
+      "foreign_reserves": 8,
+      "credit_rating": 8,
+      "public_support": -4
+    },
+    "tradeoff": "外资回流，内需承压",
+    "shortEffect": "📈 信用 +8，外储 +8，民心仅 -4，性价比高",
+    "risk": "⚠ 长期加息会抑制经济活动，民心缓慢流失",
+    "tip": "✅ 信用和外储都偏低时的优质均衡选择，推荐多用",
+    "recommendation": "balanced"
+  },
+  {
+    "id": "capital_control",
+    "name": "实施资本管制",
+    "description": "限制资金外流，短期稳定储备，但损害国际信用。",
+    "icon": "🔒",
+    "effects": {
+      "foreign_reserves": 12,
+      "credit_rating": -8,
+      "public_support": -3
+    },
+    "tradeoff": "锁住资金，也锁住信心",
+    "shortEffect": "🔒 外储 +12，信用 -8，民心 -3，应急之策",
+    "risk": "⚠ 信用损失会让投机者加大攻击力度，慎用",
+    "tip": "✅ 汇率暴跌危机中短期使用有效，但不宜超过2回合",
+    "recommendation": "survival"
+  },
+  {
+    "id": "emergency_bond",
+    "name": "发行紧急国债",
+    "description": "向国内外投资者发行高息国债，筹集资金应急。",
+    "icon": "📜",
+    "effects": {
+      "foreign_reserves": 18,
+      "credit_rating": -6
+    },
+    "tradeoff": "今天的钱，明天要还",
+    "shortEffect": "💰 外储 +18，信用 -6，对民心无影响",
+    "risk": "⚠ 信用越低发债越困难，信用<30后此牌效果减半",
+    "tip": "✅ 外储告急但民心脆弱时的好选择，优先于削减福利",
+    "recommendation": "balanced"
+  },
+  {
+    "id": "economic_reform",
+    "name": "推动结构改革",
+    "description": "宣布大规模市场化改革，提振国际投资者信心。",
+    "icon": "⚙️",
+    "effects": {
+      "credit_rating": 15,
+      "public_support": 5,
+      "foreign_reserves": -8
+    },
+    "tradeoff": "赢得信心，但改革有阵痛",
+    "shortEffect": "📈 信用大幅 +15，民心 +5，但外储 -8",
+    "risk": "⚠ 外储会减少，局势紧张时使用需保证外储在40+",
+    "tip": "✅ 信用低于40时的最佳修复手段，稳定期首选",
+    "recommendation": "growth"
+  },
+  {
+    "id": "public_speech",
+    "name": "发表鼓舞演讲",
+    "description": "领导人发表感召人心的演讲，稳定民心但治标不治本。",
+    "icon": "🎙️",
+    "effects": {
+      "public_support": 12,
+      "credit_rating": -2
+    },
+    "tradeoff": "民心暂稳，问题还在",
+    "shortEffect": "👥 民心 +12，信用仅 -2，性价比高",
+    "risk": "⚠ 效果是一次性的，根本问题未解决，下回合会继续恶化",
+    "tip": "✅ 民心低于40时必须使用，为后续政策争取空间",
+    "recommendation": "survival"
+  },
+  {
+    "id": "sell_assets",
+    "name": "出售国有资产",
+    "description": "变卖部分国有企业股权，快速套现外汇储备。",
+    "icon": "🏭",
+    "effects": {
+      "foreign_reserves": 20,
+      "public_support": -7,
+      "credit_rating": -4
+    },
+    "tradeoff": "一次性补血，未来失去控制权",
+    "shortEffect": "💰 外储 +20，民心 -7，信用 -4，短期强效",
+    "risk": "⚠ 此牌只能用1-2次，耗尽国资后无牌可出",
+    "tip": "✅ 外储急需补充但信用已低时，比发债更安全的选择",
+    "recommendation": "survival"
+  },
+  {
+    "id": "welfare_spending",
+    "name": "发放民生补贴",
+    "description": "向中低收入家庭发放临时补贴，稳定社会情绪。",
+    "icon": "🎁",
+    "effects": {
+      "public_support": 8,
+      "foreign_reserves": -6,
+      "credit_rating": -2
+    },
+    "tradeoff": "民心稳了，但财政有压力",
+    "shortEffect": "👥 民心 +8，外储 -6，信用 -2",
+    "risk": "⚠ 长期使用会耗尽外储，配合税收政策效果更佳",
+    "tip": "✅ 民心低于50且外储充足时的首选",
+    "recommendation": "survival"
+  },
+  {
+    "id": "welfare_reform",
+    "name": "推进福利改革",
+    "description": "优化福利分配效率，既保民生又控成本。",
+    "icon": "🏥",
+    "effects": {
+      "public_support": 6,
+      "foreign_reserves": 5,
+      "credit_rating": 3
+    },
+    "tradeoff": "改革有阵痛，但长期利好",
+    "shortEffect": "👥 民心 +6，外储 +5，信用 +3，综合性政策",
+    "risk": "⚠ 效果温和，不适合紧急救援",
+    "tip": "✅ 局势稳定期使用，为后续政策打基础",
+    "recommendation": "growth"
+  },
+  {
+    "id": "national_celebration",
+    "name": "举行国庆庆典",
+    "description": "举办国家级庆典活动，提升民族凝聚力。",
+    "icon": "🎆",
+    "effects": {
+      "public_support": 10,
+      "credit_rating": -1
+    },
+    "tradeoff": "花钱买人心，短期有效",
+    "shortEffect": "👥 民心 +10，信用 -1",
+    "risk": "⚠ 纯民心政策，不能解决根本问题",
+    "tip": "✅ 紧急稳定民心时的快速选项",
+    "recommendation": "survival"
+  },
+  {
+    "id": "stabilize",
+    "name": "稳住基本盘",
+    "description": "放弃大刀阔斧的改革，专注稳住现有局面，小幅提升所有核心指标，风险极低。",
+    "icon": "🛡️",
+    "effects": {
+      "foreign_reserves": 3,
+      "public_support": 3,
+      "credit_rating": 3
+    },
+    "tradeoff": "温水煮蛙式的稳定，不激进但有效",
+    "shortEffect": "🛡️ 外储 +3，民心 +3，信用 +3，全面微增",
+    "risk": "⚠ 效果温和，危机急速恶化时不够用，需配合其他政策",
+    "tip": "✅ 新手首选！不确定怎么选时就选这个，至少不会变更差",
+    "recommendation": "safe",
+    "tag": "新手推荐"
+  }
+]

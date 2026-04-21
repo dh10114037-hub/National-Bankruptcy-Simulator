@@ -1,0 +1,265 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── 政府终端主题色板 ─────────────────────────────── */
+:root {
+  /* 主背景 - 浅灰蓝（金融系统风格） */
+  --bg-main: #F5F7FA;
+  --bg-card: #FFFFFF;
+  
+  /* 文字层级 */
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --text-tertiary: #9CA3AF;
+  
+  /* 强调色 */
+  --accent-blue: #2563EB;
+  --accent-blue-light: #DBEAFE;
+  
+  /* 边框 */
+  --border-light: #E5E7EB;
+  --border-medium: #D1D5DB;
+  
+  /* 阴影 */
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.05);
+  --shadow-hover: 0 4px 12px rgba(0, 0, 0, 0.1);
+  
+  /* 保留危机状态色 */
+  --crisis-level: 0;
+}
+
+/* ── 全局基础样式 ─────────────────────────────────── */
+body {
+  background: var(--bg-main);
+  color: var(--text-primary);
+  font-family: 'Inter', 'JetBrains Mono', system-ui, -apple-system, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 滚动条样式 ──────────────────────────────────── */
+.scrollbar-thin::-webkit-scrollbar { width: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb { background: #D1D5DB; border-radius: 2px; }
+.scrollbar-thin::-webkit-scrollbar-thumb:hover { background: #9CA3AF; }
+
+/* ── Glitch Effect ─────────────────────────────────── */
+@keyframes glitch-1 {
+  0%   { clip-path: inset(0 0 95% 0); transform: translate(-3px, 0); }
+  20%  { clip-path: inset(30% 0 60% 0); transform: translate(3px, 0); }
+  40%  { clip-path: inset(60% 0 30% 0); transform: translate(-2px, 0); }
+  60%  { clip-path: inset(85% 0 5% 0); transform: translate(2px, 0); }
+  80%  { clip-path: inset(10% 0 80% 0); transform: translate(-1px, 0); }
+  100% { clip-path: inset(0 0 95% 0); transform: translate(0, 0); }
+}
+@keyframes glitch-2 {
+  0%   { clip-path: inset(50% 0 40% 0); transform: translate(3px, 0); color: #ff4444; }
+  25%  { clip-path: inset(10% 0 75% 0); transform: translate(-3px, 0); color: #44ffff; }
+  50%  { clip-path: inset(70% 0 15% 0); transform: translate(2px, 0); }
+  75%  { clip-path: inset(20% 0 65% 0); transform: translate(-2px, 0); color: #ff4444; }
+  100% { clip-path: inset(50% 0 40% 0); transform: translate(0, 0); }
+}
+.glitch-text {
+  position: relative;
+}
+.glitch-text::before,
+.glitch-text::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+.glitch-active .glitch-text::before {
+  opacity: 0.8;
+  animation: glitch-1 0.4s steps(1) infinite;
+  color: #ff4444;
+}
+.glitch-active .glitch-text::after {
+  opacity: 0.6;
+  animation: glitch-2 0.4s steps(1) infinite;
+  color: #44ffff;
+}
+
+/* ── Screen Shake ──────────────────────────────────── */
+@keyframes shake-sm {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  20%  { transform: translate(-2px, 1px) rotate(-0.3deg); }
+  40%  { transform: translate(2px, -1px) rotate(0.3deg); }
+  60%  { transform: translate(-1px, 2px) rotate(-0.2deg); }
+  80%  { transform: translate(1px, -2px) rotate(0.2deg); }
+}
+@keyframes shake-lg {
+  0%,100% { transform: translate(0,0) rotate(0); }
+  10%  { transform: translate(-4px, 2px) rotate(-0.5deg); }
+  20%  { transform: translate(4px,-2px) rotate(0.5deg); }
+  30%  { transform: translate(-3px, 3px) rotate(-0.3deg); }
+  40%  { transform: translate(3px,-3px) rotate(0.3deg); }
+  50%  { transform: translate(-2px, 1px) rotate(-0.2deg); }
+  60%  { transform: translate(2px,-1px) rotate(0.2deg); }
+  70%  { transform: translate(-1px, 2px) rotate(-0.1deg); }
+  80%  { transform: translate(1px,-1px) rotate(0.1deg); }
+  90%  { transform: translate(-1px, 0px); }
+}
+.shake-sm { animation: shake-sm 0.4s ease; }
+.shake-lg { animation: shake-lg 0.6s ease; }
+
+/* ── Slide-in from Left ────────────────────────────── */
+@keyframes slide-in-left {
+  from { transform: translateX(-40px); opacity: 0; }
+  to   { transform: translateX(0); opacity: 1; }
+}
+.slide-in-left { animation: slide-in-left 0.4s cubic-bezier(0.22,1,0.36,1); }
+
+/* ── Fade + Scale Up ───────────────────────────────── */
+@keyframes pop-in {
+  from { transform: scale(0.92); opacity: 0; }
+  to   { transform: scale(1); opacity: 1; }
+}
+.pop-in { animation: pop-in 0.25s cubic-bezier(0.22,1,0.36,1); }
+
+/* ── Number Jump ───────────────────────────────────── */
+@keyframes num-up {
+  0%   { color: #34d399; transform: translateY(0); }
+  50%  { color: #6ee7b7; transform: translateY(-4px); }
+  100% { color: inherit; transform: translateY(0); }
+}
+@keyframes num-down {
+  0%   { color: #f87171; transform: translateY(0); }
+  30%  { transform: translateY(2px); }
+  60%  { color: #fca5a5; transform: translateY(-1px); }
+  100% { color: inherit; transform: translateY(0); }
+}
+.num-up   { animation: num-up   0.5s ease; }
+.num-down { animation: num-down 0.5s ease; }
+
+/* ── Red Flicker (low stat) ────────────────────────── */
+@keyframes red-flicker {
+  0%,100% { box-shadow: 0 0 6px rgba(239,68,68,0.5); }
+  50%     { box-shadow: 0 0 16px rgba(239,68,68,0.9); }
+}
+.red-flicker { animation: red-flicker 1.2s ease-in-out infinite; }
+
+/* ── Pulse once ────────────────────────────────────── */
+@keyframes pulse-once {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.55; }
+}
+.animate-pulse-once { animation: pulse-once 0.9s ease-in-out; }
+
+/* ── Social Voice Toast ────────────────────────────── */
+@keyframes voice-in {
+  from { transform: translateY(24px); opacity: 0; }
+  to   { transform: translateY(0); opacity: 1; }
+}
+@keyframes voice-out {
+  from { opacity: 1; }
+  to   { opacity: 0; transform: translateY(-8px); }
+}
+.voice-in  { animation: voice-in  0.4s cubic-bezier(0.22,1,0.36,1) forwards; }
+.voice-out { animation: voice-out 0.4s ease forwards; }
+
+/* ── Event card border glow ────────────────────────── */
+@keyframes border-pulse-red {
+  0%,100% { border-color: rgba(239,68,68,0.5); }
+  50%     { border-color: rgba(239,68,68,1); }
+}
+.border-pulse-red { animation: border-pulse-red 0.8s ease-in-out 3; }
+
+/* ── Scanline overlay (crisis atmosphere) ──────────── */
+.scanlines::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0,0,0,0.04) 3px,
+    rgba(0,0,0,0.04) 4px
+  );
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* ── Red vignette overlay ──────────────────────────── */
+.crisis-vignette::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 50%, rgba(180,0,0,0.25) 100%);
+  pointer-events: none;
+  z-index: 9997;
+  transition: opacity 1s ease;
+}
+
+/* ── Stat bar transition ───────────────────────────── */
+.stat-bar-fill {
+  transition: width 0.8s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+/* ── Tooltip ───────────────────────────────────────── */
+.tooltip {
+  position: relative;
+}
+.tooltip .tooltip-content {
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+  pointer-events: none;
+}
+.tooltip:hover .tooltip-content {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ── Trend sparkline dots ──────────────────────────── */
+.sparkline-dot {
+  transition: r 0.2s ease;
+}
+.sparkline-dot:hover {
+  r: 4;
+}
+
+/* ── Terminal cursor blink ─────────────────────────── */
+@keyframes cursor-blink {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0; }
+}
+.cursor-blink { animation: cursor-blink 1s step-end infinite; }
+
+/* ── Decision card hover glow ──────────────────────── */
+.policy-card-hover {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.policy-card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-hover), 0 0 0 1px var(--accent-blue);
+}
+
+/* ── Speculator: slide-in from right (notifications) ── */
+@keyframes slide-in-right {
+  from { opacity: 0; transform: translateX(40px) scale(0.95); }
+  to   { opacity: 1; transform: translateX(0) scale(1); }
+}
+.animate-slide-in-right { animation: slide-in-right 0.35s cubic-bezier(0.22,1,0.36,1); }
+
+/* ── Hide scrollbar ────────────────────────────────── */
+.hide-scrollbar::-webkit-scrollbar { display: none; }
+.hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+/* ── Crisis red filter ─────────────────────────────── */
+@keyframes red-filter-pulse {
+  0%,100% { opacity: 0.08; }
+  50%     { opacity: 0.18; }
+}
+.red-filter {
+  position: fixed;
+  inset: 0;
+  background: rgba(200, 0, 0, 1);
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  z-index: 9996;
+  animation: red-filter-pulse 2s ease-in-out infinite;
+}

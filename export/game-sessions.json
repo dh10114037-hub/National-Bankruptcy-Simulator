@@ -1,0 +1,6164 @@
+{
+  "sessions": [
+    {
+      "sessionId": "随机选择_1",
+      "strategy": "随机选择",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": -3,
+            "public_support": 0,
+            "credit_rating": -15
+          },
+          "endState": {
+            "foreign_reserves": 97,
+            "public_support": 75,
+            "credit_rating": 50,
+            "exchange_rate": 1.007,
+            "inflation": 18.4,
+            "volatility": 0.15
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 97,
+            "public_support": 75,
+            "credit_rating": 50,
+            "exchange_rate": 1.007,
+            "inflation": 18.4,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "capital_control",
+            "name": "资本管制"
+          },
+          "changes": {
+            "foreign_reserves": 3,
+            "public_support": -15,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 60,
+            "credit_rating": 42,
+            "exchange_rate": 1.016,
+            "inflation": 19.2,
+            "volatility": 0.16
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 60,
+            "credit_rating": 42,
+            "exchange_rate": 1.016,
+            "inflation": 19.2,
+            "volatility": 0.16
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -3,
+            "credit_rating": 9
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 57,
+            "credit_rating": 51,
+            "exchange_rate": 1.017,
+            "inflation": 19.3,
+            "volatility": 0.18
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 57,
+            "credit_rating": 51,
+            "exchange_rate": 1.017,
+            "inflation": 19.3,
+            "volatility": 0.18
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 8,
+            "public_support": -10,
+            "credit_rating": -15
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 47,
+            "credit_rating": 36,
+            "exchange_rate": 1.014,
+            "inflation": 20.6,
+            "volatility": 0.172
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 47,
+            "credit_rating": 36,
+            "exchange_rate": 1.014,
+            "inflation": 20.6,
+            "volatility": 0.172
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -8,
+            "credit_rating": -15
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 39,
+            "credit_rating": 21,
+            "exchange_rate": 1.025,
+            "inflation": 21.7,
+            "volatility": 0.173
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 39,
+            "credit_rating": 21,
+            "exchange_rate": 1.025,
+            "inflation": 21.7,
+            "volatility": 0.173
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -6,
+            "credit_rating": -11
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 33,
+            "credit_rating": 10,
+            "exchange_rate": 1.018,
+            "inflation": 24.9,
+            "volatility": 0.184
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 33,
+            "credit_rating": 10,
+            "exchange_rate": 1.018,
+            "inflation": 24.9,
+            "volatility": 0.184
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_reform",
+            "name": "推进福利改革"
+          },
+          "changes": {
+            "foreign_reserves": -13,
+            "public_support": 6,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 39,
+            "credit_rating": 8,
+            "exchange_rate": 1.02,
+            "inflation": 24.6,
+            "volatility": 0.183
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 39,
+            "credit_rating": 8,
+            "exchange_rate": 1.02,
+            "inflation": 24.6,
+            "volatility": 0.183
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 3,
+            "public_support": -10,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 90,
+            "public_support": 29,
+            "credit_rating": 0,
+            "exchange_rate": 1.012,
+            "inflation": 26.4,
+            "volatility": 0.201
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 8,
+        "finalState": {
+          "foreign_reserves": 90,
+          "public_support": 29,
+          "credit_rating": 0,
+          "exchange_rate": 1.012
+        },
+        "reason": "国家信用归零 — 无法融资，经济彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "随机选择_2",
+      "strategy": "随机选择",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -4,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 71,
+            "credit_rating": 61,
+            "exchange_rate": 1.011,
+            "inflation": 19.3,
+            "volatility": 0.144
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 71,
+            "credit_rating": 61,
+            "exchange_rate": 1.011,
+            "inflation": 19.3,
+            "volatility": 0.144
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -15,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 56,
+            "credit_rating": 51,
+            "exchange_rate": 1.015,
+            "inflation": 19.7,
+            "volatility": 0.154
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 56,
+            "credit_rating": 51,
+            "exchange_rate": 1.015,
+            "inflation": 19.7,
+            "volatility": 0.154
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -5,
+            "credit_rating": 10
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 51,
+            "credit_rating": 61,
+            "exchange_rate": 1.017,
+            "inflation": 18.6,
+            "volatility": 0.172
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 51,
+            "credit_rating": 61,
+            "exchange_rate": 1.017,
+            "inflation": 18.6,
+            "volatility": 0.172
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 8,
+            "public_support": -25,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 26,
+            "credit_rating": 61,
+            "exchange_rate": 1.004,
+            "inflation": 19.9,
+            "volatility": 0.206
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 26,
+            "credit_rating": 61,
+            "exchange_rate": 1.004,
+            "inflation": 19.9,
+            "volatility": 0.206
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -9,
+            "credit_rating": -9
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 17,
+            "credit_rating": 52,
+            "exchange_rate": 1,
+            "inflation": 21,
+            "volatility": 0.216
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 17,
+            "credit_rating": 52,
+            "exchange_rate": 1,
+            "inflation": 21,
+            "volatility": 0.216
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "capital_control",
+            "name": "资本管制"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -3,
+            "credit_rating": -16
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 14,
+            "credit_rating": 36,
+            "exchange_rate": 1.011,
+            "inflation": 21.6,
+            "volatility": 0.224
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 14,
+            "credit_rating": 36,
+            "exchange_rate": 1.011,
+            "inflation": 21.6,
+            "volatility": 0.224
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -23,
+            "public_support": -7,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 77,
+            "public_support": 7,
+            "credit_rating": 51,
+            "exchange_rate": 1.02,
+            "inflation": 20.7,
+            "volatility": 0.227
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 77,
+            "public_support": 7,
+            "credit_rating": 51,
+            "exchange_rate": 1.02,
+            "inflation": 20.7,
+            "volatility": 0.227
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": 13,
+            "public_support": -3,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 90,
+            "public_support": 4,
+            "credit_rating": 59,
+            "exchange_rate": 1.025,
+            "inflation": 21,
+            "volatility": 0.249
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 90,
+            "public_support": 4,
+            "credit_rating": 59,
+            "exchange_rate": 1.025,
+            "inflation": 21,
+            "volatility": 0.249
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": -3,
+            "public_support": 0,
+            "credit_rating": -15
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 4,
+            "credit_rating": 44,
+            "exchange_rate": 1.014,
+            "inflation": 20.4,
+            "volatility": 0.255
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 4,
+            "credit_rating": 44,
+            "exchange_rate": 1.014,
+            "inflation": 20.4,
+            "volatility": 0.255
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -26,
+            "public_support": 3,
+            "credit_rating": 10
+          },
+          "endState": {
+            "foreign_reserves": 61,
+            "public_support": 7,
+            "credit_rating": 54,
+            "exchange_rate": 1.017,
+            "inflation": 19.9,
+            "volatility": 0.279
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 61,
+            "public_support": 7,
+            "credit_rating": 54,
+            "exchange_rate": 1.017,
+            "inflation": 19.9,
+            "volatility": 0.279
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 23,
+            "public_support": 1,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 84,
+            "public_support": 8,
+            "credit_rating": 48,
+            "exchange_rate": 1.011,
+            "inflation": 21.3,
+            "volatility": 0.313
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 84,
+            "public_support": 8,
+            "credit_rating": 48,
+            "exchange_rate": 1.011,
+            "inflation": 21.3,
+            "volatility": 0.313
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 15,
+            "public_support": -7,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 99,
+            "public_support": 1,
+            "credit_rating": 36,
+            "exchange_rate": 1.009,
+            "inflation": 22.1,
+            "volatility": 0.327
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 13,
+          "startState": {
+            "foreign_reserves": 99,
+            "public_support": 1,
+            "credit_rating": 36,
+            "exchange_rate": 1.009,
+            "inflation": 22.1,
+            "volatility": 0.327
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": 8,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 91,
+            "public_support": 9,
+            "credit_rating": 35,
+            "exchange_rate": 1.008,
+            "inflation": 21.5,
+            "volatility": 0.362
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 14,
+          "startState": {
+            "foreign_reserves": 91,
+            "public_support": 9,
+            "credit_rating": 35,
+            "exchange_rate": 1.008,
+            "inflation": 21.5,
+            "volatility": 0.362
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -15,
+            "public_support": 1,
+            "credit_rating": -3
+          },
+          "endState": {
+            "foreign_reserves": 76,
+            "public_support": 10,
+            "credit_rating": 32,
+            "exchange_rate": 1.014,
+            "inflation": 22.8,
+            "volatility": 0.367
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 15,
+          "startState": {
+            "foreign_reserves": 76,
+            "public_support": 10,
+            "credit_rating": 32,
+            "exchange_rate": 1.014,
+            "inflation": 22.8,
+            "volatility": 0.367
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -14,
+            "public_support": -2,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 62,
+            "public_support": 8,
+            "credit_rating": 30,
+            "exchange_rate": 1.013,
+            "inflation": 23,
+            "volatility": 0.382
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 16,
+          "startState": {
+            "foreign_reserves": 62,
+            "public_support": 8,
+            "credit_rating": 30,
+            "exchange_rate": 1.013,
+            "inflation": 23,
+            "volatility": 0.382
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -23,
+            "public_support": -5,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 39,
+            "public_support": 3,
+            "credit_rating": 45,
+            "exchange_rate": 1.008,
+            "inflation": 22.3,
+            "volatility": 0.383
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 17,
+          "startState": {
+            "foreign_reserves": 39,
+            "public_support": 3,
+            "credit_rating": 45,
+            "exchange_rate": 1.008,
+            "inflation": 22.3,
+            "volatility": 0.383
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "cut_welfare",
+            "name": "削减福利"
+          },
+          "changes": {
+            "foreign_reserves": 17,
+            "public_support": -3,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 56,
+            "public_support": 0,
+            "credit_rating": 45,
+            "exchange_rate": 1.004,
+            "inflation": 21.6,
+            "volatility": 0.415
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 17,
+        "finalState": {
+          "foreign_reserves": 56,
+          "public_support": 0,
+          "credit_rating": 45,
+          "exchange_rate": 1.004
+        },
+        "reason": "民众支持归零 — 社会秩序彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "随机选择_3",
+      "strategy": "随机选择",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_reform",
+            "name": "推进福利改革"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -2,
+            "credit_rating": -3
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 73,
+            "credit_rating": 62,
+            "exchange_rate": 0.992,
+            "inflation": 18,
+            "volatility": 0.164
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 73,
+            "credit_rating": 62,
+            "exchange_rate": 0.992,
+            "inflation": 18,
+            "volatility": 0.164
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -23,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 50,
+            "credit_rating": 62,
+            "exchange_rate": 0.988,
+            "inflation": 18.5,
+            "volatility": 0.173
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 50,
+            "credit_rating": 62,
+            "exchange_rate": 0.988,
+            "inflation": 18.5,
+            "volatility": 0.173
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": -7,
+            "public_support": -16,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 93,
+            "public_support": 34,
+            "credit_rating": 70,
+            "exchange_rate": 0.996,
+            "inflation": 18.6,
+            "volatility": 0.185
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 93,
+            "public_support": 34,
+            "credit_rating": 70,
+            "exchange_rate": 0.996,
+            "inflation": 18.6,
+            "volatility": 0.185
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "cut_welfare",
+            "name": "削减福利"
+          },
+          "changes": {
+            "foreign_reserves": -3,
+            "public_support": -20,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 90,
+            "public_support": 14,
+            "credit_rating": 70,
+            "exchange_rate": 1.005,
+            "inflation": 18.2,
+            "volatility": 0.178
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 90,
+            "public_support": 14,
+            "credit_rating": 70,
+            "exchange_rate": 1.005,
+            "inflation": 18.2,
+            "volatility": 0.178
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -16,
+            "public_support": 8,
+            "credit_rating": -14
+          },
+          "endState": {
+            "foreign_reserves": 74,
+            "public_support": 22,
+            "credit_rating": 56,
+            "exchange_rate": 1,
+            "inflation": 18.5,
+            "volatility": 0.197
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 74,
+            "public_support": 22,
+            "credit_rating": 56,
+            "exchange_rate": 1,
+            "inflation": 18.5,
+            "volatility": 0.197
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 10,
+            "public_support": -3,
+            "credit_rating": -18
+          },
+          "endState": {
+            "foreign_reserves": 84,
+            "public_support": 19,
+            "credit_rating": 38,
+            "exchange_rate": 1.011,
+            "inflation": 19.7,
+            "volatility": 0.206
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 84,
+            "public_support": 19,
+            "credit_rating": 38,
+            "exchange_rate": 1.011,
+            "inflation": 19.7,
+            "volatility": 0.206
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -16,
+            "public_support": 8,
+            "credit_rating": -17
+          },
+          "endState": {
+            "foreign_reserves": 68,
+            "public_support": 27,
+            "credit_rating": 21,
+            "exchange_rate": 1.018,
+            "inflation": 22.6,
+            "volatility": 0.214
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 68,
+            "public_support": 27,
+            "credit_rating": 21,
+            "exchange_rate": 1.018,
+            "inflation": 22.6,
+            "volatility": 0.214
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 10,
+            "public_support": 0,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 78,
+            "public_support": 27,
+            "credit_rating": 15,
+            "exchange_rate": 1.021,
+            "inflation": 23.8,
+            "volatility": 0.221
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 78,
+            "public_support": 27,
+            "credit_rating": 15,
+            "exchange_rate": 1.021,
+            "inflation": 23.8,
+            "volatility": 0.221
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -1,
+            "public_support": 11,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 77,
+            "public_support": 38,
+            "credit_rating": 9,
+            "exchange_rate": 1.016,
+            "inflation": 26.6,
+            "volatility": 0.211
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 77,
+            "public_support": 38,
+            "credit_rating": 9,
+            "exchange_rate": 1.016,
+            "inflation": 26.6,
+            "volatility": 0.211
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 15,
+            "public_support": -6,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 32,
+            "credit_rating": 1,
+            "exchange_rate": 1.006,
+            "inflation": 29.1,
+            "volatility": 0.225
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 32,
+            "credit_rating": 1,
+            "exchange_rate": 1.006,
+            "inflation": 29.1,
+            "volatility": 0.225
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -24,
+            "public_support": 8,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 68,
+            "public_support": 40,
+            "credit_rating": 0,
+            "exchange_rate": 0.997,
+            "inflation": 29.1,
+            "volatility": 0.213
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 11,
+        "finalState": {
+          "foreign_reserves": 68,
+          "public_support": 40,
+          "credit_rating": 0,
+          "exchange_rate": 0.997
+        },
+        "reason": "国家信用归零 — 无法融资，经济彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "随机选择_4",
+      "strategy": "随机选择",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "welfare_reform",
+            "name": "推进福利改革"
+          },
+          "changes": {
+            "foreign_reserves": -3,
+            "public_support": 6,
+            "credit_rating": 3
+          },
+          "endState": {
+            "foreign_reserves": 97,
+            "public_support": 81,
+            "credit_rating": 68,
+            "exchange_rate": 0.996,
+            "inflation": 17.9,
+            "volatility": 0.138
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 97,
+            "public_support": 81,
+            "credit_rating": 68,
+            "exchange_rate": 0.996,
+            "inflation": 17.9,
+            "volatility": 0.138
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": -7,
+            "public_support": -14,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 90,
+            "public_support": 67,
+            "credit_rating": 76,
+            "exchange_rate": 0.987,
+            "inflation": 17.3,
+            "volatility": 0.138
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 90,
+            "public_support": 67,
+            "credit_rating": 76,
+            "exchange_rate": 0.987,
+            "inflation": 17.3,
+            "volatility": 0.138
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -8,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 90,
+            "public_support": 59,
+            "credit_rating": 64,
+            "exchange_rate": 0.975,
+            "inflation": 18.7,
+            "volatility": 0.154
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 90,
+            "public_support": 59,
+            "credit_rating": 64,
+            "exchange_rate": 0.975,
+            "inflation": 18.7,
+            "volatility": 0.154
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 7,
+            "public_support": -6,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 97,
+            "public_support": 53,
+            "credit_rating": 64,
+            "exchange_rate": 0.966,
+            "inflation": 19.5,
+            "volatility": 0.149
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 97,
+            "public_support": 53,
+            "credit_rating": 64,
+            "exchange_rate": 0.966,
+            "inflation": 19.5,
+            "volatility": 0.149
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 3,
+            "public_support": -25,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 28,
+            "credit_rating": 60,
+            "exchange_rate": 0.954,
+            "inflation": 19.1,
+            "volatility": 0.18
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 28,
+            "credit_rating": 60,
+            "exchange_rate": 0.954,
+            "inflation": 19.1,
+            "volatility": 0.18
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -8,
+            "credit_rating": 10
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 20,
+            "credit_rating": 70,
+            "exchange_rate": 0.961,
+            "inflation": 18.4,
+            "volatility": 0.219
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 20,
+            "credit_rating": 70,
+            "exchange_rate": 0.961,
+            "inflation": 18.4,
+            "volatility": 0.219
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 8,
+            "public_support": 3,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 23,
+            "credit_rating": 64,
+            "exchange_rate": 0.949,
+            "inflation": 19,
+            "volatility": 0.22
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 23,
+            "credit_rating": 64,
+            "exchange_rate": 0.949,
+            "inflation": 19,
+            "volatility": 0.22
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -14,
+            "public_support": 4,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 86,
+            "public_support": 27,
+            "credit_rating": 62,
+            "exchange_rate": 0.939,
+            "inflation": 18.4,
+            "volatility": 0.237
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 86,
+            "public_support": 27,
+            "credit_rating": 62,
+            "exchange_rate": 0.939,
+            "inflation": 18.4,
+            "volatility": 0.237
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -16,
+            "public_support": 1,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 70,
+            "public_support": 28,
+            "credit_rating": 77,
+            "exchange_rate": 0.942,
+            "inflation": 18.5,
+            "volatility": 0.267
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 70,
+            "public_support": 28,
+            "credit_rating": 77,
+            "exchange_rate": 0.942,
+            "inflation": 18.5,
+            "volatility": 0.267
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 7,
+            "public_support": 0,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 77,
+            "public_support": 28,
+            "credit_rating": 67,
+            "exchange_rate": 0.935,
+            "inflation": 19.4,
+            "volatility": 0.282
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 77,
+            "public_support": 28,
+            "credit_rating": 67,
+            "exchange_rate": 0.935,
+            "inflation": 19.4,
+            "volatility": 0.282
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 7,
+            "public_support": -14,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 84,
+            "public_support": 14,
+            "credit_rating": 57,
+            "exchange_rate": 0.938,
+            "inflation": 19.8,
+            "volatility": 0.29
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 84,
+            "public_support": 14,
+            "credit_rating": 57,
+            "exchange_rate": 0.938,
+            "inflation": 19.8,
+            "volatility": 0.29
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "capital_control",
+            "name": "资本管制"
+          },
+          "changes": {
+            "foreign_reserves": 4,
+            "public_support": -14,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 88,
+            "public_support": 0,
+            "credit_rating": 49,
+            "exchange_rate": 0.943,
+            "inflation": 20.5,
+            "volatility": 0.3
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 12,
+        "finalState": {
+          "foreign_reserves": 88,
+          "public_support": 0,
+          "credit_rating": 49,
+          "exchange_rate": 0.943
+        },
+        "reason": "民众支持归零 — 社会秩序彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "稳健策略_1",
+      "strategy": "稳健策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -8,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 67,
+            "credit_rating": 53,
+            "exchange_rate": 0.998,
+            "inflation": 17.8,
+            "volatility": 0.151
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 67,
+            "credit_rating": 53,
+            "exchange_rate": 0.998,
+            "inflation": 17.8,
+            "volatility": 0.151
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "capital_control",
+            "name": "资本管制"
+          },
+          "changes": {
+            "foreign_reserves": -3,
+            "public_support": -13,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 97,
+            "public_support": 54,
+            "credit_rating": 45,
+            "exchange_rate": 1.008,
+            "inflation": 19.1,
+            "volatility": 0.159
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 97,
+            "public_support": 54,
+            "credit_rating": 45,
+            "exchange_rate": 1.008,
+            "inflation": 19.1,
+            "volatility": 0.159
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -14,
+            "public_support": 8,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 83,
+            "public_support": 62,
+            "credit_rating": 43,
+            "exchange_rate": 1.016,
+            "inflation": 19.9,
+            "volatility": 0.151
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 83,
+            "public_support": 62,
+            "credit_rating": 43,
+            "exchange_rate": 1.016,
+            "inflation": 19.9,
+            "volatility": 0.151
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": -7,
+            "public_support": -14,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 76,
+            "public_support": 48,
+            "credit_rating": 51,
+            "exchange_rate": 1.028,
+            "inflation": 20.5,
+            "volatility": 0.14
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 76,
+            "public_support": 48,
+            "credit_rating": 51,
+            "exchange_rate": 1.028,
+            "inflation": 20.5,
+            "volatility": 0.14
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -6,
+            "public_support": -7,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 70,
+            "public_support": 41,
+            "credit_rating": 49,
+            "exchange_rate": 1.022,
+            "inflation": 21.2,
+            "volatility": 0.154
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 70,
+            "public_support": 41,
+            "credit_rating": 49,
+            "exchange_rate": 1.022,
+            "inflation": 21.2,
+            "volatility": 0.154
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -15,
+            "public_support": 0,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 55,
+            "public_support": 41,
+            "credit_rating": 48,
+            "exchange_rate": 1.017,
+            "inflation": 21.4,
+            "volatility": 0.174
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 55,
+            "public_support": 41,
+            "credit_rating": 48,
+            "exchange_rate": 1.017,
+            "inflation": 21.4,
+            "volatility": 0.174
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 18,
+            "public_support": -12,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 73,
+            "public_support": 29,
+            "credit_rating": 36,
+            "exchange_rate": 1.008,
+            "inflation": 21.6,
+            "volatility": 0.218
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 73,
+            "public_support": 29,
+            "credit_rating": 36,
+            "exchange_rate": 1.008,
+            "inflation": 21.6,
+            "volatility": 0.218
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -14,
+            "public_support": -4,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 59,
+            "public_support": 25,
+            "credit_rating": 31,
+            "exchange_rate": 1.003,
+            "inflation": 23.5,
+            "volatility": 0.225
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 59,
+            "public_support": 25,
+            "credit_rating": 31,
+            "exchange_rate": 1.003,
+            "inflation": 23.5,
+            "volatility": 0.225
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -18,
+            "public_support": 5,
+            "credit_rating": 3
+          },
+          "endState": {
+            "foreign_reserves": 41,
+            "public_support": 30,
+            "credit_rating": 34,
+            "exchange_rate": 1.004,
+            "inflation": 23.6,
+            "volatility": 0.219
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 41,
+            "public_support": 30,
+            "credit_rating": 34,
+            "exchange_rate": 1.004,
+            "inflation": 23.6,
+            "volatility": 0.219
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": 12,
+            "credit_rating": -7
+          },
+          "endState": {
+            "foreign_reserves": 33,
+            "public_support": 42,
+            "credit_rating": 27,
+            "exchange_rate": 0.994,
+            "inflation": 26.5,
+            "volatility": 0.231
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 33,
+            "public_support": 42,
+            "credit_rating": 27,
+            "exchange_rate": 0.994,
+            "inflation": 26.5,
+            "volatility": 0.231
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": -5,
+            "public_support": -18,
+            "credit_rating": -3
+          },
+          "endState": {
+            "foreign_reserves": 28,
+            "public_support": 24,
+            "credit_rating": 24,
+            "exchange_rate": 1.002,
+            "inflation": 27.2,
+            "volatility": 0.23
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 28,
+            "public_support": 24,
+            "credit_rating": 24,
+            "exchange_rate": 1.002,
+            "inflation": 27.2,
+            "volatility": 0.23
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": -7,
+            "public_support": -14,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 21,
+            "public_support": 10,
+            "credit_rating": 32,
+            "exchange_rate": 0.998,
+            "inflation": 26.3,
+            "volatility": 0.224
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 13,
+          "startState": {
+            "foreign_reserves": 21,
+            "public_support": 10,
+            "credit_rating": 32,
+            "exchange_rate": 0.998,
+            "inflation": 26.3,
+            "volatility": 0.224
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": -5,
+            "public_support": 12,
+            "credit_rating": -13
+          },
+          "endState": {
+            "foreign_reserves": 16,
+            "public_support": 22,
+            "credit_rating": 19,
+            "exchange_rate": 0.986,
+            "inflation": 29.4,
+            "volatility": 0.22
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 14,
+          "startState": {
+            "foreign_reserves": 16,
+            "public_support": 22,
+            "credit_rating": 19,
+            "exchange_rate": 0.986,
+            "inflation": 29.4,
+            "volatility": 0.22
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -2,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 8,
+            "public_support": 20,
+            "credit_rating": 15,
+            "exchange_rate": 0.977,
+            "inflation": 31.3,
+            "volatility": 0.204
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 15,
+          "startState": {
+            "foreign_reserves": 8,
+            "public_support": 20,
+            "credit_rating": 15,
+            "exchange_rate": 0.977,
+            "inflation": 31.3,
+            "volatility": 0.204
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 13,
+            "public_support": 0,
+            "credit_rating": -14
+          },
+          "endState": {
+            "foreign_reserves": 21,
+            "public_support": 20,
+            "credit_rating": 1,
+            "exchange_rate": 0.966,
+            "inflation": 30.3,
+            "volatility": 0.185
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 16,
+          "startState": {
+            "foreign_reserves": 21,
+            "public_support": 20,
+            "credit_rating": 1,
+            "exchange_rate": 0.966,
+            "inflation": 30.3,
+            "volatility": 0.185
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 2,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 21,
+            "public_support": 22,
+            "credit_rating": 0,
+            "exchange_rate": 0.972,
+            "inflation": 32.9,
+            "volatility": 0.176
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 16,
+        "finalState": {
+          "foreign_reserves": 21,
+          "public_support": 22,
+          "credit_rating": 0,
+          "exchange_rate": 0.972
+        },
+        "reason": "国家信用归零 — 无法融资，经济彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "稳健策略_2",
+      "strategy": "稳健策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -16,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 59,
+            "credit_rating": 59,
+            "exchange_rate": 1.004,
+            "inflation": 19.1,
+            "volatility": 0.146
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 59,
+            "credit_rating": 59,
+            "exchange_rate": 1.004,
+            "inflation": 19.1,
+            "volatility": 0.146
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 0,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 59,
+            "credit_rating": 53,
+            "exchange_rate": 1.015,
+            "inflation": 18.4,
+            "volatility": 0.155
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 59,
+            "credit_rating": 53,
+            "exchange_rate": 1.015,
+            "inflation": 18.4,
+            "volatility": 0.155
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -5,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 54,
+            "credit_rating": 53,
+            "exchange_rate": 1.021,
+            "inflation": 17.6,
+            "volatility": 0.16
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 54,
+            "credit_rating": 53,
+            "exchange_rate": 1.021,
+            "inflation": 17.6,
+            "volatility": 0.16
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -21,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 33,
+            "credit_rating": 48,
+            "exchange_rate": 1.019,
+            "inflation": 17.1,
+            "volatility": 0.183
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 33,
+            "credit_rating": 48,
+            "exchange_rate": 1.019,
+            "inflation": 17.1,
+            "volatility": 0.183
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -24,
+            "public_support": 8,
+            "credit_rating": -7
+          },
+          "endState": {
+            "foreign_reserves": 76,
+            "public_support": 41,
+            "credit_rating": 41,
+            "exchange_rate": 1.008,
+            "inflation": 17.3,
+            "volatility": 0.178
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 76,
+            "public_support": 41,
+            "credit_rating": 41,
+            "exchange_rate": 1.008,
+            "inflation": 17.3,
+            "volatility": 0.178
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 13,
+            "public_support": 0,
+            "credit_rating": -19
+          },
+          "endState": {
+            "foreign_reserves": 89,
+            "public_support": 41,
+            "credit_rating": 22,
+            "exchange_rate": 1.011,
+            "inflation": 21.2,
+            "volatility": 0.178
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 89,
+            "public_support": 41,
+            "credit_rating": 22,
+            "exchange_rate": 1.011,
+            "inflation": 21.2,
+            "volatility": 0.178
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 10,
+            "public_support": -18,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 99,
+            "public_support": 23,
+            "credit_rating": 14,
+            "exchange_rate": 1.015,
+            "inflation": 22.5,
+            "volatility": 0.177
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 99,
+            "public_support": 23,
+            "credit_rating": 14,
+            "exchange_rate": 1.015,
+            "inflation": 22.5,
+            "volatility": 0.177
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 1,
+            "public_support": -18,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 5,
+            "credit_rating": 9,
+            "exchange_rate": 1.01,
+            "inflation": 22.5,
+            "volatility": 0.16
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 5,
+            "credit_rating": 9,
+            "exchange_rate": 1.01,
+            "inflation": 22.5,
+            "volatility": 0.16
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 7,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 12,
+            "credit_rating": 5,
+            "exchange_rate": 1.006,
+            "inflation": 23.1,
+            "volatility": 0.154
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 12,
+            "credit_rating": 5,
+            "exchange_rate": 1.006,
+            "inflation": 23.1,
+            "volatility": 0.154
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -6,
+            "public_support": -2,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 94,
+            "public_support": 10,
+            "credit_rating": 0,
+            "exchange_rate": 1.002,
+            "inflation": 24.9,
+            "volatility": 0.141
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 10,
+        "finalState": {
+          "foreign_reserves": 94,
+          "public_support": 10,
+          "credit_rating": 0,
+          "exchange_rate": 1.002
+        },
+        "reason": "国家信用归零 — 无法融资，经济彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "稳健策略_3",
+      "strategy": "稳健策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -18,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 57,
+            "credit_rating": 60,
+            "exchange_rate": 1.008,
+            "inflation": 17.7,
+            "volatility": 0.161
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 57,
+            "credit_rating": 60,
+            "exchange_rate": 1.008,
+            "inflation": 17.7,
+            "volatility": 0.161
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -7,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 50,
+            "credit_rating": 56,
+            "exchange_rate": 0.996,
+            "inflation": 17,
+            "volatility": 0.144
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 50,
+            "credit_rating": 56,
+            "exchange_rate": 0.996,
+            "inflation": 17,
+            "volatility": 0.144
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -17,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 33,
+            "credit_rating": 50,
+            "exchange_rate": 1.002,
+            "inflation": 16.2,
+            "volatility": 0.153
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 33,
+            "credit_rating": 50,
+            "exchange_rate": 1.002,
+            "inflation": 16.2,
+            "volatility": 0.153
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -11,
+            "public_support": 8,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 89,
+            "public_support": 41,
+            "credit_rating": 40,
+            "exchange_rate": 1.013,
+            "inflation": 15.9,
+            "volatility": 0.146
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 89,
+            "public_support": 41,
+            "credit_rating": 40,
+            "exchange_rate": 1.013,
+            "inflation": 15.9,
+            "volatility": 0.146
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -24,
+            "public_support": 8,
+            "credit_rating": -10.75
+          },
+          "endState": {
+            "foreign_reserves": 65,
+            "public_support": 49,
+            "credit_rating": 29.25,
+            "exchange_rate": 1.018,
+            "inflation": 18.1,
+            "volatility": 0.134
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 65,
+            "public_support": 49,
+            "credit_rating": 29.25,
+            "exchange_rate": 1.018,
+            "inflation": 18.1,
+            "volatility": 0.134
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "cut_welfare",
+            "name": "削减福利"
+          },
+          "changes": {
+            "foreign_reserves": 17,
+            "public_support": -5,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 82,
+            "public_support": 44,
+            "credit_rating": 24.25,
+            "exchange_rate": 1.022,
+            "inflation": 22.3,
+            "volatility": 0.153
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 82,
+            "public_support": 44,
+            "credit_rating": 24.25,
+            "exchange_rate": 1.022,
+            "inflation": 22.3,
+            "volatility": 0.153
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 18,
+            "public_support": -15,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 29,
+            "credit_rating": 18.25,
+            "exchange_rate": 1.012,
+            "inflation": 22.6,
+            "volatility": 0.141
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 29,
+            "credit_rating": 18.25,
+            "exchange_rate": 1.012,
+            "inflation": 22.6,
+            "volatility": 0.141
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -16,
+            "public_support": 5,
+            "credit_rating": 11
+          },
+          "endState": {
+            "foreign_reserves": 84,
+            "public_support": 34,
+            "credit_rating": 29.25,
+            "exchange_rate": 1.005,
+            "inflation": 24.4,
+            "volatility": 0.121
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 84,
+            "public_support": 34,
+            "credit_rating": 29.25,
+            "exchange_rate": 1.005,
+            "inflation": 24.4,
+            "volatility": 0.121
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -8,
+            "credit_rating": 10
+          },
+          "endState": {
+            "foreign_reserves": 76,
+            "public_support": 26,
+            "credit_rating": 39.25,
+            "exchange_rate": 1.017,
+            "inflation": 23.7,
+            "volatility": 0.132
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 76,
+            "public_support": 26,
+            "credit_rating": 39.25,
+            "exchange_rate": 1.017,
+            "inflation": 23.7,
+            "volatility": 0.132
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -24,
+            "public_support": 8,
+            "credit_rating": -7
+          },
+          "endState": {
+            "foreign_reserves": 52,
+            "public_support": 34,
+            "credit_rating": 32.25,
+            "exchange_rate": 1.022,
+            "inflation": 24.3,
+            "volatility": 0.131
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 52,
+            "public_support": 34,
+            "credit_rating": 32.25,
+            "exchange_rate": 1.022,
+            "inflation": 24.3,
+            "volatility": 0.131
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 10,
+            "public_support": -23,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 62,
+            "public_support": 11,
+            "credit_rating": 30.25,
+            "exchange_rate": 1.011,
+            "inflation": 26.4,
+            "volatility": 0.126
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 62,
+            "public_support": 11,
+            "credit_rating": 30.25,
+            "exchange_rate": 1.011,
+            "inflation": 26.4,
+            "volatility": 0.126
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 2,
+            "credit_rating": -9
+          },
+          "endState": {
+            "foreign_reserves": 62,
+            "public_support": 13,
+            "credit_rating": 21.25,
+            "exchange_rate": 1.011,
+            "inflation": 27.8,
+            "volatility": 0.109
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 13,
+          "startState": {
+            "foreign_reserves": 62,
+            "public_support": 13,
+            "credit_rating": 21.25,
+            "exchange_rate": 1.011,
+            "inflation": 27.8,
+            "volatility": 0.109
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -3,
+            "credit_rating": 9
+          },
+          "endState": {
+            "foreign_reserves": 54,
+            "public_support": 10,
+            "credit_rating": 30.25,
+            "exchange_rate": 1.015,
+            "inflation": 27.5,
+            "volatility": 0.093
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 14,
+          "startState": {
+            "foreign_reserves": 54,
+            "public_support": 10,
+            "credit_rating": 30.25,
+            "exchange_rate": 1.015,
+            "inflation": 27.5,
+            "volatility": 0.093
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 2,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 54,
+            "public_support": 12,
+            "credit_rating": 26.25,
+            "exchange_rate": 1.007,
+            "inflation": 28.1,
+            "volatility": 0.11
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 15,
+          "startState": {
+            "foreign_reserves": 54,
+            "public_support": 12,
+            "credit_rating": 26.25,
+            "exchange_rate": 1.007,
+            "inflation": 28.1,
+            "volatility": 0.11
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 15,
+            "public_support": -5,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 69,
+            "public_support": 7,
+            "credit_rating": 24.25,
+            "exchange_rate": 1.007,
+            "inflation": 30.3,
+            "volatility": 0.09
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 16,
+          "startState": {
+            "foreign_reserves": 69,
+            "public_support": 7,
+            "credit_rating": 24.25,
+            "exchange_rate": 1.007,
+            "inflation": 30.3,
+            "volatility": 0.09
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": -10,
+            "public_support": 12,
+            "credit_rating": -14
+          },
+          "endState": {
+            "foreign_reserves": 59,
+            "public_support": 19,
+            "credit_rating": 10.25,
+            "exchange_rate": 1.018,
+            "inflation": 31.7,
+            "volatility": 0.094
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 17,
+          "startState": {
+            "foreign_reserves": 59,
+            "public_support": 19,
+            "credit_rating": 10.25,
+            "exchange_rate": 1.018,
+            "inflation": 31.7,
+            "volatility": 0.094
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 15,
+            "public_support": -5,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 74,
+            "public_support": 14,
+            "credit_rating": 8.25,
+            "exchange_rate": 1.015,
+            "inflation": 32.6,
+            "volatility": 0.114
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 18,
+          "startState": {
+            "foreign_reserves": 74,
+            "public_support": 14,
+            "credit_rating": 8.25,
+            "exchange_rate": 1.015,
+            "inflation": 32.6,
+            "volatility": 0.114
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 15,
+            "public_support": -6,
+            "credit_rating": -5.25
+          },
+          "endState": {
+            "foreign_reserves": 89,
+            "public_support": 8,
+            "credit_rating": 3,
+            "exchange_rate": 1.009,
+            "inflation": 33.4,
+            "volatility": 0.111
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 19,
+          "startState": {
+            "foreign_reserves": 89,
+            "public_support": 8,
+            "credit_rating": 3,
+            "exchange_rate": 1.009,
+            "inflation": 33.4,
+            "volatility": 0.111
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -8,
+            "credit_rating": -3
+          },
+          "endState": {
+            "foreign_reserves": 81,
+            "public_support": 0,
+            "credit_rating": 0,
+            "exchange_rate": 1,
+            "inflation": 34.2,
+            "volatility": 0.13
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 19,
+        "finalState": {
+          "foreign_reserves": 81,
+          "public_support": 0,
+          "credit_rating": 0,
+          "exchange_rate": 1
+        },
+        "reason": "民众支持归零 — 社会秩序彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "稳健策略_4",
+      "strategy": "稳健策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -1,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 74,
+            "credit_rating": 73,
+            "exchange_rate": 0.987,
+            "inflation": 17.8,
+            "volatility": 0.155
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 74,
+            "credit_rating": 73,
+            "exchange_rate": 0.987,
+            "inflation": 17.8,
+            "volatility": 0.155
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -10,
+            "public_support": 10,
+            "credit_rating": -13
+          },
+          "endState": {
+            "foreign_reserves": 90,
+            "public_support": 84,
+            "credit_rating": 60,
+            "exchange_rate": 0.981,
+            "inflation": 18.2,
+            "volatility": 0.156
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 90,
+            "public_support": 84,
+            "credit_rating": 60,
+            "exchange_rate": 0.981,
+            "inflation": 18.2,
+            "volatility": 0.156
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 10,
+            "public_support": 0,
+            "credit_rating": -14
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 84,
+            "credit_rating": 46,
+            "exchange_rate": 0.988,
+            "inflation": 18.3,
+            "volatility": 0.156
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 84,
+            "credit_rating": 46,
+            "exchange_rate": 0.988,
+            "inflation": 18.3,
+            "volatility": 0.156
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -12,
+            "credit_rating": 2
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 72,
+            "credit_rating": 48,
+            "exchange_rate": 1,
+            "inflation": 19.1,
+            "volatility": 0.137
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 72,
+            "credit_rating": 48,
+            "exchange_rate": 1,
+            "inflation": 19.1,
+            "volatility": 0.137
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -5,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 67,
+            "credit_rating": 48,
+            "exchange_rate": 1.003,
+            "inflation": 18.2,
+            "volatility": 0.156
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 67,
+            "credit_rating": 48,
+            "exchange_rate": 1.003,
+            "inflation": 18.2,
+            "volatility": 0.156
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -1,
+            "credit_rating": 8
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 66,
+            "credit_rating": 56,
+            "exchange_rate": 0.994,
+            "inflation": 17.8,
+            "volatility": 0.168
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 66,
+            "credit_rating": 56,
+            "exchange_rate": 0.994,
+            "inflation": 17.8,
+            "volatility": 0.168
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -8,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 58,
+            "credit_rating": 51,
+            "exchange_rate": 1.004,
+            "inflation": 18.1,
+            "volatility": 0.157
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 58,
+            "credit_rating": 51,
+            "exchange_rate": 1.004,
+            "inflation": 18.1,
+            "volatility": 0.157
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 8,
+            "public_support": -5,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 53,
+            "credit_rating": 51,
+            "exchange_rate": 1.012,
+            "inflation": 18.7,
+            "volatility": 0.166
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 53,
+            "credit_rating": 51,
+            "exchange_rate": 1.012,
+            "inflation": 18.7,
+            "volatility": 0.166
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -8,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 45,
+            "credit_rating": 39,
+            "exchange_rate": 1.018,
+            "inflation": 18.7,
+            "volatility": 0.173
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 45,
+            "credit_rating": 39,
+            "exchange_rate": 1.018,
+            "inflation": 18.7,
+            "volatility": 0.173
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -10,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 35,
+            "credit_rating": 29,
+            "exchange_rate": 1.011,
+            "inflation": 20.2,
+            "volatility": 0.168
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 35,
+            "credit_rating": 29,
+            "exchange_rate": 1.011,
+            "inflation": 20.2,
+            "volatility": 0.168
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -16,
+            "public_support": -10,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 84,
+            "public_support": 25,
+            "credit_rating": 44,
+            "exchange_rate": 1.019,
+            "inflation": 21,
+            "volatility": 0.191
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 84,
+            "public_support": 25,
+            "credit_rating": 44,
+            "exchange_rate": 1.019,
+            "inflation": 21,
+            "volatility": 0.191
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "raise_interest",
+            "name": "紧急加息"
+          },
+          "changes": {
+            "foreign_reserves": -2,
+            "public_support": -4,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 82,
+            "public_support": 21,
+            "credit_rating": 40,
+            "exchange_rate": 1.025,
+            "inflation": 22.2,
+            "volatility": 0.206
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 13,
+          "startState": {
+            "foreign_reserves": 82,
+            "public_support": 21,
+            "credit_rating": 40,
+            "exchange_rate": 1.025,
+            "inflation": 22.2,
+            "volatility": 0.206
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": 8,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 74,
+            "public_support": 29,
+            "credit_rating": 38,
+            "exchange_rate": 1.031,
+            "inflation": 22,
+            "volatility": 0.223
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 14,
+          "startState": {
+            "foreign_reserves": 74,
+            "public_support": 29,
+            "credit_rating": 38,
+            "exchange_rate": 1.031,
+            "inflation": 22,
+            "volatility": 0.223
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 12,
+            "public_support": -19,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 86,
+            "public_support": 10,
+            "credit_rating": 32,
+            "exchange_rate": 1.03,
+            "inflation": 24.5,
+            "volatility": 0.219
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 15,
+          "startState": {
+            "foreign_reserves": 86,
+            "public_support": 10,
+            "credit_rating": 32,
+            "exchange_rate": 1.03,
+            "inflation": 24.5,
+            "volatility": 0.219
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -14,
+            "public_support": -2,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 72,
+            "public_support": 8,
+            "credit_rating": 30,
+            "exchange_rate": 1.028,
+            "inflation": 25.7,
+            "volatility": 0.2
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 16,
+          "startState": {
+            "foreign_reserves": 72,
+            "public_support": 8,
+            "credit_rating": 30,
+            "exchange_rate": 1.028,
+            "inflation": 25.7,
+            "volatility": 0.2
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": 10,
+            "credit_rating": -3
+          },
+          "endState": {
+            "foreign_reserves": 64,
+            "public_support": 18,
+            "credit_rating": 27,
+            "exchange_rate": 1.029,
+            "inflation": 27.2,
+            "volatility": 0.209
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 17,
+          "startState": {
+            "foreign_reserves": 64,
+            "public_support": 18,
+            "credit_rating": 27,
+            "exchange_rate": 1.029,
+            "inflation": 27.2,
+            "volatility": 0.209
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 23,
+            "public_support": 3,
+            "credit_rating": -9
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 21,
+            "credit_rating": 18,
+            "exchange_rate": 1.024,
+            "inflation": 29.7,
+            "volatility": 0.198
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 18,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 21,
+            "credit_rating": 18,
+            "exchange_rate": 1.024,
+            "inflation": 29.7,
+            "volatility": 0.198
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -3,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 18,
+            "credit_rating": 16,
+            "exchange_rate": 1.019,
+            "inflation": 29.7,
+            "volatility": 0.215
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 19,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 18,
+            "credit_rating": 16,
+            "exchange_rate": 1.019,
+            "inflation": 29.7,
+            "volatility": 0.215
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": 5,
+            "public_support": 15,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 33,
+            "credit_rating": 10,
+            "exchange_rate": 1.029,
+            "inflation": 31.7,
+            "volatility": 0.22
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 20,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 33,
+            "credit_rating": 10,
+            "exchange_rate": 1.029,
+            "inflation": 31.7,
+            "volatility": 0.22
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": -5,
+            "public_support": -18,
+            "credit_rating": -2
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 15,
+            "credit_rating": 8,
+            "exchange_rate": 1.033,
+            "inflation": 33.4,
+            "volatility": 0.2
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 21,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 15,
+            "credit_rating": 8,
+            "exchange_rate": 1.033,
+            "inflation": 33.4,
+            "volatility": 0.2
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -11,
+            "public_support": 8,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 76,
+            "public_support": 23,
+            "credit_rating": 0,
+            "exchange_rate": 1.037,
+            "inflation": 33.3,
+            "volatility": 0.202
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 21,
+        "finalState": {
+          "foreign_reserves": 76,
+          "public_support": 23,
+          "credit_rating": 0,
+          "exchange_rate": 1.037
+        },
+        "reason": "国家信用归零 — 无法融资，经济彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "激进策略_1",
+      "strategy": "激进策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -14,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 61,
+            "credit_rating": 64,
+            "exchange_rate": 1.01,
+            "inflation": 17.2,
+            "volatility": 0.158
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 61,
+            "credit_rating": 64,
+            "exchange_rate": 1.01,
+            "inflation": 17.2,
+            "volatility": 0.158
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": 8,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 69,
+            "credit_rating": 79,
+            "exchange_rate": 1.019,
+            "inflation": 16.5,
+            "volatility": 0.156
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 69,
+            "credit_rating": 79,
+            "exchange_rate": 1.019,
+            "inflation": 16.5,
+            "volatility": 0.156
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 8,
+            "public_support": 0,
+            "credit_rating": -14
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 69,
+            "credit_rating": 65,
+            "exchange_rate": 1.013,
+            "inflation": 16.4,
+            "volatility": 0.168
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 69,
+            "credit_rating": 65,
+            "exchange_rate": 1.013,
+            "inflation": 16.4,
+            "volatility": 0.168
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -16,
+            "public_support": -7,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 84,
+            "public_support": 62,
+            "credit_rating": 80,
+            "exchange_rate": 1.01,
+            "inflation": 16.1,
+            "volatility": 0.176
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "victory",
+        "survivalDays": 4,
+        "finalState": {
+          "foreign_reserves": 84,
+          "public_support": 62,
+          "credit_rating": 80,
+          "exchange_rate": 1.01
+        },
+        "reason": "连续3个月指标全部达标，国家重回稳定轨道"
+      }
+    },
+    {
+      "sessionId": "激进策略_2",
+      "strategy": "激进策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 4,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 79,
+            "credit_rating": 57,
+            "exchange_rate": 1.011,
+            "inflation": 17.8,
+            "volatility": 0.153
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 79,
+            "credit_rating": 57,
+            "exchange_rate": 1.011,
+            "inflation": 17.8,
+            "volatility": 0.153
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -5,
+            "credit_rating": 10
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 74,
+            "credit_rating": 67,
+            "exchange_rate": 1.021,
+            "inflation": 17.2,
+            "volatility": 0.155
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 74,
+            "credit_rating": 67,
+            "exchange_rate": 1.021,
+            "inflation": 17.2,
+            "volatility": 0.155
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "capital_control",
+            "name": "资本管制"
+          },
+          "changes": {
+            "foreign_reserves": 4,
+            "public_support": -3,
+            "credit_rating": -8
+          },
+          "endState": {
+            "foreign_reserves": 96,
+            "public_support": 71,
+            "credit_rating": 59,
+            "exchange_rate": 1.031,
+            "inflation": 16.7,
+            "volatility": 0.172
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 96,
+            "public_support": 71,
+            "credit_rating": 59,
+            "exchange_rate": 1.031,
+            "inflation": 16.7,
+            "volatility": 0.172
+          },
+          "event": {
+            "id": "tech_crisis",
+            "name": "科技企业倒闭潮",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 4,
+            "public_support": -18,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 53,
+            "credit_rating": 54,
+            "exchange_rate": 1.029,
+            "inflation": 16.2,
+            "volatility": 0.163
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 53,
+            "credit_rating": 54,
+            "exchange_rate": 1.029,
+            "inflation": 16.2,
+            "volatility": 0.163
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -24,
+            "credit_rating": 5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 29,
+            "credit_rating": 59,
+            "exchange_rate": 1.02,
+            "inflation": 16.3,
+            "volatility": 0.206
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 29,
+            "credit_rating": 59,
+            "exchange_rate": 1.02,
+            "inflation": 16.3,
+            "volatility": 0.206
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -16,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 13,
+            "credit_rating": 58,
+            "exchange_rate": 1.027,
+            "inflation": 16.1,
+            "volatility": 0.204
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 13,
+            "credit_rating": 58,
+            "exchange_rate": 1.027,
+            "inflation": 16.1,
+            "volatility": 0.204
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -6,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 7,
+            "credit_rating": 58,
+            "exchange_rate": 1.015,
+            "inflation": 15.4,
+            "volatility": 0.222
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 7,
+            "credit_rating": 58,
+            "exchange_rate": 1.015,
+            "inflation": 15.4,
+            "volatility": 0.222
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "cut_welfare",
+            "name": "削减福利"
+          },
+          "changes": {
+            "foreign_reserves": -6,
+            "public_support": -7,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 94,
+            "public_support": 0,
+            "credit_rating": 53,
+            "exchange_rate": 1.015,
+            "inflation": 16,
+            "volatility": 0.234
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 8,
+        "finalState": {
+          "foreign_reserves": 94,
+          "public_support": 0,
+          "credit_rating": 53,
+          "exchange_rate": 1.015
+        },
+        "reason": "民众支持归零 — 社会秩序彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "激进策略_3",
+      "strategy": "激进策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -7,
+            "credit_rating": -4
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 68,
+            "credit_rating": 61,
+            "exchange_rate": 1,
+            "inflation": 18.9,
+            "volatility": 0.15
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 68,
+            "credit_rating": 61,
+            "exchange_rate": 1,
+            "inflation": 18.9,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -15,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 53,
+            "credit_rating": 51,
+            "exchange_rate": 0.997,
+            "inflation": 19.9,
+            "volatility": 0.139
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 53,
+            "credit_rating": 51,
+            "exchange_rate": 0.997,
+            "inflation": 19.9,
+            "volatility": 0.139
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": 8,
+            "credit_rating": 15
+          },
+          "endState": {
+            "foreign_reserves": 92,
+            "public_support": 61,
+            "credit_rating": 66,
+            "exchange_rate": 1.008,
+            "inflation": 20,
+            "volatility": 0.146
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 92,
+            "public_support": 61,
+            "credit_rating": 66,
+            "exchange_rate": 1.008,
+            "inflation": 20,
+            "volatility": 0.146
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": -15,
+            "public_support": 0,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 77,
+            "public_support": 61,
+            "credit_rating": 65,
+            "exchange_rate": 1.011,
+            "inflation": 20.9,
+            "volatility": 0.128
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 77,
+            "public_support": 61,
+            "credit_rating": 65,
+            "exchange_rate": 1.011,
+            "inflation": 20.9,
+            "volatility": 0.128
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 23,
+            "public_support": -3,
+            "credit_rating": 5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 58,
+            "credit_rating": 70,
+            "exchange_rate": 1.004,
+            "inflation": 21.1,
+            "volatility": 0.14
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 58,
+            "credit_rating": 70,
+            "exchange_rate": 1.004,
+            "inflation": 21.1,
+            "volatility": 0.14
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -6,
+            "credit_rating": -3
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 52,
+            "credit_rating": 67,
+            "exchange_rate": 1.014,
+            "inflation": 22.5,
+            "volatility": 0.139
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 52,
+            "credit_rating": 67,
+            "exchange_rate": 1.014,
+            "inflation": 22.5,
+            "volatility": 0.139
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -8,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 44,
+            "credit_rating": 55,
+            "exchange_rate": 1.012,
+            "inflation": 23.7,
+            "volatility": 0.136
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 44,
+            "credit_rating": 55,
+            "exchange_rate": 1.012,
+            "inflation": 23.7,
+            "volatility": 0.136
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -18,
+            "credit_rating": -1
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 26,
+            "credit_rating": 54,
+            "exchange_rate": 1.017,
+            "inflation": 24.6,
+            "volatility": 0.15
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 26,
+            "credit_rating": 54,
+            "exchange_rate": 1.017,
+            "inflation": 24.6,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -9,
+            "credit_rating": 5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 17,
+            "credit_rating": 59,
+            "exchange_rate": 1.013,
+            "inflation": 24.3,
+            "volatility": 0.168
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 17,
+            "credit_rating": 59,
+            "exchange_rate": 1.013,
+            "inflation": 24.3,
+            "volatility": 0.168
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -26,
+            "public_support": 5,
+            "credit_rating": 10
+          },
+          "endState": {
+            "foreign_reserves": 74,
+            "public_support": 22,
+            "credit_rating": 69,
+            "exchange_rate": 1.021,
+            "inflation": 24.7,
+            "volatility": 0.164
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 74,
+            "public_support": 22,
+            "credit_rating": 69,
+            "exchange_rate": 1.021,
+            "inflation": 24.7,
+            "volatility": 0.164
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 17,
+            "public_support": -8,
+            "credit_rating": 5
+          },
+          "endState": {
+            "foreign_reserves": 91,
+            "public_support": 14,
+            "credit_rating": 74,
+            "exchange_rate": 1.028,
+            "inflation": 25.8,
+            "volatility": 0.17
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 91,
+            "public_support": 14,
+            "credit_rating": 74,
+            "exchange_rate": 1.028,
+            "inflation": 25.8,
+            "volatility": 0.17
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "cut_welfare",
+            "name": "削减福利"
+          },
+          "changes": {
+            "foreign_reserves": -3,
+            "public_support": -14,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 88,
+            "public_support": 0,
+            "credit_rating": 74,
+            "exchange_rate": 1.04,
+            "inflation": 25.2,
+            "volatility": 0.174
+          },
+          "speculatorAction": {
+            "name": "散布恐慌",
+            "type": "spread_rumor"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 12,
+        "finalState": {
+          "foreign_reserves": 88,
+          "public_support": 0,
+          "credit_rating": 74,
+          "exchange_rate": 1.04
+        },
+        "reason": "民众支持归零 — 社会秩序彻底崩溃"
+      }
+    },
+    {
+      "sessionId": "激进策略_4",
+      "strategy": "激进策略",
+      "initialState": {
+        "foreign_reserves": 100,
+        "public_support": 75,
+        "credit_rating": 65,
+        "exchange_rate": 1,
+        "inflation": 18,
+        "volatility": 0.15
+      },
+      "days": [
+        {
+          "day": 1,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 75,
+            "credit_rating": 65,
+            "exchange_rate": 1,
+            "inflation": 18,
+            "volatility": 0.15
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -18,
+            "credit_rating": 5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 57,
+            "credit_rating": 70,
+            "exchange_rate": 1.003,
+            "inflation": 17.3,
+            "volatility": 0.162
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 2,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 57,
+            "credit_rating": 70,
+            "exchange_rate": 1.003,
+            "inflation": 17.3,
+            "volatility": 0.162
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -12,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 45,
+            "credit_rating": 64,
+            "exchange_rate": 0.998,
+            "inflation": 18.1,
+            "volatility": 0.161
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 3,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 45,
+            "credit_rating": 64,
+            "exchange_rate": 0.998,
+            "inflation": 18.1,
+            "volatility": 0.161
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 3,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 48,
+            "credit_rating": 54,
+            "exchange_rate": 0.993,
+            "inflation": 17.3,
+            "volatility": 0.146
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 4,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 48,
+            "credit_rating": 54,
+            "exchange_rate": 0.993,
+            "inflation": 17.3,
+            "volatility": 0.146
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 0,
+            "credit_rating": -11
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 48,
+            "credit_rating": 43,
+            "exchange_rate": 0.984,
+            "inflation": 18.4,
+            "volatility": 0.149
+          },
+          "speculatorAction": {
+            "name": "观望待机",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 5,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 48,
+            "credit_rating": 43,
+            "exchange_rate": 0.984,
+            "inflation": 18.4,
+            "volatility": 0.149
+          },
+          "event": {
+            "id": "currency_crash",
+            "name": "货币暴跌",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 0,
+            "credit_rating": -21.75
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 48,
+            "credit_rating": 21.25,
+            "exchange_rate": 0.971,
+            "inflation": 20.5,
+            "volatility": 0.162
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 6,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 48,
+            "credit_rating": 21.25,
+            "exchange_rate": 0.971,
+            "inflation": 20.5,
+            "volatility": 0.162
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -6,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 42,
+            "credit_rating": 21.25,
+            "exchange_rate": 0.958,
+            "inflation": 22.7,
+            "volatility": 0.172
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 7,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 42,
+            "credit_rating": 21.25,
+            "exchange_rate": 0.958,
+            "inflation": 22.7,
+            "volatility": 0.172
+          },
+          "event": {
+            "id": "debt_downgrade",
+            "name": "评级下调",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -13,
+            "public_support": 5,
+            "credit_rating": 7
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 47,
+            "credit_rating": 28.25,
+            "exchange_rate": 0.96,
+            "inflation": 21.7,
+            "volatility": 0.166
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 8,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 47,
+            "credit_rating": 28.25,
+            "exchange_rate": 0.96,
+            "inflation": 21.7,
+            "volatility": 0.166
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 13,
+            "public_support": -3,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 44,
+            "credit_rating": 28.25,
+            "exchange_rate": 0.969,
+            "inflation": 24.6,
+            "volatility": 0.166
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 9,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 44,
+            "credit_rating": 28.25,
+            "exchange_rate": 0.969,
+            "inflation": 24.6,
+            "volatility": 0.166
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -3,
+            "credit_rating": 0
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 41,
+            "credit_rating": 28.25,
+            "exchange_rate": 0.978,
+            "inflation": 28.7,
+            "volatility": 0.162
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 10,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 41,
+            "credit_rating": 28.25,
+            "exchange_rate": 0.978,
+            "inflation": 28.7,
+            "volatility": 0.162
+          },
+          "event": {
+            "id": "trade_deficit",
+            "name": "贸易逆差扩大",
+            "severity": "low"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -6,
+            "credit_rating": 5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 35,
+            "credit_rating": 33.25,
+            "exchange_rate": 0.983,
+            "inflation": 29.1,
+            "volatility": 0.162
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 11,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 35,
+            "credit_rating": 33.25,
+            "exchange_rate": 0.983,
+            "inflation": 29.1,
+            "volatility": 0.162
+          },
+          "event": {
+            "id": "bank_run",
+            "name": "银行挤兑",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "sell_assets",
+            "name": "出售资产"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -17,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 18,
+            "credit_rating": 27.25,
+            "exchange_rate": 0.986,
+            "inflation": 29.9,
+            "volatility": 0.173
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 12,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 18,
+            "credit_rating": 27.25,
+            "exchange_rate": 0.986,
+            "inflation": 29.9,
+            "volatility": 0.173
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "national_celebration",
+            "name": "举行国庆庆典"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": 13,
+            "credit_rating": -5
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 31,
+            "credit_rating": 22.25,
+            "exchange_rate": 0.992,
+            "inflation": 33.3,
+            "volatility": 0.185
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 13,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 31,
+            "credit_rating": 22.25,
+            "exchange_rate": 0.992,
+            "inflation": 33.3,
+            "volatility": 0.185
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "emergency_bond",
+            "name": "紧急国债"
+          },
+          "changes": {
+            "foreign_reserves": 0,
+            "public_support": -15,
+            "credit_rating": -6
+          },
+          "endState": {
+            "foreign_reserves": 100,
+            "public_support": 16,
+            "credit_rating": 16.25,
+            "exchange_rate": 0.984,
+            "inflation": 33,
+            "volatility": 0.168
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 14,
+          "startState": {
+            "foreign_reserves": 100,
+            "public_support": 16,
+            "credit_rating": 16.25,
+            "exchange_rate": 0.984,
+            "inflation": 33,
+            "volatility": 0.168
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "public_speech",
+            "name": "鼓舞演讲"
+          },
+          "changes": {
+            "foreign_reserves": -18,
+            "public_support": 12,
+            "credit_rating": -10
+          },
+          "endState": {
+            "foreign_reserves": 82,
+            "public_support": 28,
+            "credit_rating": 6.25,
+            "exchange_rate": 0.987,
+            "inflation": 34.6,
+            "volatility": 0.185
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 15,
+          "startState": {
+            "foreign_reserves": 82,
+            "public_support": 28,
+            "credit_rating": 6.25,
+            "exchange_rate": 0.987,
+            "inflation": 34.6,
+            "volatility": 0.185
+          },
+          "event": {
+            "id": "protest",
+            "name": "全国抗议",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "economic_reform",
+            "name": "结构改革"
+          },
+          "changes": {
+            "foreign_reserves": -8,
+            "public_support": -10,
+            "credit_rating": 13
+          },
+          "endState": {
+            "foreign_reserves": 74,
+            "public_support": 18,
+            "credit_rating": 19.25,
+            "exchange_rate": 0.999,
+            "inflation": 35.4,
+            "volatility": 0.173
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 16,
+          "startState": {
+            "foreign_reserves": 74,
+            "public_support": 18,
+            "credit_rating": 19.25,
+            "exchange_rate": 0.999,
+            "inflation": 35.4,
+            "volatility": 0.173
+          },
+          "event": {
+            "id": "foreign_pressure",
+            "name": "外部施压",
+            "severity": "high"
+          },
+          "policy": {
+            "id": "welfare_spending",
+            "name": "发放民生补贴"
+          },
+          "changes": {
+            "foreign_reserves": -24,
+            "public_support": 8,
+            "credit_rating": -7
+          },
+          "endState": {
+            "foreign_reserves": 50,
+            "public_support": 26,
+            "credit_rating": 12.25,
+            "exchange_rate": 1.006,
+            "inflation": 36,
+            "volatility": 0.185
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        },
+        {
+          "day": 17,
+          "startState": {
+            "foreign_reserves": 50,
+            "public_support": 26,
+            "credit_rating": 12.25,
+            "exchange_rate": 1.006,
+            "inflation": 36,
+            "volatility": 0.185
+          },
+          "event": {
+            "id": "food_shortage",
+            "name": "粮食短缺",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "imf_bailout",
+            "name": "IMF援助"
+          },
+          "changes": {
+            "foreign_reserves": 17,
+            "public_support": -18,
+            "credit_rating": 3
+          },
+          "endState": {
+            "foreign_reserves": 67,
+            "public_support": 8,
+            "credit_rating": 15.25,
+            "exchange_rate": 1.005,
+            "inflation": 38.2,
+            "volatility": 0.203
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 18,
+          "startState": {
+            "foreign_reserves": 67,
+            "public_support": 8,
+            "credit_rating": 15.25,
+            "exchange_rate": 1.005,
+            "inflation": 38.2,
+            "volatility": 0.203
+          },
+          "event": {
+            "id": "minor_recovery",
+            "name": "短暂喘息",
+            "severity": "positive"
+          },
+          "policy": {
+            "id": "print_money",
+            "name": "增发货币"
+          },
+          "changes": {
+            "foreign_reserves": 20,
+            "public_support": 3,
+            "credit_rating": -12
+          },
+          "endState": {
+            "foreign_reserves": 87,
+            "public_support": 11,
+            "credit_rating": 3.25,
+            "exchange_rate": 0.997,
+            "inflation": 40.7,
+            "volatility": 0.206
+          },
+          "speculatorAction": {
+            "name": "攻击债市",
+            "type": "attack_bonds"
+          }
+        },
+        {
+          "day": 19,
+          "startState": {
+            "foreign_reserves": 87,
+            "public_support": 11,
+            "credit_rating": 3.25,
+            "exchange_rate": 0.997,
+            "inflation": 40.7,
+            "volatility": 0.206
+          },
+          "event": {
+            "id": "corruption_scandal",
+            "name": "腐败丑闻",
+            "severity": "medium"
+          },
+          "policy": {
+            "id": "tax_increase",
+            "name": "提高税收"
+          },
+          "changes": {
+            "foreign_reserves": 10,
+            "public_support": -11,
+            "credit_rating": -3.25
+          },
+          "endState": {
+            "foreign_reserves": 97,
+            "public_support": 0,
+            "credit_rating": 0,
+            "exchange_rate": 0.998,
+            "inflation": 40.2,
+            "volatility": 0.195
+          },
+          "speculatorAction": {
+            "name": "获利了结",
+            "type": "wait"
+          }
+        }
+      ],
+      "finalResult": {
+        "outcome": "defeat",
+        "survivalDays": 19,
+        "finalState": {
+          "foreign_reserves": 97,
+          "public_support": 0,
+          "credit_rating": 0,
+          "exchange_rate": 0.998
+        },
+        "reason": "民众支持归零 — 社会秩序彻底崩溃"
+      }
+    }
+  ],
+  "summary": {
+    "totalSessions": 12,
+    "byStrategy": {
+      "随机选择": {
+        "total": 4,
+        "victories": 0,
+        "defeats": 4,
+        "winRate": "0.0%",
+        "avgSurvival": 12,
+        "minSurvival": 8,
+        "maxSurvival": 17
+      },
+      "稳健策略": {
+        "total": 4,
+        "victories": 0,
+        "defeats": 4,
+        "winRate": "0.0%",
+        "avgSurvival": 16.5,
+        "minSurvival": 10,
+        "maxSurvival": 21
+      },
+      "激进策略": {
+        "total": 4,
+        "victories": 1,
+        "defeats": 3,
+        "winRate": "25.0%",
+        "avgSurvival": 10.8,
+        "minSurvival": 4,
+        "maxSurvival": 19
+      }
+    },
+    "overall": {
+      "victories": 1,
+      "defeats": 11,
+      "avgSurvival": "13.1",
+      "survivalDays": [
+        8,
+        17,
+        11,
+        12,
+        16,
+        10,
+        19,
+        21,
+        4,
+        8,
+        12,
+        19
+      ]
+    }
+  }
+}

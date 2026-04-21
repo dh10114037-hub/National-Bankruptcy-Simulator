@@ -1,0 +1,110 @@
+[
+  {
+    "id": "bank_run",
+    "name": "银行挤兑",
+    "description": "恐慌情绪蔓延，民众纷纷提取存款，银行体系承压。",
+    "icon": "🏦",
+    "severity": "high",
+    "effects": {
+      "foreign_reserves": -15,
+      "public_support": -10
+    }
+  },
+  {
+    "id": "protest",
+    "name": "全国抗议",
+    "description": "失业率攀升，数十万人走上街头，社会动荡加剧。",
+    "icon": "✊",
+    "severity": "medium",
+    "effects": {
+      "public_support": -15
+    }
+  },
+  {
+    "id": "currency_crash",
+    "name": "货币暴跌",
+    "description": "汇率崩溃，外资加速撤离，国际信用严重受损。",
+    "icon": "📉",
+    "severity": "high",
+    "effects": {
+      "credit_rating": -12,
+      "foreign_reserves": -10
+    }
+  },
+  {
+    "id": "debt_downgrade",
+    "name": "评级下调",
+    "description": "国际评级机构宣布下调主权信用评级，债券利率飙升。",
+    "icon": "⬇️",
+    "severity": "medium",
+    "effects": {
+      "credit_rating": -8,
+      "foreign_reserves": -5
+    }
+  },
+  {
+    "id": "food_shortage",
+    "name": "粮食短缺",
+    "description": "农业减产叠加进口受阻，基本物资供应出现危机。",
+    "icon": "🌾",
+    "severity": "medium",
+    "effects": {
+      "public_support": -12,
+      "foreign_reserves": -8
+    }
+  },
+  {
+    "id": "foreign_pressure",
+    "name": "外部施压",
+    "description": "债权国要求提前偿还贷款，外汇储备快速消耗。",
+    "icon": "🌍",
+    "severity": "high",
+    "effects": {
+      "foreign_reserves": -18,
+      "credit_rating": -5
+    }
+  },
+  {
+    "id": "corruption_scandal",
+    "name": "腐败丑闻",
+    "description": "高层官员腐败曝光，民心大失，国际观察者表示担忧。",
+    "icon": "💰",
+    "severity": "medium",
+    "effects": {
+      "public_support": -8,
+      "credit_rating": -6
+    }
+  },
+  {
+    "id": "trade_deficit",
+    "name": "贸易逆差扩大",
+    "description": "出口萎缩，进口激增，贸易账户持续恶化。",
+    "icon": "📦",
+    "severity": "low",
+    "effects": {
+      "foreign_reserves": -8
+    }
+  },
+  {
+    "id": "minor_recovery",
+    "name": "短暂喘息",
+    "description": "国际油价下跌，输入性通胀减缓，局势略有好转。",
+    "icon": "🌤️",
+    "severity": "positive",
+    "effects": {
+      "foreign_reserves": 5,
+      "public_support": 3
+    }
+  },
+  {
+    "id": "tech_crisis",
+    "name": "科技企业倒闭潮",
+    "description": "融资断裂，大量科技企业关门，失业人数骤增。",
+    "icon": "💻",
+    "severity": "medium",
+    "effects": {
+      "public_support": -10,
+      "credit_rating": -5
+    }
+  }
+]

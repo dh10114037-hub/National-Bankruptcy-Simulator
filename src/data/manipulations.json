@@ -1,0 +1,42 @@
+[
+  {
+    "id": "create_media_panic",
+    "name": "制造舆论危机",
+    "description": "向媒体散布恐慌性报道，压低民众支持",
+    "cost": 100000,
+    "effects": { "public_support_dmg": 10, "inflation": 3 },
+    "side_effect": "民众骚动加剧，政府被迫应急",
+    "success_rate": 0.85,
+    "cooldown": 2
+  },
+  {
+    "id": "short_attack",
+    "name": "做空攻击",
+    "description": "集中火力做空本币，加速汇率暴跌",
+    "cost": 200000,
+    "effects": { "exchange_rate": -0.15, "credit_rating": -5 },
+    "side_effect": "央行被迫动用外储干预",
+    "success_rate": 0.75,
+    "cooldown": 3
+  },
+  {
+    "id": "spread_rumor",
+    "name": "散布谣言",
+    "description": "通过匿名渠道散布政府即将违约的消息",
+    "cost": 80000,
+    "effects": { "credit_rating": -8, "inflation": 5 },
+    "side_effect": "国际评级机构可能跟进调降",
+    "success_rate": 0.8,
+    "cooldown": 2
+  },
+  {
+    "id": "short_bank_system",
+    "name": "做空银行系统",
+    "description": "触发市场对银行系统的担忧，提升挤兑概率",
+    "cost": 150000,
+    "effects": { "exchange_rate": -0.08, "public_support_dmg": 5, "credit_rating": -6 },
+    "side_effect": "可能触发政府全面管控市场",
+    "success_rate": 0.7,
+    "cooldown": 3
+  }
+]
