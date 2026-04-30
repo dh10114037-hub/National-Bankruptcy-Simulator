@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import type { SpeculatorGameState, SpecNotif, TradeOrder } from '../types/speculator';
+import type { SpeculatorGameState, SpecNotif, TradeOrder, TurnSummary } from '../types/speculator';
 import type { StoryState, StoryChoice } from '../types/story';
 import {
   createSpeculatorState,
@@ -16,6 +16,8 @@ import {
   makeChoice,
   advanceStoryTurn,
 } from '../engine/storyEngine';
+import { saveGame, loadSave, type SaveData } from '../utils/saveLoad';
+import { playSound, vibrate } from '../utils/soundEffects';
 
 interface SpeculatorStore {
   state: SpeculatorGameState;
@@ -44,8 +46,15 @@ interface SpeculatorStore {
   dismissNotif: (id: string) => void;
   pushNotif: (notif: SpecNotif) => void;
 
+  // 关闭回合总结
+  dismissTurnSummary: () => void;
+
   // 重置
   resetGame: () => void;
+
+  // 存档
+  saveToSlot: (slot: number) => boolean;
+  loadFromSlot: (slot: number) => boolean;
 }
 
 export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
@@ -67,6 +76,8 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     const { newState, notif } = executeTrade(state, order);
     set({ state: newState });
     get().pushNotif(notif);
+    playSound('open_position');
+    vibrate('light');
   },
 
   closeTrade: (posId) => {
@@ -74,18 +85,31 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     const { newState, notif } = closePosition(state, posId);
     set({ state: newState });
     get().pushNotif(notif);
+    const pos = state.assets.positions.find(p => p.id === posId);
+    if (pos) {
+      if (pos.pnl >= 0) {
+        playSound('close_profit');
+        vibrate('success');
+      } else {
+        playSound('close_loss');
+        vibrate('error');
+      }
+    }
   },
 
   purchaseIntel: (intelId) => {
     const { state } = get();
     const newState = buyIntel(state, intelId);
     set({ state: newState });
+    playSound('intel_purchased');
+    vibrate('light');
   },
 
   bribeForIntel: (intelId) => {
     const { state } = get();
     const newState = bribeIntel(state, intelId);
     set({ state: newState });
+    playSound('intel_purchased');
   },
 
   triggerManipulation: (actionId) => {
@@ -93,6 +117,12 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     const { newState, notif } = executeManipulation(state, actionId);
     set({ state: newState });
     get().pushNotif(notif);
+    if (notif.type === 'manipulation_success') {
+      playSound('manipulation_success');
+      vibrate('success');
+    } else {
+      playSound('manipulation_fail');
+    }
   },
 
   nextTurn: () => {
@@ -126,8 +156,30 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     }
 
     // 5. 没有触发事件，正常推进游戏回合
+    //    先记录推进前的值，用于计算回合总结
+    const prevCash = state.assets.cash;
+    const prevTotalValue = state.assets.total_value;
+    const prevExchangeRate = state.market.exchange_rate;
+    const prevInflation = state.market.inflation;
+    const prevCreditRating = state.market.credit_rating;
+    const prevStockIndex = state.market.stock_index;
+    const prevBondPrice = state.market.bond_price;
+
     const { newState, notifs } = advanceSpecTurn(state);
-    set({ state: newState, story: storyAfterCheck });
+
+    // 6. 计算回合总结
+    const turnSummary: TurnSummary = {
+      turn: newState.turn,
+      exchange_rate_delta: newState.market.exchange_rate - prevExchangeRate,
+      inflation_delta: newState.market.inflation - prevInflation,
+      credit_rating_delta: newState.market.credit_rating - prevCreditRating,
+      stock_index_delta: Math.round(newState.market.stock_index - prevStockIndex),
+      bond_price_delta: newState.market.bond_price - prevBondPrice,
+      cash_delta: newState.assets.cash - prevCash,
+      total_value_delta: newState.assets.total_value - prevTotalValue,
+    };
+
+    set({ state: { ...newState, turn_summary: turnSummary }, story: storyAfterCheck });
     notifs.forEach((n) => get().pushNotif(n));
   },
 
@@ -181,8 +233,8 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
         notifications: [notif, ...s.state.notifications].slice(0, 8),
       },
     }));
-    // 5秒后自动消除
-    setTimeout(() => get().dismissNotif(notif.id), 5000);
+    // 8秒后自动消除
+    setTimeout(() => get().dismissNotif(notif.id), 8000);
   },
 
   dismissNotif: (id) => {
@@ -194,11 +246,59 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     }));
   },
 
+  dismissTurnSummary: () => {
+    set((s) => ({
+      state: { ...s.state, turn_summary: null },
+    }));
+  },
+
   resetGame: () => {
     set({
       state: createSpeculatorState(),
       story: createStoryState(),
       hasActiveStory: false,
     });
+  },
+
+  saveToSlot: (slot) => {
+    const { state, story, hasActiveStory } = get();
+    if (state.phase !== 'playing') return false;
+    return saveGame(slot, 'speculator', state.turn, {
+      state: {
+        ...state,
+        // 清除临时UI状态，不影响存档
+        notifications: [],
+        turn_summary: null,
+        market_flash: {},
+      },
+      story,
+      hasActiveStory,
+    } as Record<string, unknown>);
+  },
+
+  loadFromSlot: (slot) => {
+    const data = loadSave(slot);
+    if (!data || data.mode !== 'speculator' || !data.specData) return false;
+    try {
+      const { state, story, hasActiveStory } = data.specData as {
+        state: SpeculatorGameState;
+        story: StoryState;
+        hasActiveStory: boolean;
+      };
+      set({
+        // 恢复时清除UI临时状态
+        state: {
+          ...state,
+          notifications: [],
+          turn_summary: null,
+          market_flash: {},
+        },
+        story,
+        hasActiveStory,
+      });
+      return true;
+    } catch {
+      return false;
+    }
   },
 }));

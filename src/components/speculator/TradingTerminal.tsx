@@ -124,24 +124,24 @@ function TradeModal({
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm">
-      <div className="w-[420px] bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+      <div className="w-full max-w-[420px] bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
         {/* 标题 - 显示大白话解释 */}
-        <div className="px-5 py-4 border-b border-gray-200 flex items-start justify-between gap-4">
-          <div className="flex-1">
-            <div className="font-bold text-gray-900 text-lg">{asset.name}</div>
+        <div className="px-4 py-3 border-b border-gray-200 flex items-start justify-between gap-4">
+          <div className="flex-1 min-w-0">
+            <div className="font-bold text-gray-900 text-base">{asset.name}</div>
             {/* 👉 大白话解释 - 新手最关键 */}
-            <div className="mt-2 px-3 py-2 bg-amber-50 border border-amber-200 rounded-lg">
+            <div className="mt-1.5 px-2.5 py-1.5 bg-amber-50 border border-amber-200 rounded-lg">
               <div className="text-xs text-amber-700 flex items-start gap-1.5">
                 <span className="shrink-0 mt-0.5">👉</span>
                 <span className="leading-relaxed">{asset.explain}</span>
               </div>
             </div>
           </div>
-          <button onClick={onCancel} className="text-gray-400 hover:text-gray-600 text-xl leading-none shrink-0">×</button>
+          <button onClick={onCancel} className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0 w-8 h-8 flex items-center justify-center">×</button>
         </div>
 
-        <div className="px-5 py-4 space-y-4">
+        <div className="px-4 py-4 space-y-4">
           {/* 当前价格 */}
           <div className="flex justify-between text-sm">
             <span className="text-gray-500">当前价格</span>
@@ -150,32 +150,35 @@ function TradeModal({
 
           {/* 投入金额 */}
           <div>
-            <label className="text-xs text-gray-500 block mb-1">投入金额</label>
-            <input
-              type="range"
-              min={asset.min_invest}
-              max={Math.max(maxAmount, asset.min_invest)}
-              step={10000}
-              value={Math.min(amount, Math.max(maxAmount, asset.min_invest))}
-              onChange={(e) => setAmount(Number(e.target.value))}
-              className="w-full accent-amber-500"
-            />
+            <label className="text-xs text-gray-500 block mb-1.5">投入金额</label>
+            {/* 滑块加大触控区域 */}
+            <div className="relative">
+              <input
+                type="range"
+                min={asset.min_invest}
+                max={Math.max(maxAmount, asset.min_invest)}
+                step={10000}
+                value={Math.min(amount, Math.max(maxAmount, asset.min_invest))}
+                onChange={(e) => setAmount(Number(e.target.value))}
+                className="w-full accent-amber-500 h-8" /* 加大高度便于触控 */
+              />
+            </div>
             <div className="flex justify-between text-xs text-gray-400 mt-1">
               <span>${asset.min_invest.toLocaleString()}</span>
-              <span className="font-mono text-amber-600 font-bold">${amount.toLocaleString()}</span>
+              <span className="font-mono text-amber-600 font-bold text-sm">${amount.toLocaleString()}</span>
               <span>${maxAmount.toLocaleString()}</span>
             </div>
           </div>
 
-          {/* 杠杆 */}
+          {/* 杠杆（按钮更大更易触控） */}
           <div>
             <label className="text-xs text-gray-500 block mb-2">杠杆倍数</label>
-            <div className="flex gap-2">
+            <div className="grid grid-cols-4 gap-2">
               {asset.leverage_available.slice(0, 4).map((lv) => (
                 <button
                   key={lv}
                   onClick={() => setLeverage(lv)}
-                  className={`flex-1 py-1.5 rounded-lg text-sm font-bold border transition-all ${
+                  className={`py-3 rounded-xl text-sm font-bold border transition-all active:scale-95 ${
                     leverage === lv
                       ? 'border-amber-400 bg-amber-100 text-amber-700'
                       : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700'
@@ -201,11 +204,11 @@ function TradeModal({
             </div>
           </div>
 
-          {/* 确认按钮 */}
+          {/* 确认按钮（加大触控区域） */}
           <button
             disabled={amount > cash}
             onClick={handleConfirm}
-            className="w-full py-3 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98] shadow-lg"
           >
             确认开仓 −${amount.toLocaleString()}
           </button>

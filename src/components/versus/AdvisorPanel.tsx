@@ -182,7 +182,11 @@ export function TutorialOverlay({ role, onClose }: TutorialProps) {
             <div
               key={i}
               className={`h-1 flex-1 rounded-full transition-all ${
-                i <= step ? 'bg-blue-500' : 'bg-gray-200'
+                i <= step
+                  ? role === 'speculator' ? 'bg-amber-500'
+                  : role === 'savior'    ? 'bg-blue-600'
+                  : 'bg-purple-500'
+                  : 'bg-gray-200'
               }`}
             />
           ))}
@@ -205,7 +209,13 @@ export function TutorialOverlay({ role, onClose }: TutorialProps) {
           )}
           <button
             onClick={() => isLast ? onClose() : setStep(step + 1)}
-            className="flex-1 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-bold text-sm transition-all"
+            className={`flex-1 py-2.5 rounded-xl font-bold text-sm transition-all ${
+              role === 'speculator'
+                ? 'bg-amber-500 hover:bg-amber-400 text-white'
+                : role === 'savior'
+                  ? 'bg-blue-600 hover:bg-blue-500 text-white'
+                  : 'bg-purple-600 hover:bg-purple-500 text-white'
+            }`}
           >
             {isLast ? '开始游戏 →' : '下一步 →'}
           </button>

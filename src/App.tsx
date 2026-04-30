@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import { useGameStore } from './store/gameStore';
+import { useSpeculatorStore } from './store/speculatorStore';
 import { ModeSelect } from './components/ModeSelect';
 import { SpeculatorView } from './components/speculator/SpeculatorView';
 import { VersusView } from './components/versus/VersusView';
@@ -43,6 +43,8 @@ export default function App() {
     dismissRoundSummary,
     toggleAuxAction,
   } = useGameStore();
+
+  const { state: specState, saveToSlot: specSave, loadFromSlot: specLoad } = useSpeculatorStore();
 
   // Auto-start first round
   const bootedRef = useRef(false);
@@ -94,9 +96,35 @@ export default function App() {
     }
   };
 
+  // ── 存档/读档回调 ──────────────────────────────────────────
+  const handleLoadSave = (loadMode: 'savior' | 'speculator' | 'versus') => {
+    if (loadMode === 'speculator') {
+      specLoad(0);
+      setMode('speculator');
+    } else {
+      // 拯救者模式：目前重置（简化实现）
+      // TODO: 后续实现拯救者模式的存档
+      setMode(loadMode);
+    }
+  };
+
+  const handleSaveCurrent = (slot: number) => {
+    if (mode === 'speculator') {
+      specSave(slot);
+    }
+    // 拯救者模式暂不支持
+  };
+
   // ── 模式选择页 ──
   if (mode === 'select') {
-    return <ModeSelect onSelect={(m) => setMode(m)} />;
+    return (
+      <ModeSelect
+        onSelect={(m) => setMode(m)}
+        onLoadSave={handleLoadSave}
+        onSaveCurrent={handleSaveCurrent}
+        currentMode={null}
+      />
+    );
   }
 
   // ── 投机者模式 ──

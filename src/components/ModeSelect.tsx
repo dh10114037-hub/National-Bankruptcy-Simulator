@@ -1,8 +1,17 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { SaveLoadModal } from './ui/SaveLoadModal';
+import { hasAnySave } from '../utils/saveLoad';
 
 interface Props {
   onSelect: (mode: 'savior' | 'speculator' | 'versus') => void;
+  /** 从存档加载时的回调 */
+  onLoadSave?: (mode: 'savior' | 'speculator' | 'versus') => void;
+  /** 保存当前游戏回调 */
+  onSaveCurrent?: (slot: number) => void;
+  /** 当前游戏模式（非select，表示有正在进行的游戏） */
+  currentMode?: 'savior' | 'speculator' | 'versus' | null;
+  currentTurn?: number;
 }
 
 // ─── 游戏说明弹层 ────────────────────────────────────────────
@@ -196,8 +205,27 @@ function HowToPlayModal({ onClose }: { onClose: () => void }) {
 }
 
 // ─── 模式选择主视图 ──────────────────────────────────────────
-export function ModeSelect({ onSelect }: Props) {
+export function ModeSelect({ onSelect, onLoadSave, onSaveCurrent, currentMode, currentTurn }: Props) {
   const [showHowTo, setShowHowTo] = useState(false);
+  const [showSaveLoad, setShowSaveLoad] = useState(false);
+  const [hasSaves, setHasSaves] = useState(false);
+
+  useEffect(() => {
+    setHasSaves(hasAnySave());
+  }, []);
+
+  const handleSave = (slot: number) => {
+    if (onSaveCurrent && currentMode) {
+      onSaveCurrent(slot);
+      setHasSaves(hasAnySave());
+    }
+    setShowSaveLoad(false);
+  };
+
+  const handleLoad = (mode: 'savior' | 'speculator' | 'versus') => {
+    setShowSaveLoad(false);
+    onLoadSave?.(mode);
+  };
 
   return (
     <div
@@ -205,13 +233,25 @@ export function ModeSelect({ onSelect }: Props) {
       style={{ background: '#F5F7FA' }}
     >
       {/* 顶部按钮 */}
-      <div className="absolute top-6 right-6 z-10">
+      <div className="absolute top-6 right-6 z-10 flex gap-2">
+        {/* 存档/读档按钮 */}
+        <button
+          onClick={() => setShowSaveLoad(true)}
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-gray-50 border border-gray-200 text-gray-600 text-xs font-medium shadow-sm transition-all"
+        >
+          <span>💾</span>
+          <span>存档</span>
+          {hasSaves && (
+            <span className="w-1.5 h-1.5 rounded-full bg-blue-500" />
+          )}
+        </button>
+        {/* 游戏说明 */}
         <button
           onClick={() => setShowHowTo(true)}
           className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-white hover:bg-gray-50 border border-gray-200 text-gray-600 text-xs font-medium shadow-sm transition-all"
         >
           <span>📘</span>
-          <span>游戏说明</span>
+          <span>说明</span>
         </button>
       </div>
 
@@ -325,6 +365,20 @@ export function ModeSelect({ onSelect }: Props) {
           </p>
         </div>
       </div>
+
+      {/* 存档弹层 */}
+      <AnimatePresence>
+        {showSaveLoad && (
+          <SaveLoadModal
+            currentMode={currentMode ?? undefined}
+            canSave={currentMode !== undefined && currentMode !== null}
+            currentTurn={currentTurn}
+            onClose={() => setShowSaveLoad(false)}
+            onLoad={handleLoad}
+            onSave={handleSave}
+          />
+        )}
+      </AnimatePresence>
 
       {/* 说明弹层 */}
       <AnimatePresence>

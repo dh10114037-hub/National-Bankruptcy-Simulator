@@ -141,6 +141,64 @@ export function SpecActionHub({
           />
         </div>
 
+        {/* 当前持仓快捷查看（如果有持仓，直接在主界面显示） */}
+        {assets.positions.length > 0 && (
+          <div className="rounded-2xl border border-gray-200 bg-white p-4">
+            <div className="flex items-center justify-between mb-3">
+              <div className="flex items-center gap-2">
+                <span className="text-base">💼</span>
+                <span className="font-bold text-sm text-gray-800">当前持仓</span>
+                <span className="text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-full">
+                  {assets.positions.length} 笔
+                </span>
+              </div>
+              <button
+                onClick={() => setActivePanel('trading')}
+                className="text-xs text-blue-500 hover:text-blue-600 font-medium"
+              >
+                查看全部 →
+              </button>
+            </div>
+            <div className="space-y-2">
+              {assets.positions.slice(0, 3).map((pos) => (
+                <div
+                  key={pos.id}
+                  className={`flex items-center justify-between p-3 rounded-xl border ${
+                    pos.pnl >= 0
+                      ? 'border-emerald-200 bg-emerald-50'
+                      : 'border-red-200 bg-red-50'
+                  }`}
+                >
+                  <div className="min-w-0 flex-1">
+                    <div className="text-sm font-medium text-gray-800 truncate">{pos.label}</div>
+                    <div className="text-xs text-gray-400 mt-0.5">
+                      ${pos.amount.toLocaleString()} · x{pos.leverage}
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-2 ml-2">
+                    <div className="text-right">
+                      <div className={`font-mono font-bold text-sm ${pos.pnl >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                        {pos.pnl >= 0 ? '+' : ''}{pos.pnl_pct.toFixed(1)}%
+                      </div>
+                    </div>
+                    <button
+                      onClick={() => onClose(pos.id)}
+                      className="px-3 py-1.5 rounded-lg bg-white border border-gray-200 text-xs font-bold text-gray-600 hover:bg-gray-50 active:scale-95 transition-all"
+                    >
+                      平仓
+                    </button>
+                  </div>
+                </div>
+              ))}
+              {assets.positions.length > 3 && (
+                <div className="text-xs text-gray-400 text-center py-1">
+                  还有 {assets.positions.length - 3} 笔持仓
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+
         {/* 当前机会摘要（卡片形式，更紧凑） */}
         <div className="rounded-2xl border-2 border-amber-200 bg-white p-4">
           <div className="flex items-center gap-2 mb-3">

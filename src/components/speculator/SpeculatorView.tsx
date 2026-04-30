@@ -11,7 +11,8 @@
  *   - 点击进入BottomSheet查看详情
  */
 
-import { AnimatePresence } from 'framer-motion';
+import { useState, useEffect, useRef } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useSpeculatorStore } from '../../store/speculatorStore';
 import { SpecHeader } from './SpecHeader';
 import { IntelPanel } from './IntelPanel';
@@ -22,13 +23,23 @@ import { SpecGameOver } from './SpecGameOver';
 import { OpportunityPanel } from './OpportunityPanel';
 import { SpecActionHub } from './SpecActionHub';
 import { StoryEventPanel } from '../story/StoryEventPanel';
+import { TurnSummaryCard } from './TurnSummaryCard';
 import type { StoryChoice } from '../../types/story';
+import { TutorialOverlay } from '../versus/AdvisorPanel';
+import { SaveLoadModal } from '../ui/SaveLoadModal';
+import { saveGame } from '../../utils/saveLoad';
+import { playSound, vibrate } from '../../utils/soundEffects';
+import { useAchievements } from '../../utils/useAchievements';
+import { AchievementToast, AchievementPanel } from '../ui/AchievementUI';
 
 interface SpeculatorViewProps {
   onBack?: () => void;
 }
 
 export function SpeculatorView({ onBack }: SpeculatorViewProps) {
+  const [showTutorial, setShowTutorial] = useState(true);
+  const [showSaveLoad, setShowSaveLoad] = useState(false);
+  const [showAchievements, setShowAchievements] = useState(false);
   const {
     state,
     story,
@@ -41,10 +52,22 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
     nextTurn,
     makeStoryChoice,
     dismissNotif,
+    dismissTurnSummary,
     resetGame,
+    saveToSlot,
   } = useSpeculatorStore();
 
-  const { phase, turn, maxTurns, assets, market, intels, manipulations, notifications, market_flash, gov_log, initial_cash } = state;
+  const { phase, turn, maxTurns, assets, market, intels, manipulations, notifications, market_flash, gov_log, initial_cash, turn_summary } = state;
+
+  // 成就系统
+  const {
+    checkAndUnlock,
+    newAchievement,
+    dismissNewAchievement,
+    getAchievementsForMode,
+    unlockedCount,
+    totalCount,
+  } = useAchievements();
 
   // 危机感背景（随危机强度变化）
   const crisisDepth = Math.max(0, (1 - market.credit_rating / 100) * 0.5 + (1 - market.exchange_rate) * 0.5);
@@ -52,6 +75,40 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
     background: crisisDepth > 0.7 ? '#FFF5F5' : '#F5F7FA',
     minHeight: '100vh',
   };
+
+  // 胜负音效 + 成就检查
+  const prevPhaseRef = useRef(phase);
+  const manipulationsSucceededRef = useRef(0);
+  useEffect(() => {
+    if (prevPhaseRef.current === 'playing' && phase !== 'playing') {
+      // 胜负音效
+      if (phase === 'victory') {
+        playSound('victory');
+        vibrate('success');
+      } else {
+        playSound('defeat');
+        vibrate('error');
+      }
+      // 成就检查
+      checkAndUnlock({
+        mode: 'speculator',
+        turn,
+        phase,
+        spec: {
+          totalValue: assets.total_value,
+          initialCash: initial_cash,
+          cash: assets.cash,
+          positionsCount: assets.positions.length,
+          intelsBought: intels.filter(i => i.purchased).length,
+          manipulationsTriggered: manipulations.length > 0 ? manipulations.length : manipulationsSucceededRef.current,
+          manipulationsSucceeded: manipulationsSucceededRef.current,
+          largestPnl: assets.positions.reduce((max, p) => Math.max(max, p.pnl), 0),
+          pnlHistory: assets.positions.map(p => p.pnl),
+        },
+      });
+    }
+    prevPhaseRef.current = phase;
+  }, [phase]);
 
   return (
     <div className="min-h-screen text-gray-900" style={bgStyle}>
@@ -61,6 +118,17 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
           <StoryEventPanel
             event={story.currentEvent}
             onChoice={(choice: StoryChoice) => makeStoryChoice(choice)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* 回合结算总结 */}
+      <AnimatePresence>
+        {turn_summary && (
+          <TurnSummaryCard
+            key="turn-summary"
+            summary={turn_summary}
+            onDismiss={dismissTurnSummary}
           />
         )}
       </AnimatePresence>
@@ -146,14 +214,24 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
               <div className="text-xs text-gray-500 leading-relaxed text-center">
                 ⏳ 结束本月操作，市场将根据你的行动波动
               </div>
-              <button
-                onClick={nextTurn}
-                disabled={hasActiveStory}
-                className="w-full py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm transition-all shadow-lg shadow-yellow-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
-                style={{ minHeight: '44px' }}
-              >
-                结束本月 →
-              </button>
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setShowSaveLoad(true)}
+                  disabled={phase !== 'playing'}
+                  className="px-3 py-3 rounded-xl bg-gray-100 hover:bg-gray-200 text-gray-500 text-sm font-medium transition-all disabled:opacity-40 disabled:cursor-not-allowed"
+                  title="存档"
+                >
+                  💾
+                </button>
+                <button
+                  onClick={nextTurn}
+                  disabled={hasActiveStory}
+                  className="flex-1 py-3 rounded-xl bg-yellow-500 hover:bg-yellow-400 text-black font-bold text-sm transition-all shadow-lg shadow-yellow-900/30 disabled:opacity-50 disabled:cursor-not-allowed"
+                  style={{ minHeight: '44px' }}
+                >
+                  结束本月 →
+                </button>
+              </div>
               <div className="text-xs text-gray-400 flex items-center gap-2 justify-center">
                 <span>📖</span>
                 <span>已触发 {story.triggeredEvents.length} 个剧情事件</span>
@@ -168,8 +246,25 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
         </div>
 
         {/* Footer */}
-        <div className="text-center text-gray-600 text-xs mt-4 pb-3 font-mono tracking-widest">
-          信息不对称是你唯一的武器 · 操控市场 · 收割危机
+        <div className="flex items-center justify-between text-center text-gray-600 text-xs mt-4 pb-3 font-mono tracking-widest px-2">
+          <span>信息不对称是你唯一的武器 · 操控市场 · 收割危机</span>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setShowAchievements(true)}
+              className="flex items-center gap-1 text-gray-400 hover:text-amber-500 transition-colors shrink-0"
+              title="查看成就"
+            >
+              🏆
+              <span className="text-[10px]">{unlockedCount}/{totalCount}</span>
+            </button>
+            <button
+              onClick={() => setShowTutorial(true)}
+              className="text-gray-400 hover:text-blue-500 transition-colors shrink-0"
+              title="查看新手引导"
+            >
+              ❓
+            </button>
+          </div>
         </div>
       </div>
 
@@ -195,10 +290,61 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
           onTriggerManipulation={triggerManipulation}
           onNextTurn={nextTurn}
         />
+        {/* H5 教程重开入口 */}
+        <div className="flex justify-center mt-3">
+          <button
+            onClick={() => setShowTutorial(true)}
+            className="text-xs text-gray-400 hover:text-blue-500 transition-colors"
+          >
+            ❓ 查看新手引导
+          </button>
+        </div>
       </div>
 
       {/* 通知 */}
       <SpecNotifications notifications={notifications} onDismiss={dismissNotif} />
+
+      {/* 成就解锁通知 */}
+      <AchievementToast achievement={newAchievement} onDismiss={dismissNewAchievement} />
+
+      {/* 成就面板 */}
+      <AnimatePresence>
+        {showAchievements && (
+          <AchievementPanel
+            mode="speculator"
+            achievements={getAchievementsForMode('speculator')}
+            onClose={() => setShowAchievements(false)}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* 存档弹层 */}
+      <AnimatePresence>
+        {showSaveLoad && (
+          <SaveLoadModal
+            currentMode="speculator"
+            canSave={phase === 'playing' && !hasActiveStory}
+            currentTurn={turn}
+            onClose={() => setShowSaveLoad(false)}
+            onLoad={() => {}}
+            onSave={(slot) => {
+              const saved = saveToSlot(slot);
+              if (saved) {
+                dismissNotif(`notif_${Date.now()}`);
+              }
+              setShowSaveLoad(false);
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* 新手引导 */}
+      {showTutorial && (
+        <TutorialOverlay
+          role="speculator"
+          onClose={() => setShowTutorial(false)}
+        />
+      )}
     </div>
   );
 }

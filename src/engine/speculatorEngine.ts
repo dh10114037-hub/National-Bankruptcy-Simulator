@@ -13,6 +13,7 @@ import {
   generateAvailableAssets,
   generateAvailableManipulations,
   generateAvailableIntels,
+  INTEL_POOL,
 } from '../data/expandablePool';
 
 // ═══════════════════════════════════════════
@@ -59,6 +60,7 @@ export function createSpeculatorState(): SpeculatorGameState {
     initial_cash: INITIAL_CASH,
     gov_log: [],
     market_flash: {},
+    turn_summary: null,
   };
 }
 
@@ -112,7 +114,8 @@ export function tickMarket(
 
   // 自然衰减：每回合汇率微跌，通胀微升
   const er_delta  = (Math.random() - 0.6) * 0.04;          // 偏向下跌
-  const inf_delta = (Math.random() - 0.3) * 3;             // 偏向上升
+  // 期望值 = (0.5-0.2)*4 = 1.2，通胀每回合平均上升 1.2%，符合债务危机惯性
+  const inf_delta = (Math.random() - 0.2) * 4;
   const cr_delta  = (Math.random() - 0.55) * 4;            // 偏向下跌
   const bp_delta  = (Math.random() - 0.5) * 0.015;
   const si_delta  = (Math.random() - 0.6) * 120;           // 偏向下跌
@@ -293,9 +296,32 @@ export const INTEL_BRIBE_COST = 80_000;
 
 export function buyIntel(state: SpeculatorGameState, intelId: string): SpeculatorGameState {
   if (state.assets.cash < INTEL_BUY_COST) return state;
-  const intels = state.intels.map((i) =>
-    i.id === intelId ? { ...i, purchased: true } : i
-  );
+  // 修复：如果情报不在 state.intels 里（初始为空），从 INTEL_POOL 查出来再加入
+  const existing = state.intels.find((i) => i.id === intelId);
+  const intels = existing
+    ? state.intels.map((i) => i.id === intelId ? { ...i, purchased: true } : i)
+    : [
+        ...state.intels,
+        {
+          ...(INTEL_POOL.find((p) => p.id === intelId) ?? {
+            id: intelId,
+            name: intelId,
+            source: 'unknown',
+            source_type: 'underground' as const,
+            impact: 'medium' as const,
+            content: '',
+            detail: '',
+            confidence: 0.5,
+            display_confidence: 0.5,
+            affects: {},
+            purchased: true,
+            bribed: false,
+            expired: false,
+            revealed: false,
+          }),
+          purchased: true,
+        },
+      ];
   return {
     ...state,
     assets: { ...state.assets, cash: state.assets.cash - INTEL_BUY_COST },
@@ -306,6 +332,8 @@ export function buyIntel(state: SpeculatorGameState, intelId: string): Speculato
 
 export function bribeIntel(state: SpeculatorGameState, intelId: string): SpeculatorGameState {
   if (state.assets.cash < INTEL_BRIBE_COST) return state;
+  const existing = state.intels.find((i) => i.id === intelId);
+  if (!existing) return state; // 必须先购买才能贿赂
   const intels = state.intels.map((i) =>
     i.id === intelId
       ? { ...i, bribed: true, display_confidence: Math.min(0.98, i.confidence + 0.15) }
@@ -354,7 +382,7 @@ export function executeManipulation(
     id: `notif_manip_${Date.now()}`,
     type: success ? 'manipulation_success' : 'manipulation_fail',
     message: success
-      ? `✔ ${action.name} 成功！${action.side_effect}`
+      ? `✔ ${action.name} 成功！进入 ${action.cooldown} 回合冷却。${action.side_effect}`
       : `✘ ${action.name} 失败，被反情报部门察觉`,
     timestamp: Date.now(),
   };
@@ -417,7 +445,11 @@ export function advanceSpecTurn(
   // 冷却倒计时 + 动态刷新部分操控行为
   const cooldownManipulations = state.manipulations.map((m) =>
     m.is_cooling
-      ? { ...m, cooldown_left: m.cooldown_left - 1, is_cooling: m.cooldown_left > 1 }
+      ? {
+          ...m,
+          cooldown_left: m.cooldown_left - 1,
+          is_cooling: m.cooldown_left - 1 > 0, // 用递减后的值判断
+        }
       : m
   );
 
@@ -437,8 +469,8 @@ export function advanceSpecTurn(
     }
   }
 
-  // 情报过期 + 动态生成新情报
-  state.intels.map((i) => ({ ...i, expired: true, revealed: true }));
+  // 情报过期 + 动态生成新情报（需合并：旧情报标记过期后仍保留显示，新情报追加）
+  const expiredIntels = state.intels.map((i) => ({ ...i, expired: true, revealed: true }));
   const freshIntels = generateIntelsFromPool({
     turn: newTurn,
     exchange_rate: newMarket.exchange_rate,
@@ -466,7 +498,7 @@ export function advanceSpecTurn(
     assets: newAssets,
     market: newMarket,
     manipulations: newManipulations,
-    intels: freshIntels,
+    intels: [...expiredIntels, ...freshIntels].slice(0, 6), // 过期情报保留显示，新情报追加，最多保留6条
     intels_bought_this_turn: 0,
     market_flash: flash,
     gov_log: [govAction, ...state.gov_log.slice(0, 4)],
@@ -515,10 +547,14 @@ function calcTotalValue(cash: number, positions: Position[], market: MarketState
 }
 
 function pickGovAction(market: MarketState): string {
-  if (market.exchange_rate < 0.6) return '政府启动外储干预，护盘汇率';
-  if (market.credit_rating < 25)  return '政府向IMF紧急求援';
-  if (market.inflation > 70)      return '央行宣布紧急加息';
-  if (market.stock_index < 1500)  return '证监会暂停股市交易';
+  // 汇率干预：初始 0.92 已在危机边缘，提前到 0.85 介入
+  if (market.exchange_rate < 0.85) return '政府启动外储干预，护盘汇率';
+  // 紧急加息：通胀 45% 已是高危，提前到 >55 介入
+  if (market.inflation > 55)       return '央行宣布紧急加息';
+  // IMF 求援：信用 38 已是危险区，提前到 <35 介入
+  if (market.credit_rating < 35)   return '政府向IMF紧急求援';
+  // 股指暴跌：初始 3200 尚可，保留 1500 阈值
+  if (market.stock_index < 1500)   return '证监会暂停股市交易';
   return '政府召开新闻发布会安抚民众';
 }
 

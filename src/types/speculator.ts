@@ -87,8 +87,20 @@ export interface TradeOrder {
   risk_note: string;
 }
 
+/** 回合结算总结 */
+export interface TurnSummary {
+  exchange_rate_delta: number;
+  inflation_delta: number;
+  credit_rating_delta: number;
+  stock_index_delta: number;
+  bond_price_delta: number;
+  cash_delta: number;
+  total_value_delta: number;
+  turn: number;
+}
+
 /** 通知消息（暴利/爆仓/操控成功） */
-export type NotifType = 'profit' | 'loss' | 'liquidation' | 'manipulation_success' | 'manipulation_fail' | 'intel';
+export type NotifType = 'profit' | 'loss' | 'liquidation' | 'manipulation_success' | 'manipulation_fail' | 'intel' | 'turn_summary';
 
 export interface SpecNotif {
   id: string;
@@ -121,4 +133,6 @@ export interface SpeculatorGameState {
   gov_log: string[];
   /** 市场波动动画 flag（用于前端 flash） */
   market_flash: Partial<Record<keyof MarketState, 'up' | 'down'>>;
+  /** 本回合结算总结（点击结束本月后显示，供 UI 展示） */
+  turn_summary: TurnSummary | null;
 }

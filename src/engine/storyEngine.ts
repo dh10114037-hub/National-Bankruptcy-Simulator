@@ -458,10 +458,10 @@ function checkCondition(
       const marketVal = market[key as keyof MarketState];
       if (marketVal === undefined) continue;
       if (typeof value === 'number' && typeof marketVal === 'number') {
-        // 汇率越低越容易触发
-        if (key === 'exchange_rate' && marketVal >= value) return false;
-        // 其他指标越低越容易触发
-        if (key !== 'exchange_rate' && marketVal <= value) return false;
+        // 汇率/信用/国债：越低越危险，低到阈值以下才触发（改为 >，避免等于时误拦截）
+        if ((key === 'exchange_rate' || key === 'credit_rating' || key === 'bond_price') && marketVal > value) return false;
+        // 通胀/股指：越高越危险，高到阈值以上才触发（保持 <=）
+        if ((key === 'inflation' || key === 'stock_index') && marketVal <= value) return false;
       }
     }
   }

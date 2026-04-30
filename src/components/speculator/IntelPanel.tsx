@@ -167,7 +167,7 @@ export function IntelPanel({ intels, cash, turn, onBuy, onBribe }: Props) {
                       onClick={(e) => { e.stopPropagation(); onBribe(intel.id); }}
                       className="w-full mt-2 py-1.5 text-xs rounded-lg border border-orange-200 bg-orange-50 text-orange-700 hover:bg-orange-100 disabled:opacity-40 disabled:cursor-not-allowed transition-all"
                     >
-                      贿赂官员 提升准确率（-${INTEL_BRIBE_COST.toLocaleString()}）
+                      高级贿赂 (¥{INTEL_BRIBE_COST.toLocaleString()})
                     </button>
                   )}
                   {intel.bribed && (
@@ -184,7 +184,7 @@ export function IntelPanel({ intels, cash, turn, onBuy, onBribe }: Props) {
                     onClick={(e) => { e.stopPropagation(); onBuy(intelPool.id); }}
                     className="w-full py-2 text-xs rounded-lg border border-amber-200 bg-amber-50 text-amber-700 hover:bg-amber-100 disabled:opacity-40 disabled:cursor-not-allowed transition-all font-medium"
                   >
-                    购买情报 −${INTEL_BUY_COST.toLocaleString()}
+                    购买情报 (¥{INTEL_BUY_COST.toLocaleString()})
                   </button>
                 </div>
               )}
