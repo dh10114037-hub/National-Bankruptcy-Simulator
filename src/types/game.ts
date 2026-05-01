@@ -80,6 +80,12 @@ export interface RoundSummary {
   chainEffects: string[];
   /** 投机者行动说明 */
   speculatorNote?: string;
+  /** P1-1: 难度阶段 */
+  difficultyPhase?: string;
+  /** P1-1: 绝境逆转是否触发 */
+  desperationTriggered?: boolean;
+  /** P1-1: 绝境逆转事件名称 */
+  desperationEventName?: string;
 }
 
 export interface LogEntry {

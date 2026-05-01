@@ -36,6 +36,7 @@ export default function App() {
     selectedAuxActions,
     delayedEffectQueue,
     postMortem,
+    difficultyState,
     startNewRound,
     choosePolicy,
     restartGame,
@@ -173,6 +174,7 @@ export default function App() {
         marketFlash={marketFlash}
         lastRoundSummary={lastRoundSummary}
         recommendedPolicyId={recommendedPolicyId}
+        difficultyState={difficultyState}
         onChoose={handlePolicyChoose}
         onNextRound={handleNextRound}
         onBack={() => setMode('select')}

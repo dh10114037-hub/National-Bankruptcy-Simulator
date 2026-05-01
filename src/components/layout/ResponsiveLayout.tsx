@@ -1,9 +1,9 @@
 /**
  * ResponsiveLayout - 统一响应式布局
- * 
+ *
  * PC:  三栏网格 (事件+顾问+风险 | 决策 | 数据)
  * H5:  操作入口模式（BottomSheet详情）
- * 
+ *
  * 响应式策略：
  * - PC (lg+): 三栏网格布局
  * - H5 (<lg): SaviorActionHub 入口模式
@@ -21,6 +21,8 @@ import { RiskSourcePanel } from '../RiskSourcePanel';
 import { RoundSummaryPanel } from '../RoundSummaryPanel';
 import { MobileTopStatus } from './MobileTopStatus';
 import { SaviorActionHub } from './SaviorActionHub';
+import { DecisionAssistantPanel } from '../DecisionAssistant';
+import type { DifficultyState } from '../../engine/gameEngine';
 
 interface ResponsiveLayoutProps {
   gameState: any;
@@ -37,6 +39,7 @@ interface ResponsiveLayoutProps {
   marketFlash: any;
   lastRoundSummary: any;
   recommendedPolicyId: string | null;
+  difficultyState: DifficultyState;
   onChoose: (policy: any) => void;
   onNextRound: () => void;
   onBack: () => void;
@@ -64,6 +67,7 @@ export default function ResponsiveLayout(props: ResponsiveLayoutProps) {
     marketFlash,
     lastRoundSummary,
     recommendedPolicyId,
+    difficultyState,
     onChoose,
     onNextRound,
     onBack,
@@ -101,6 +105,7 @@ export default function ResponsiveLayout(props: ResponsiveLayoutProps) {
       lastDelta={lastDelta}
       marketFlash={marketFlash}
       recommendedPolicyId={recommendedPolicyId}
+      difficultyState={difficultyState}
       onChoose={onChoose}
       onNextRound={onNextRound}
       onBack={onBack}
@@ -143,6 +148,16 @@ export default function ResponsiveLayout(props: ResponsiveLayoutProps) {
 
           {/* ── 中间：决策中心 ── */}
           <div className="rounded-2xl bg-white border border-gray-200 p-3 sm:p-5 min-h-[400px] sm:min-h-[520px] shadow-sm order-2">
+            {/* P1-2: 决策辅助面板 */}
+            {gameState.phase === 'playing' && currentPolicies.length > 0 && (
+              <DecisionAssistantPanel
+                state={gameState}
+                policies={currentPolicies}
+                recommendedPolicyId={recommendedPolicyId}
+                crisisLevel={crisisLevel}
+                difficultyState={difficultyState}
+              />
+            )}
             <DecisionPanel
               policies={currentPolicies}
               onChoose={onChoose}

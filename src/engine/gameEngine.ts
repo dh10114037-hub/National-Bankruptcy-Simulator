@@ -139,6 +139,232 @@ export function applyExchangeRateCoupling(
 }
 
 // ────────────────────────────────────────────
+// 改造1：动态难度平衡系统 (P1-1)
+// 根据游戏状态自动调整AI强度、事件频率、恢复速度
+// ────────────────────────────────────────────
+
+export type DifficultyPhase = 'early' | 'growth' | 'crisis' | 'final' | 'desperate';
+
+export interface DifficultyState {
+  phase: DifficultyPhase;
+  ai_aggression: number;      // 0.5 - 1.8
+  event_frequency: number;    // 0.5 - 1.5
+  recovery_rate: number;      // 0.5 - 1.5
+  bonus_recovery: number;     // 绝境逆转加成
+  description: string;        // 当前难度描述
+}
+
+/**
+ * 计算动态难度状态
+ * 根据回合数、指标水平、危机等级综合判断
+ */
+export function calculateDifficulty(
+  turn: number,
+  indicators: { foreign_reserves: number; public_support: number; credit_rating: number },
+  crisisLevel: number
+): DifficultyState {
+  const avgIndicator = (indicators.foreign_reserves + indicators.public_support + indicators.credit_rating) / 3;
+  const isCritical = avgIndicator < 30 || crisisLevel > 70;
+  const isStabilizing = avgIndicator > 60 && crisisLevel < 30;
+
+  // Phase 1: 早期（前5回合）- 新手友好
+  if (turn <= 5 && avgIndicator > 50) {
+    return {
+      phase: 'early',
+      ai_aggression: 0.5,
+      event_frequency: 0.6,
+      recovery_rate: 1.3,
+      bonus_recovery: 0,
+      description: '🏠 稳定期 — 市场平稳，适合熟悉玩法',
+    };
+  }
+
+  // Phase 2: 成长期 - 标准难度
+  if (avgIndicator > 55 && crisisLevel < 40) {
+    return {
+      phase: 'growth',
+      ai_aggression: 0.8,
+      event_frequency: 0.8,
+      recovery_rate: 1.0,
+      bonus_recovery: 0,
+      description: '📊 正常期 — 局势可控，保持警惕',
+    };
+  }
+
+  // Phase 3: 危机期 - 压力上升
+  if (avgIndicator > 35 && crisisLevel < 60) {
+    return {
+      phase: 'crisis',
+      ai_aggression: 1.1,
+      event_frequency: 1.1,
+      recovery_rate: 0.8,
+      bonus_recovery: 0,
+      description: '⚠️ 危机期 — 压力上升，需谨慎决策',
+    };
+  }
+
+  // Phase 4: 危急期 - 高压模式
+  if (avgIndicator > 20 && !isCritical) {
+    return {
+      phase: 'final',
+      ai_aggression: 1.4,
+      event_frequency: 1.3,
+      recovery_rate: 0.6,
+      bonus_recovery: 0,
+      description: '🚨 危急期 — 生死存亡，背水一战',
+    };
+  }
+
+  // Phase 5: 绝境期 - 提供逆转机会
+  return {
+    phase: 'desperate',
+    ai_aggression: 1.6,
+    event_frequency: 1.2,
+    recovery_rate: 0.4,
+    bonus_recovery: 1,  // 绝境逆转触发标志
+    description: '💀 绝境期 — 最后机会，命运转折点',
+  };
+}
+
+/**
+ * 绝境逆转事件池
+ * 当处于绝境期时，有概率触发逆转事件
+ */
+export interface DesperationEvent {
+  id: string;
+  name: string;
+  icon: string;
+  effects: Effects;
+  description: string;
+}
+
+export const DESPERATION_EVENTS: DesperationEvent[] = [
+  {
+    id: 'international_aid',
+    name: '国际援助协议签署',
+    icon: '🌍',
+    effects: { foreign_reserves: 15, credit_rating: 10 },
+    description: '邻国和国际组织伸出援手，提供紧急融资',
+  },
+  {
+    id: 'patriotic_wave',
+    name: '民族主义情绪爆发',
+    icon: '🇨🇳',
+    effects: { public_support: 12 },
+    description: '民众团结一心，共同抵御危机',
+  },
+  {
+    id: 'economic_boom',
+    name: '意外经济利好',
+    icon: '📈',
+    effects: { foreign_reserves: 8, credit_rating: 5, public_support: 5 },
+    description: '出口大增或发现新资源，经济出现转机',
+  },
+  {
+    id: 'speculator_miscalculation',
+    name: '投机者误判形势',
+    icon: '🤡',
+    effects: { foreign_reserves: 6, credit_rating: 8, public_support: 4 },
+    description: '投机者过度做空后被迫平仓，市场信心恢复',
+  },
+];
+
+/**
+ * 检查并触发绝境逆转事件
+ * 触发条件：绝境期 + 30%概率
+ */
+export function checkDesperationEvent(
+  difficulty: DifficultyState,
+  market: MarketState
+): { event: DesperationEvent | null; triggered: boolean } {
+  if (difficulty.phase !== 'desperate') {
+    return { event: null, triggered: false };
+  }
+
+  // 绝境期有30%概率触发逆转事件
+  if (Math.random() < 0.30) {
+    const event = DESPERATION_EVENTS[Math.floor(Math.random() * DESPERATION_EVENTS.length)];
+    return { event, triggered: true };
+  }
+
+  return { event: null, triggered: false };
+}
+
+/**
+ * 应用动态难度到投机者AI攻击效果
+ */
+export function applyDifficultyModifier(
+  effects: Effects,
+  difficulty: DifficultyState
+): Effects {
+  if (Object.keys(effects).length === 0) return effects;
+
+  const modifier = difficulty.ai_aggression;
+  const modified: Effects = {};
+
+  for (const [key, value] of Object.entries(effects)) {
+    if (typeof value === 'number' && value !== 0) {
+      modified[key as keyof Effects] = value * modifier;
+    } else {
+      modified[key as keyof Effects] = value;
+    }
+  }
+
+  return modified;
+}
+
+/**
+ * 应用动态难度到恢复系统
+ */
+export function applyDifficultyRecovery(
+  state: { foreign_reserves: number; public_support: number; credit_rating: number },
+  difficulty: DifficultyState
+): { foreign_reserves: number; public_support: number; credit_rating: number } {
+  const recovery = difficulty.recovery_rate;
+
+  // 稳定恢复（双指标达标）
+  if (state.credit_rating >= 60 && state.public_support >= 60) {
+    return {
+      ...state,
+      foreign_reserves: clamp(state.foreign_reserves + Math.round(5 * recovery)),
+      public_support: clamp(state.public_support + Math.round(2 * recovery)),
+    };
+  }
+
+  // 中等恢复
+  if (state.credit_rating >= 50 && state.public_support >= 50) {
+    return {
+      ...state,
+      foreign_reserves: clamp(state.foreign_reserves + Math.round(2 * recovery)),
+    };
+  }
+
+  return state;
+}
+
+/**
+ * 根据难度调整事件效果
+ */
+export function applyDifficultyToEvent(
+  event: Event,
+  difficulty: DifficultyState
+): Event {
+  const modifier = difficulty.event_frequency;
+  if (modifier === 1.0) return event;
+
+  const modifiedEffects: Effects = {};
+  for (const [key, value] of Object.entries(event.effects)) {
+    if (typeof value === 'number' && value !== 0) {
+      modifiedEffects[key as keyof Effects] = value * modifier;
+    } else {
+      modifiedEffects[key as keyof Effects] = value;
+    }
+  }
+
+  return { ...event, effects: modifiedEffects };
+}
+
+// ────────────────────────────────────────────
 // 改造1：恢复机制（稳住后可回血）
 // ────────────────────────────────────────────
 

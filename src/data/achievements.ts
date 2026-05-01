@@ -44,6 +44,8 @@ export interface AchievementContext {
     manipulationsSucceeded: number;
     largestPnl: number;
     pnlHistory: number[];
+    // P1-3: 策略流派
+    strategy?: string;
   };
 
   // 拯救者特有
@@ -183,6 +185,52 @@ export const ACHIEVEMENTS: Achievement[] = [
     check: (ctx) =>
       ctx.spec !== undefined &&
       ctx.spec.positionsCount >= 3,
+  },
+
+  // ── P1-3: 策略流派成就 ──────────────────────
+  {
+    id: 'spec_macro_hedge',
+    mode: 'speculator',
+    name: '宏观对冲',
+    description: '同时使用多头和空头策略，完美对冲风险',
+    icon: '⚖️',
+    rarity: 'epic',
+    check: (ctx) =>
+      ctx.spec !== undefined &&
+      ctx.spec.strategy === 'macro_hedge',
+  },
+  {
+    id: 'spec_aggressive',
+    mode: 'speculator',
+    name: '激进猎手',
+    description: '使用高杠杆（≥5倍）做空策略获利',
+    icon: '🎯',
+    rarity: 'epic',
+    check: (ctx) =>
+      ctx.spec !== undefined &&
+      ctx.spec.strategy === 'aggressive_short',
+  },
+  {
+    id: 'spec_insider',
+    mode: 'speculator',
+    name: '内幕交易师',
+    description: '利用高准确率情报（>80%）成功获利',
+    icon: '🕵️',
+    rarity: 'rare',
+    check: (ctx) =>
+      ctx.spec !== undefined &&
+      ctx.spec.strategy === 'insider_trade',
+  },
+  {
+    id: 'spec_conservative',
+    mode: 'speculator',
+    name: '稳健投资者',
+    description: '现金占比超过60%的保守策略',
+    icon: '🛡️',
+    rarity: 'rare',
+    check: (ctx) =>
+      ctx.spec !== undefined &&
+      ctx.spec.strategy === 'conservative',
   },
 
   // ── 拯救者 ─────────────────────────────────────────────────

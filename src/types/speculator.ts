@@ -113,6 +113,46 @@ export interface SpecNotif {
 /** 游戏阶段 */
 export type SpecPhase = 'playing' | 'victory' | 'defeat';
 
+// ─── P1-3: 风险评分系统 ──────────────────────────────
+
+export interface RiskScore {
+  volatility_risk: number;     // 0-100，波动率风险
+  concentration_risk: number;  // 0-100，集中风险  
+  liquidity_risk: number;     // 0-100，流动性风险
+  total_risk: number;         // 0-100，综合风险
+  risk_level: 'low' | 'medium' | 'high' | 'extreme';
+}
+
+// ─── P1-3: 策略流派 ──────────────────────────────────
+
+export type StrategyType = 
+  | 'macro_hedge'     // 宏观对冲
+  | 'aggressive_short' // 激进做空
+  | 'insider_trade'   // 内幕交易
+  | 'balanced'        // 均衡策略
+  | 'conservative';   // 保守策略
+
+export interface StrategyInfo {
+  type: StrategyType;
+  name: string;
+  icon: string;
+  description: string;
+  bonus_multiplier: number;  // 策略加成倍率
+}
+
+// ─── P1-3: 大机会事件 ──────────────────────────────
+
+export interface MegaOpportunity {
+  id: string;
+  name: string;
+  icon: string;
+  description: string;
+  trigger_condition: string;
+  profit_multiplier: number;
+  duration: number;  // 持续回合数
+  market_effect: Partial<MarketState>;
+}
+
 /** 整体投机者游戏状态 */
 export interface SpeculatorGameState {
   phase: SpecPhase;

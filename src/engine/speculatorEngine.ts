@@ -8,6 +8,9 @@ import type {
   NotifType,
   TradeOrder,
   SpecPhase,
+  RiskScore,
+  StrategyType,
+  MegaOpportunity,
 } from '../types/speculator';
 import {
   generateAvailableAssets,
@@ -560,4 +563,130 @@ function pickGovAction(market: MarketState): string {
 
 function makeNotif(type: NotifType, message: string): SpecNotif {
   return { id: `notif_${Date.now()}`, type, message, timestamp: Date.now() };
+}
+
+// ─── P1-3: 风险评分系统 ──────────────────────────────
+
+
+/**
+ * 计算投机者风险评分
+ */
+export function calcSpeculatorRisk(
+  assets: SpeculatorAssets,
+  market: MarketState
+): RiskScore {
+  const positions = assets.positions;
+
+  // 1. 波动率风险：持仓数量越多，风险越分散
+  const volatility_risk = positions.length === 0 ? 0 :
+    Math.min(100, positions.length * 15);
+
+  // 2. 集中风险：单一持仓占比过高
+  const totalInvested = positions.reduce((s, p) => s + p.amount, 0);
+  const maxPositionRatio = positions.length > 0 ?
+    Math.max(...positions.map(p => p.amount / (assets.cash + totalInvested))) : 0;
+  const concentration_risk = Math.round(maxPositionRatio * 100);
+
+  // 3. 流动性风险：现金占比过低
+  const liquidity_risk = assets.cash < assets.total_value * 0.2 ? 80 :
+    assets.cash < assets.total_value * 0.5 ? 40 : 10;
+
+  const total_risk = Math.round(
+    volatility_risk * 0.3 +
+    concentration_risk * 0.4 +
+    liquidity_risk * 0.3
+  );
+
+  const risk_level = total_risk > 70 ? 'high' :
+    total_risk > 40 ? 'medium' : 'low';
+
+  return {
+    volatility_risk,
+    concentration_risk,
+    liquidity_risk,
+    total_risk,
+    risk_level,
+  };
+}
+
+// ─── P1-3: 策略流派检测 ──────────────────────────────
+
+/**
+ * 检测当前策略流派
+ */
+export function detectStrategy(
+  assets: SpeculatorAssets,
+  intels: { accuracy: number }[]
+): StrategyType {
+  const positions = assets.positions;
+
+  // 宏观对冲：同时有多头和空头
+  const hasLong = positions.some(p => p.type === 'gold');
+  const hasShort = positions.some(p => p.type === 'short_currency' || p.type === 'short_bank');
+  if (hasLong && hasShort) return 'macro_hedge';
+
+  // 激进做空：有做空仓位且杠杆>=5
+  const hasHighLeverageShort = positions.some(
+    p => (p.type === 'short_currency' || p.type === 'short_bank') && p.leverage >= 5
+  );
+  if (hasHighLeverageShort) return 'aggressive_short';
+
+  // 内幕交易：情报准确率>0.8
+  const avgAccuracy = intels.filter(i => i.accuracy).length > 0 ?
+    intels.reduce((s, i) => s + i.accuracy, 0) / intels.filter(i => i.accuracy).length : 0;
+  if (avgAccuracy > 0.8) return 'insider_trade';
+
+  // 保守策略：现金占比>60%
+  if (assets.cash / assets.total_value > 0.6) return 'conservative';
+
+  return 'balanced';
+}
+
+// ─── P1-3: 大机会事件池 ──────────────────────────────
+
+export const MEGA_OPPORTUNITIES = [
+  {
+    id: 'currency_attack',
+    name: '货币攻击机会',
+    icon: '💥',
+    description: '市场出现极端恐慌，做空货币收益×3！',
+    trigger_probability: 0.05,
+    profit_multiplier: 3,
+    duration: 3,
+    market_effect: { exchange_rate: -0.15 },
+  },
+  {
+    id: 'bank_run',
+    name: '银行挤兑危机',
+    icon: '🏦',
+    description: '市场传言银行将破产，做空银行股收益×5！',
+    trigger_probability: 0.03,
+    profit_multiplier: 5,
+    duration: 2,
+    market_effect: { stock_index: -500 },
+  },
+  {
+    id: 'default_speculation',
+    name: '主权违约危机',
+    icon: '📉',
+    description: '国家即将违约，做空国债收益爆炸！',
+    trigger_probability: 0.02,
+    profit_multiplier: 8,
+    duration: 2,
+    market_effect: { bond_price: -0.3 },
+  },
+];
+
+/**
+ * 检测并触发大机会事件
+ * 返回 null 或 MegaOpportunity
+ */
+export function checkMegaOpportunity(market: MarketState, turn: number): typeof MEGA_OPPORTUNITIES[0] | null {
+  // 只在回合开始时检测
+  for (const op of MEGA_OPPORTUNITIES) {
+    if (Math.random() < op.trigger_probability) {
+      return op;
+    }
+  }
+  return null;
 }

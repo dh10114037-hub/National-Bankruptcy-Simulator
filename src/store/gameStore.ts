@@ -15,9 +15,16 @@ import {
   calcCrisisLevel,
   applyExchangeRateCoupling,
   tickMarket,
-  applyRecoverySystem,
   applyDeathBuffer,
   applyWinStreakBonus,
+  // P1-1: 动态难度系统
+  calculateDifficulty,
+  applyDifficultyModifier,
+  applyDifficultyRecovery,
+  applyDifficultyToEvent,
+  checkDesperationEvent,
+  type DifficultyState,
+  type DesperationEvent,
 } from '../engine/gameEngine';
 import { generateRecommendedPolicy } from '../engine/advisorSavior';
 import { buildPostMortem } from '../engine/postMortem';
@@ -52,6 +59,10 @@ interface GameStore {
   // ── 新增：投机者连续攻击计数 ──────────────────
   consecutiveSpeculatorAttacks: number;
 
+  // ── P1-1 新增：动态难度状态 ──────────────────
+  difficultyState: DifficultyState;
+  desperationEvent: DesperationEvent | null;
+
   startNewRound: () => void;
   choosePolicy: (policy: Policy) => void;
   restartGame: () => void;
@@ -84,6 +95,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
   delayedEffectQueue: [],
   postMortem: null,
   consecutiveSpeculatorAttacks: 0,
+  // P1-1: 动态难度初始状态
+  difficultyState: {
+    phase: 'early',
+    ai_aggression: 0.5,
+    event_frequency: 0.6,
+    recovery_rate: 1.3,
+    bonus_recovery: 0,
+    description: '🏠 稳定期 — 市场平稳，适合熟悉玩法',
+  },
+  desperationEvent: null,
 
   advanceTurnPhase: (phase) => set({ turnPhase: phase }),
   dismissRoundSummary: () => set({ lastRoundSummary: null }),
@@ -157,8 +178,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
       market:           gameState.market,
     };
 
-    // Step 1: event effects
-    let newStats = applyEffects(statsBefore, currentEvent.effects);
+    // ── P1-1: 计算动态难度 ──────────────────────
+    const currentCrisisLevel = calcCrisisLevel(statsBefore);
+    const difficulty = calculateDifficulty(
+      gameState.turn,
+      { foreign_reserves: statsBefore.foreign_reserves, public_support: statsBefore.public_support, credit_rating: statsBefore.credit_rating },
+      currentCrisisLevel
+    );
+
+    // Step 1: event effects (应用难度调整)
+    let modifiedEvent = applyDifficultyToEvent(currentEvent, difficulty);
+    let newStats = applyEffects(statsBefore, modifiedEvent.effects);
     if (!newStats.market) newStats.market = gameState.market;
 
     // Step 2: policy effects
@@ -233,10 +263,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const isAttacking = specAction && specAction.actionType !== 'wait' && specAction.effects && Object.keys(specAction.effects).length > 0;
     const newConsecutiveAttacks = isAttacking ? gameState.consecutiveSpeculatorAttacks + 1 : 0;
 
-    if (specAction && specAction.effects && Object.keys(specAction.effects).length > 0) {
-      newStats = applyEffects(newStats, specAction.effects);
+    // ── P1-1: 应用动态难度到投机者攻击效果 ────────
+    const modifiedSpecEffects = applyDifficultyModifier(specAction.effects, difficulty);
+
+    if (modifiedSpecEffects && Object.keys(modifiedSpecEffects).length > 0) {
+      newStats = applyEffects(newStats, modifiedSpecEffects);
       if (!newStats.market) newStats.market = newMarket;
-      if (specAction.effects.exchange_rate || specAction.effects.inflation) {
+      if (modifiedSpecEffects.exchange_rate || modifiedSpecEffects.inflation) {
         const reCoupled = applyExchangeRateCoupling(
           { foreign_reserves: newStats.foreign_reserves, public_support: newStats.public_support, credit_rating: newStats.credit_rating },
           newStats.market!
@@ -246,12 +279,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
       }
     }
 
-    // Step 8: 恢复机制（稳住后回血）
-    const recoveredStats = applyRecoverySystem({
+    // Step 8: 恢复机制（稳住后回血，使用动态难度调整）
+    const recoveredStats = applyDifficultyRecovery({
       foreign_reserves: newStats.foreign_reserves,
       public_support:   newStats.public_support,
       credit_rating:    newStats.credit_rating,
-    });
+    }, difficulty);
     newStats = { ...newStats, ...recoveredStats };
 
     // Step 8.5: win streak（先算上回合，用于连胜奖励判断）
@@ -277,6 +310,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
       market:           newMarket,
     });
     newStats = { ...newStats, ...bufferedStats };
+
+    // ── P1-1: 绝境逆转事件检查 ───────────────────
+    const { event: desperationEvent, triggered } = checkDesperationEvent(difficulty, newMarket);
+    if (triggered && desperationEvent) {
+      newStats = applyEffects(newStats, desperationEvent.effects);
+      if (!newStats.market) newStats.market = newMarket;
+    }
 
     const nextTurn = gameState.turn + 1;
     const newGameState: GameState = {
@@ -338,6 +378,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
       delta,
       chainEffects,
       speculatorNote: specAction && specAction.actionType !== 'wait' ? specAction.name : undefined,
+      // P1-1: 添加难度信息和绝境逆转提示
+      difficultyPhase: difficulty.phase,
+      desperationTriggered: triggered,
+      desperationEventName: desperationEvent?.name,
     };
 
     // Step 16: 如果游戏结束，生成复盘报告
@@ -353,7 +397,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       turnPhase: 'feedback',
       trendHistory: [...trendHistory.slice(-9), newTrend],
       lastSpeculatorAction: specAction.name !== '⏳ 观望待机' ? specAction.name : null,
-      lastSpeculatorEffects: specAction.effects as Record<string, number> | null,
+      lastSpeculatorEffects: modifiedSpecEffects as Record<string, number> | null,
       crisisLevel,
       lastDelta: delta,
       marketFlash,
@@ -363,6 +407,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       selectedAuxActions: [],
       postMortem,
       consecutiveSpeculatorAttacks: newConsecutiveAttacks,
+      // P1-1: 动态难度状态
+      difficultyState: difficulty,
+      desperationEvent: desperationEvent,
     });
 
     setTimeout(() => set({ turnPhase: 'ai_action' }), 800);
@@ -390,6 +437,16 @@ export const useGameStore = create<GameStore>((set, get) => ({
       delayedEffectQueue: [],
       postMortem: null,
       consecutiveSpeculatorAttacks: 0,
+      // P1-1: 重置动态难度
+      difficultyState: {
+        phase: 'early',
+        ai_aggression: 0.5,
+        event_frequency: 0.6,
+        recovery_rate: 1.3,
+        bonus_recovery: 0,
+        description: '🏠 稳定期 — 市场平稳，适合熟悉玩法',
+      },
+      desperationEvent: null,
     });
   },
 }));

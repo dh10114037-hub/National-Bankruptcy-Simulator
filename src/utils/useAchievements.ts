@@ -10,6 +10,7 @@
 
 import { useState, useEffect, useCallback } from 'react';
 import { ACHIEVEMENTS, type Achievement, type AchievementContext, type UnlockedAchievement } from '../data/achievements';
+import { detectStrategy, type StrategyType } from '../engine/speculatorEngine';
 
 const STORAGE_KEY = 'nation_collapse_achievements';
 
