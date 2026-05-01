@@ -9,6 +9,10 @@ import {
   bribeIntel,
   executeManipulation,
   advanceSpecTurn,
+  // P1-3: 导入策略检测和风险评估函数
+  calcSpeculatorRisk,
+  detectStrategy,
+  checkMegaOpportunity,
 } from '../engine/speculatorEngine';
 import {
   createStoryState,
@@ -179,8 +183,56 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
       total_value_delta: newState.assets.total_value - prevTotalValue,
     };
 
-    set({ state: { ...newState, turn_summary: turnSummary }, story: storyAfterCheck });
-    notifs.forEach((n) => get().pushNotif(n));
+    // ─── P1-3: 更新风险评分与策略检测 ──────────────
+    const newRiskScore = calcSpeculatorRisk(newState.assets, newState.market);
+    const newStrategyType = detectStrategy(
+      newState.assets,
+      newState.intels.map(i => ({ accuracy: i.confidence }))
+    );
+
+    // ─── P1-3: 检测并触发大机会事件 ────────────────
+    let newOpportunity = state.activeOpportunity;
+    let newOpportunityRemaining = state.opportunityRemainingTurns;
+    let megaNotifs: SpecNotif[] = [...notifs];
+
+    // 如果当前有大机会事件，倒计时减少
+    if (state.activeOpportunity && state.opportunityRemainingTurns > 0) {
+      newOpportunityRemaining = state.opportunityRemainingTurns - 1;
+      if (newOpportunityRemaining <= 0) {
+        newOpportunity = null;
+        megaNotifs.push({
+          id: `mega_expire_${Date.now()}`,
+          type: 'turn_summary',
+          message: `⏰ 大机会「${state.activeOpportunity.name}」已结束`,
+          timestamp: Date.now(),
+        });
+      }
+    } else {
+      // 检测是否有新的大机会触发
+      const potentialOpportunity = checkMegaOpportunity(newState.market, newState.turn);
+      if (potentialOpportunity) {
+        newOpportunity = potentialOpportunity;
+        newOpportunityRemaining = potentialOpportunity.duration;
+        megaNotifs.push({
+          id: `mega_start_${Date.now()}`,
+          type: 'profit',
+          message: `${potentialOpportunity.icon} 大机会！「${potentialOpportunity.name}」触发！${potentialOpportunity.description}`,
+          timestamp: Date.now(),
+        });
+      }
+    }
+
+    const updatedState: SpeculatorGameState = {
+      ...newState,
+      turn_summary: turnSummary,
+      riskScore: newRiskScore,
+      strategyType: newStrategyType,
+      activeOpportunity: newOpportunity,
+      opportunityRemainingTurns: newOpportunityRemaining,
+    };
+
+    set({ state: updatedState, story: storyAfterCheck });
+    megaNotifs.forEach((n) => get().pushNotif(n));
   },
 
   makeStoryChoice: (choice) => {
@@ -206,6 +258,13 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     // 推进游戏回合
     const { newState, notifs } = advanceSpecTurn({ ...state, market: newMarket });
 
+    // ─── P1-3: 更新风险评分与策略检测 ──────────────
+    const newRiskScore = calcSpeculatorRisk(newState.assets, newState.market);
+    const newStrategyType = detectStrategy(
+      newState.assets,
+      newState.intels.map(i => ({ accuracy: i.confidence }))
+    );
+
     // 添加剧情通知
     const choiceResult = choice.successRate !== undefined && Math.random() < choice.successRate;
     get().pushNotif({
@@ -219,7 +278,11 @@ export const useSpeculatorStore = create<SpeculatorStore>((set, get) => ({
     });
 
     set({
-      state: newState,
+      state: {
+        ...newState,
+        riskScore: newRiskScore,
+        strategyType: newStrategyType,
+      },
       story: newStory,
       hasActiveStory: false,
     });

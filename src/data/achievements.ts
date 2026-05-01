@@ -267,6 +267,105 @@ export const ACHIEVEMENTS: Achievement[] = [
       ctx.savior !== undefined &&
       ctx.savior.crisisHistory.some(c => c > 70),
   },
+
+  // ── P2-2: 多周目激励成就 ──────────────────────────────
+  // 通用多周目成就
+  {
+    id: 'ng_all_modes',
+    mode: 'all',
+    name: '全能选手',
+    description: '在所有三种模式下都获得过胜利',
+    icon: '🌟',
+    rarity: 'legendary',
+    check: (ctx) => {
+      // 这个成就需要在游戏结算时额外检查
+      return false; // 动态检查
+    },
+  },
+  {
+    id: 'ng_10_wins',
+    mode: 'all',
+    name: '常胜将军',
+    description: '累计获得 10 场胜利',
+    icon: '🏅',
+    rarity: 'epic',
+    check: (ctx) => {
+      return false; // 动态检查
+    },
+  },
+  {
+    id: 'ng_50_wins',
+    mode: 'all',
+    name: '传奇玩家',
+    description: '累计获得 50 场胜利',
+    icon: '👑',
+    rarity: 'legendary',
+    check: (ctx) => {
+      return false; // 动态检查
+    },
+  },
+
+  // 拯救者多周目成就
+  {
+    id: 'ng_savior_5_wins',
+    mode: 'savior',
+    name: '政坛常青',
+    description: '作为拯救者累计获胜 5 次',
+    icon: '🏛',
+    rarity: 'epic',
+    check: (ctx) => {
+      return false; // 动态检查
+    },
+  },
+  {
+    id: 'ng_savior_perfect',
+    mode: 'savior',
+    name: '完美救援',
+    description: '30回合结束时三项指标均 > 80',
+    icon: '💎',
+    rarity: 'legendary',
+    check: (ctx) =>
+      ctx.phase === 'victory' &&
+      ctx.savior !== undefined &&
+      ctx.savior.foreign_reserves > 80 &&
+      ctx.savior.public_support > 80 &&
+      ctx.savior.credit_rating > 80,
+  },
+  {
+    id: 'ng_savior_last_stand',
+    mode: 'savior',
+    name: '背水一战',
+    description: '在最后1回合逆转获胜',
+    icon: '⚔️',
+    rarity: 'epic',
+    check: (ctx) =>
+      ctx.phase === 'victory' &&
+      ctx.turn >= 29,
+  },
+
+  // 投机者多周目成就
+  {
+    id: 'ng_spec_5_wins',
+    mode: 'speculator',
+    name: '收割者',
+    description: '作为投机者累计获胜 5 次',
+    icon: '💰',
+    rarity: 'epic',
+    check: (ctx) => {
+      return false; // 动态检查
+    },
+  },
+  {
+    id: 'ng_spec_mega',
+    mode: 'speculator',
+    name: '大机会猎手',
+    description: '成功触发并利用大机会事件',
+    icon: '💥',
+    rarity: 'rare',
+    check: (ctx) => {
+      return false; // 动态检查
+    },
+  },
 ];
 
 // ─── rarity 颜色配置 ──────────────────────────────────────────

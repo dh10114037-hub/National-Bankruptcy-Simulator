@@ -11,6 +11,12 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ACHIEVEMENTS, type Achievement, type AchievementContext, type UnlockedAchievement } from '../data/achievements';
 import { detectStrategy, type StrategyType } from '../engine/speculatorEngine';
+import {
+  loadStats,
+  saveStats,
+  updateStatsAfterGame,
+  checkDynamicAchievements,
+} from './achievementStats';
 
 const STORAGE_KEY = 'nation_collapse_achievements';
 
@@ -50,6 +56,36 @@ export function useAchievements() {
     const now = new Date().toISOString();
 
     const unlockedIds = new Set(unlocked.map(u => u.id));
+
+    // ── P2-2: 更新游戏统计 ────────────────────────────
+    if (ctx.phase === 'victory' || ctx.phase === 'defeat') {
+      // 更新多周目统计
+      const stats = loadStats();
+      const updatedStats = updateStatsAfterGame({
+        mode: ctx.mode as 'savior' | 'speculator' | 'versus',
+        phase: ctx.phase as 'victory' | 'defeat',
+        turn: ctx.turn,
+        saviorIndicators: ctx.savior ? {
+          foreign_reserves: ctx.savior.foreign_reserves,
+          public_support: ctx.savior.public_support,
+          credit_rating: ctx.savior.credit_rating,
+        } : undefined,
+        specProfit: ctx.spec ? ctx.spec.totalValue - ctx.spec.initialCash : undefined,
+        specInitialCash: ctx.spec?.initialCash,
+      });
+
+      // 检查动态成就
+      const dynamicNewAchievements = checkDynamicAchievements(updatedStats);
+      for (const achId of dynamicNewAchievements) {
+        if (!unlockedIds.has(achId)) {
+          const ach = ACHIEVEMENTS.find(a => a.id === achId);
+          if (ach) {
+            newlyUnlocked.push(ach);
+            unlockedIds.add(achId);
+          }
+        }
+      }
+    }
 
     for (const achievement of ACHIEVEMENTS) {
       // 已解锁则跳过

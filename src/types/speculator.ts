@@ -153,6 +153,9 @@ export interface MegaOpportunity {
   market_effect: Partial<MarketState>;
 }
 
+// P2-3: 政府人格类型
+export type GovPersonaType = 'conservative' | 'aggressive' | 'balanced' | 'populist';
+
 /** 整体投机者游戏状态 */
 export interface SpeculatorGameState {
   phase: SpecPhase;
@@ -175,4 +178,18 @@ export interface SpeculatorGameState {
   market_flash: Partial<Record<keyof MarketState, 'up' | 'down'>>;
   /** 本回合结算总结（点击结束本月后显示，供 UI 展示） */
   turn_summary: TurnSummary | null;
+
+  // ─── P1-3: 风险评分与策略检测 ───────────────────
+  /** 当前风险评分 */
+  riskScore: RiskScore;
+  /** 当前策略类型 */
+  strategyType: StrategyType;
+  /** 当前激活的大机会事件 */
+  activeOpportunity: MegaOpportunity | null;
+  /** 大机会事件剩余持续回合 */
+  opportunityRemainingTurns: number;
+
+  // ─── P2-3: 政府人格系统 ──────────────────────────
+  /** 政府人格类型 */
+  govPersona: GovPersonaType;
 }

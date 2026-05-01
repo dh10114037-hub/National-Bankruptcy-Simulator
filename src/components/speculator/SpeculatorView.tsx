@@ -24,6 +24,7 @@ import { OpportunityPanel } from './OpportunityPanel';
 import { SpecActionHub } from './SpecActionHub';
 import { StoryEventPanel } from '../story/StoryEventPanel';
 import { TurnSummaryCard } from './TurnSummaryCard';
+import { SpecStrategyPanel } from './SpecStrategyPanel'; // P1-3: 策略分析面板
 import type { StoryChoice } from '../../types/story';
 import { TutorialOverlay } from '../versus/AdvisorPanel';
 import { SaveLoadModal } from '../ui/SaveLoadModal';
@@ -57,7 +58,7 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
     saveToSlot,
   } = useSpeculatorStore();
 
-  const { phase, turn, maxTurns, assets, market, intels, manipulations, notifications, market_flash, gov_log, initial_cash, turn_summary } = state;
+  const { phase, turn, maxTurns, assets, market, intels, manipulations, notifications, market_flash, gov_log, initial_cash, turn_summary, riskScore, strategyType, activeOpportunity, opportunityRemainingTurns } = state;
 
   // 成就系统
   const {
@@ -160,18 +161,31 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
         <div className="grid grid-cols-1 xl:grid-cols-[280px_1fr_280px] gap-4">
 
           {/* ① 左侧：当前机会 */}
-          <div className="rounded-2xl border-2 border-amber-200 bg-white p-5 shadow-sm">
-            <div className="flex items-center gap-2 mb-4">
-              <span className="text-base">🎯</span>
-              <span className="font-bold text-sm text-gray-800 tracking-wide">当前机会</span>
-              <span className="ml-auto text-[10px] font-mono text-gray-400">回合 {turn}/{maxTurns}</span>
+          <div className="space-y-4">
+            {/* 回合进度 */}
+            <div className="rounded-2xl border-2 border-amber-200 bg-white p-4 shadow-sm">
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-base">🎯</span>
+                <span className="font-bold text-sm text-gray-800 tracking-wide">当前机会</span>
+                <span className="ml-auto text-[10px] font-mono text-gray-400">回合 {turn}/{maxTurns}</span>
+              </div>
+              <OpportunityPanel
+                market={market}
+                turn={turn}
+                cash={assets.cash}
+                maxTurns={maxTurns}
+              />
             </div>
-            <OpportunityPanel
-              market={market}
-              turn={turn}
-              cash={assets.cash}
-              maxTurns={maxTurns}
-            />
+
+            {/* P1-3: 策略分析面板 */}
+            <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+              <SpecStrategyPanel
+                riskScore={riskScore}
+                strategyType={strategyType}
+                activeOpportunity={activeOpportunity}
+                opportunityRemainingTurns={opportunityRemainingTurns}
+              />
+            </div>
           </div>
 
           {/* ② 中间：情报 + 交易终端 */}
@@ -271,7 +285,7 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
       {/* ─────────────────────────────────────────────────────
           H5 布局 (<lg): 操作入口模式
       ───────────────────────────────────────────────────── */}
-      <div className="lg:hidden max-w-[1400px] mx-auto px-3 py-3">
+      <div className="lg:hidden max-w-[1400px] mx-auto px-3 py-3 space-y-3">
         <SpecActionHub
           market={market}
           intels={intels}
@@ -290,8 +304,19 @@ export function SpeculatorView({ onBack }: SpeculatorViewProps) {
           onTriggerManipulation={triggerManipulation}
           onNextTurn={nextTurn}
         />
+
+        {/* H5 P1-3: 策略分析面板 */}
+        <div className="rounded-2xl border border-gray-200 bg-white p-3 shadow-sm">
+          <SpecStrategyPanel
+            riskScore={riskScore}
+            strategyType={strategyType}
+            activeOpportunity={activeOpportunity}
+            opportunityRemainingTurns={opportunityRemainingTurns}
+          />
+        </div>
+
         {/* H5 教程重开入口 */}
-        <div className="flex justify-center mt-3">
+        <div className="flex justify-center">
           <button
             onClick={() => setShowTutorial(true)}
             className="text-xs text-gray-400 hover:text-blue-500 transition-colors"

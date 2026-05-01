@@ -4,8 +4,35 @@
  * 两种角色风格：拯救者（蓝/绿）vs 投机者（黄/红）
  */
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import type { AdvisorTip } from '../../types/versus';
+
+// ────────────────────────────────────────────────────────────────
+// 教程系统本地存储键
+// ────────────────────────────────────────────────────────────────
+const TUTORIAL_KEY = 'nation_collapse_tutorial_done';
+
+export function isTutorialCompleted(role: 'savior' | 'speculator' | 'versus'): boolean {
+  try {
+    const done = localStorage.getItem(TUTORIAL_KEY);
+    if (!done) return false;
+    const parsed = JSON.parse(done) as Record<string, boolean>;
+    return parsed[role] === true;
+  } catch {
+    return false;
+  }
+}
+
+export function markTutorialCompleted(role: 'savior' | 'speculator' | 'versus'): void {
+  try {
+    const done = localStorage.getItem(TUTORIAL_KEY);
+    const parsed = (done ? JSON.parse(done) : {}) as Record<string, boolean>;
+    parsed[role] = true;
+    localStorage.setItem(TUTORIAL_KEY, JSON.stringify(parsed));
+  } catch {
+    // 忽略localStorage错误
+  }
+}
 
 interface Props {
   tip:   AdvisorTip | null;
@@ -105,6 +132,13 @@ interface TutorialProps {
 export function TutorialOverlay({ role, onClose }: TutorialProps) {
   const [step, setStep] = useState(0);
 
+  // 检查是否已完成过教程，若是则直接关闭
+  useEffect(() => {
+    if (isTutorialCompleted(role)) {
+      onClose();
+    }
+  }, [role, onClose]);
+
   const STEPS_SAVIOR = [
     {
       title:   '你是国家的最后防线',
@@ -170,8 +204,25 @@ export function TutorialOverlay({ role, onClose }: TutorialProps) {
   ];
 
   const steps = role === 'savior' ? STEPS_SAVIOR : role === 'speculator' ? STEPS_SPECULATOR : STEPS_VERSUS;
+
+  // 安全检查
+  if (step >= steps.length) return null;
+
   const current = steps[step];
   const isLast  = step >= steps.length - 1;
+
+  const handleFinish = () => {
+    markTutorialCompleted(role);
+    onClose();
+  };
+
+  const handleNext = () => {
+    if (isLast) {
+      handleFinish();
+    } else {
+      setStep(step + 1);
+    }
+  };
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-md">
@@ -208,7 +259,7 @@ export function TutorialOverlay({ role, onClose }: TutorialProps) {
             </button>
           )}
           <button
-            onClick={() => isLast ? onClose() : setStep(step + 1)}
+            onClick={handleNext}
             className={`flex-1 py-2.5 rounded-xl font-bold text-sm transition-all ${
               role === 'speculator'
                 ? 'bg-amber-500 hover:bg-amber-400 text-white'
@@ -224,10 +275,10 @@ export function TutorialOverlay({ role, onClose }: TutorialProps) {
         {/* 跳过 */}
         {!isLast && (
           <button
-            onClick={onClose}
+            onClick={handleFinish}
             className="w-full text-center text-xs text-gray-400 hover:text-gray-600 mt-3 transition-colors"
           >
-            跳过引导
+            跳过引导（下次不再显示）
           </button>
         )}
       </div>

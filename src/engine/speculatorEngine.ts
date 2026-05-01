@@ -45,16 +45,18 @@ export function createSpeculatorState(): SpeculatorGameState {
     is_cooling: false,
   }));
 
+  const initialAssets: SpeculatorAssets = {
+    cash: INITIAL_CASH,
+    positions: [],
+    total_value: INITIAL_CASH,
+    pnl_today: 0,
+  };
+
   return {
     phase: 'playing',
     turn: 1,
     maxTurns: 30,
-    assets: {
-      cash: INITIAL_CASH,
-      positions: [],
-      total_value: INITIAL_CASH,
-      pnl_today: 0,
-    },
+    assets: initialAssets,
     market: initialMarket,
     intels: generateIntelsFromPool(ctx),
     manipulations,
@@ -64,6 +66,13 @@ export function createSpeculatorState(): SpeculatorGameState {
     gov_log: [],
     market_flash: {},
     turn_summary: null,
+    // P1-3: 风险评分与策略检测
+    riskScore: calcSpeculatorRisk(initialAssets, initialMarket),
+    strategyType: 'balanced',
+    activeOpportunity: null,
+    opportunityRemainingTurns: 0,
+    // P2-3: 政府人格系统
+    govPersona: 'balanced',
   };
 }
 
@@ -483,8 +492,8 @@ export function advanceSpecTurn(
     cash: state.assets.cash,
   });
 
-  // 政府AI行动日志
-  const govAction = pickGovAction(newMarket);
+  // 政府AI行动日志（使用政府人格）
+  const govAction = pickGovAction(newMarket, state.govPersona);
 
   // 胜负检测
   const { phase, reason } = checkSpecGameOver({
@@ -549,16 +558,123 @@ function calcTotalValue(cash: number, positions: Position[], market: MarketState
   return Math.max(0, cash + posValue);
 }
 
-function pickGovAction(market: MarketState): string {
-  // 汇率干预：初始 0.92 已在危机边缘，提前到 0.85 介入
-  if (market.exchange_rate < 0.85) return '政府启动外储干预，护盘汇率';
-  // 紧急加息：通胀 45% 已是高危，提前到 >55 介入
-  if (market.inflation > 55)       return '央行宣布紧急加息';
-  // IMF 求援：信用 38 已是危险区，提前到 <35 介入
-  if (market.credit_rating < 35)   return '政府向IMF紧急求援';
-  // 股指暴跌：初始 3200 尚可，保留 1500 阈值
-  if (market.stock_index < 1500)   return '证监会暂停股市交易';
-  return '政府召开新闻发布会安抚民众';
+// ─── P2-3: 政府AI人格系统 ──────────────────────────────
+
+export type GovPersonaType = 'conservative' | 'aggressive' | 'balanced' | 'populist';
+
+/**
+ * 政府人格配置
+ */
+export interface GovPersona {
+  type: GovPersonaType;
+  name: string;
+  icon: string;
+  description: string;
+  // 反应阈值调整（相对于基准值）
+  exchange_rate_threshold: number;  // 基准 0.85
+  inflation_threshold: number;     // 基准 55
+  credit_rating_threshold: number;  // 基准 35
+  stock_index_threshold: number;   // 基准 1500
+  // 行动偏好
+  preferred_actions: string[];      // 更倾向于的行动类型
+}
+
+export const GOV_PERSONAS: Record<GovPersonaType, GovPersona> = {
+  // 保守型：晚介入，给投机者更多机会
+  conservative: {
+    type: 'conservative',
+    name: '保守型政府',
+    icon: '🏦',
+    description: '谨慎决策，延迟干预，给市场自我修复的机会',
+    exchange_rate_threshold: 0.75,   // 更低阈值
+    inflation_threshold: 65,        // 更高阈值
+    credit_rating_threshold: 30,     // 更低阈值
+    stock_index_threshold: 1000,    // 更低阈值
+    preferred_actions: ['安抚', '观望'],
+  },
+  // 激进型：早干预，快速响应
+  aggressive: {
+    type: 'aggressive',
+    name: '激进型政府',
+    icon: '⚡',
+    description: '快速响应，提前干预，主动控制危机',
+    exchange_rate_threshold: 0.95,   // 更高阈值
+    inflation_threshold: 45,         // 更低阈值
+    credit_rating_threshold: 45,     // 更高阈值
+    stock_index_threshold: 2000,    // 更高阈值
+    preferred_actions: ['干预', '加息'],
+  },
+  // 平衡型：标准响应
+  balanced: {
+    type: 'balanced',
+    name: '平衡型政府',
+    icon: '⚖️',
+    description: '权衡利弊，在干预成本和市场压力间寻求平衡',
+    exchange_rate_threshold: 0.85,
+    inflation_threshold: 55,
+    credit_rating_threshold: 35,
+    stock_index_threshold: 1500,
+    preferred_actions: ['发布会', '评估'],
+  },
+  // 民粹型：优先民心
+  populist: {
+    type: 'populist',
+    name: '民粹型政府',
+    icon: '🗳️',
+    description: '优先维护民众支持，可能牺牲长期经济健康',
+    exchange_rate_threshold: 0.80,
+    inflation_threshold: 50,          // 更低，通胀影响民心
+    credit_rating_threshold: 40,     // 更高，信用影响国际形象
+    stock_index_threshold: 1800,
+    preferred_actions: ['安抚', '福利'],
+  },
+};
+
+/**
+ * 根据市场状态选择政府行动（支持不同人格）
+ */
+export function pickGovAction(market: MarketState, persona: GovPersonaType = 'balanced'): string {
+  const cfg = GOV_PERSONAS[persona];
+
+  // 汇率干预
+  if (market.exchange_rate < cfg.exchange_rate_threshold) {
+    const intensity = Math.floor((cfg.exchange_rate_threshold - market.exchange_rate) / 0.1);
+    if (intensity >= 2) return '政府启动外储干预，护盘汇率';
+    if (intensity >= 1) return '政府警告投机者，暗示将干预市场';
+    return '政府召开紧急会议讨论汇率';
+  }
+
+  // 紧急加息
+  if (market.inflation > cfg.inflation_threshold) {
+    return persona === 'populist'
+      ? '政府讨论加息，但担心影响民心'
+      : persona === 'aggressive'
+        ? '央行紧急宣布大幅加息'
+        : '央行宣布提高基准利率';
+  }
+
+  // IMF 求援
+  if (market.credit_rating < cfg.credit_rating_threshold) {
+    return persona === 'conservative'
+      ? '政府犹豫是否求援IMF，内部分歧严重'
+      : '政府向IMF紧急求援';
+  }
+
+  // 股指暴跌
+  if (market.stock_index < cfg.stock_index_threshold) {
+    return persona === 'aggressive'
+      ? '证监会启动市场稳定基金'
+      : persona === 'conservative'
+        ? '政府表示不会干预股市'
+        : '证监会暂停股市交易';
+  }
+
+  // 日常安抚
+  return persona === 'populist'
+    ? '总理发表讲话，强调人民利益至上'
+    : persona === 'aggressive'
+      ? '政府公布经济改革计划'
+      : '政府召开新闻发布会安抚民众';
 }
 
 function makeNotif(type: NotifType, message: string): SpecNotif {
