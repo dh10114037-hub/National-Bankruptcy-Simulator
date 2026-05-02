@@ -64,6 +64,12 @@ function SaveSlotCard({
   onDelete: () => void;
 }) {
   const [confirmDelete, setConfirmDelete] = useState(false);
+  const [confirmOverwrite, setConfirmOverwrite] = useState(false);
+
+  const handleOverwriteSave = () => {
+    setConfirmOverwrite(false);
+    onSave();
+  };
 
   if (!meta) {
     // 空槽
@@ -73,7 +79,7 @@ function SaveSlotCard({
         <div className="text-sm text-gray-400 font-medium">{SLOT_LABELS[slot]} — 空</div>
           {canSave && currentMode && (
             <button
-              onClick={() => handleSave(slot)}
+              onClick={() => onSave()}
               className="px-4 py-1.5 rounded-lg bg-blue-500 hover:bg-blue-400 text-white text-xs font-bold transition-colors"
             >
               保存到此处
@@ -140,13 +146,44 @@ function SaveSlotCard({
         >
           读取
         </button>
+        {/* 覆盖确认弹窗 */}
+        {confirmOverwrite ? (
+          <div className="flex-1 flex flex-col gap-1">
+            <div className="text-xs text-center text-red-600 py-1 px-2 bg-red-50 rounded-lg">
+              确定覆盖此存档？
+            </div>
+            <div className="flex gap-1">
+              <button
+                onClick={handleOverwriteSave}
+                className="flex-1 py-1.5 rounded-lg bg-red-500 hover:bg-red-400 text-white text-xs font-bold transition-colors"
+              >
+                确认覆盖
+              </button>
+              <button
+                onClick={() => setConfirmOverwrite(false)}
+                className="flex-1 py-1.5 rounded-lg bg-gray-200 hover:bg-gray-300 text-gray-600 text-xs font-bold transition-colors"
+              >
+                取消
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            onClick={() => setConfirmOverwrite(true)}
+            className="px-3 py-2 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-600 hover:text-amber-700 text-xs font-bold transition-colors border border-amber-200"
+            title="覆盖存档（需二次确认）"
+          >
+            覆盖
+          </button>
+        )}
+        {/* 删除确认 */}
         {confirmDelete ? (
           <div className="flex-1 flex gap-1">
             <button
               onClick={onDelete}
               className="flex-1 py-2 rounded-lg bg-red-500 hover:bg-red-400 text-white text-xs font-bold transition-colors"
             >
-              确认删除
+              确定删除（不可撤销）
             </button>
             <button
               onClick={() => setConfirmDelete(false)}
@@ -159,6 +196,7 @@ function SaveSlotCard({
           <button
             onClick={() => setConfirmDelete(true)}
             className="px-3 py-2 rounded-lg bg-gray-100 hover:bg-red-50 text-gray-400 hover:text-red-500 text-xs transition-colors"
+            title="删除存档"
           >
             🗑
           </button>
@@ -189,7 +227,8 @@ export function SaveLoadModal({
   const handleSave = (slotIndex: number) => {
     if (!onSave) return;
     onSave(slotIndex);
-    setTimeout(refreshSlots, 100);
+    // 延迟刷新确保保存完成
+    setTimeout(() => refreshSlots(), 200);
   };
 
   const handleLoad = (meta: SaveSlotMeta) => {

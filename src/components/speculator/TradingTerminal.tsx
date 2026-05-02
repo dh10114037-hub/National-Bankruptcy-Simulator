@@ -103,6 +103,7 @@ function TradeModal({
 }) {
   const [amount, setAmount] = useState(asset.min_invest);
   const [leverage, setLeverage] = useState(asset.leverage_available[0] || 1);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const mapping = ASSET_MAPPING[asset.id] || { type: 'bond', price_key: 'bond_price' };
   const isShort = asset.id.includes('short') || asset.trend === 'bear';
@@ -110,7 +111,11 @@ function TradeModal({
   const expectedProfit = 15 + asset.volatility * 50 * leverage;
   const riskPct = leverage * 25;
 
-  const handleConfirm = () => {
+  const handleFirstConfirm = () => {
+    setShowConfirm(true);
+  };
+
+  const handleFinalConfirm = () => {
     onConfirm({
       position_type: mapping.type,
       label: asset.name,
@@ -123,96 +128,170 @@ function TradeModal({
     });
   };
 
+  // 交易方向标识（色盲友好）
+  const tradeDirection = isShort
+    ? { label: '做空', icon: '▼', color: 'text-red-600 bg-red-50 border-red-200' }
+    : { label: '做多', icon: '▲', color: 'text-emerald-600 bg-emerald-50 border-emerald-200' };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="w-full max-w-[420px] bg-white border border-gray-200 rounded-2xl shadow-2xl overflow-hidden max-h-[90vh] overflow-y-auto">
-        {/* 标题 - 显示大白话解释 */}
-        <div className="px-4 py-3 border-b border-gray-200 flex items-start justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <div className="font-bold text-gray-900 text-base">{asset.name}</div>
-            {/* 👉 大白话解释 - 新手最关键 */}
-            <div className="mt-1.5 px-2.5 py-1.5 bg-amber-50 border border-amber-200 rounded-lg">
-              <div className="text-xs text-amber-700 flex items-start gap-1.5">
-                <span className="shrink-0 mt-0.5">👉</span>
-                <span className="leading-relaxed">{asset.explain}</span>
+        {/* 二次确认弹窗 */}
+        {showConfirm ? (
+          <>
+            <div className="px-4 py-3 border-b border-gray-200 flex items-start justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="font-bold text-gray-900 text-base">确认交易</div>
+              </div>
+              <button onClick={() => setShowConfirm(false)} className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0 w-8 h-8 flex items-center justify-center">×</button>
+            </div>
+            <div className="px-4 py-6 space-y-4">
+              <div className="text-center">
+                <div className={`inline-flex items-center gap-1 px-3 py-1.5 rounded-full border text-sm font-bold ${tradeDirection.color}`}>
+                  <span>{tradeDirection.icon}</span>
+                  <span>{tradeDirection.label}</span>
+                </div>
+                <div className="mt-2 font-bold text-gray-900">{asset.name}</div>
+              </div>
+
+              <div className="bg-gray-50 rounded-xl p-4 space-y-2">
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">投入金额</span>
+                  <span className="font-mono font-bold text-gray-900">${amount.toLocaleString()}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">杠杆倍数</span>
+                  <span className="font-mono font-bold text-amber-600">x{leverage}</span>
+                </div>
+                <div className="flex justify-between text-sm">
+                  <span className="text-gray-500">交易方向</span>
+                  <span className={`font-mono font-bold ${tradeDirection.color.split(' ')[0]}`}>
+                    {tradeDirection.icon} {tradeDirection.label}
+                  </span>
+                </div>
+              </div>
+
+              <div className="text-xs text-gray-400 text-center">
+                确认后将扣除 ${amount.toLocaleString()} 现金，请确认交易信息无误
+              </div>
+
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setShowConfirm(false)}
+                  className="flex-1 py-3.5 rounded-xl border border-gray-200 text-gray-600 font-semibold text-sm hover:bg-gray-50 transition-all"
+                >
+                  取消
+                </button>
+                <button
+                  onClick={handleFinalConfirm}
+                  className="flex-1 py-3.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-bold text-sm transition-all shadow-lg shadow-amber-500/30"
+                >
+                  确认开仓
+                </button>
               </div>
             </div>
-          </div>
-          <button onClick={onCancel} className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0 w-8 h-8 flex items-center justify-center">×</button>
-        </div>
-
-        <div className="px-4 py-4 space-y-4">
-          {/* 当前价格 */}
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-500">当前价格</span>
-            <span className="font-mono text-gray-900">${currentPrice.toFixed(2)}</span>
-          </div>
-
-          {/* 投入金额 */}
-          <div>
-            <label className="text-xs text-gray-500 block mb-1.5">投入金额</label>
-            {/* 滑块加大触控区域 */}
-            <div className="relative">
-              <input
-                type="range"
-                min={asset.min_invest}
-                max={Math.max(maxAmount, asset.min_invest)}
-                step={10000}
-                value={Math.min(amount, Math.max(maxAmount, asset.min_invest))}
-                onChange={(e) => setAmount(Number(e.target.value))}
-                className="w-full accent-amber-500 h-8" /* 加大高度便于触控 */
-              />
+          </>
+        ) : (
+          <>
+            {/* 标题 */}
+            <div className="px-4 py-3 border-b border-gray-200 flex items-start justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <div className={`inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full border text-xs font-bold ${tradeDirection.color}`}>
+                    {tradeDirection.icon} {tradeDirection.label}
+                  </div>
+                </div>
+                <div className="font-bold text-gray-900 text-base mt-1">{asset.name}</div>
+                {/* 大白话解释 */}
+                <div className="mt-1.5 px-2.5 py-1.5 bg-amber-50 border border-amber-200 rounded-lg">
+                  <div className="text-xs text-amber-700 flex items-start gap-1.5">
+                    <span className="shrink-0 mt-0.5">👉</span>
+                    <span className="leading-relaxed">{asset.explain}</span>
+                  </div>
+                </div>
+              </div>
+              <button onClick={onCancel} className="text-gray-400 hover:text-gray-600 text-2xl leading-none shrink-0 w-8 h-8 flex items-center justify-center">×</button>
             </div>
-            <div className="flex justify-between text-xs text-gray-400 mt-1">
-              <span>${asset.min_invest.toLocaleString()}</span>
-              <span className="font-mono text-amber-600 font-bold text-sm">${amount.toLocaleString()}</span>
-              <span>${maxAmount.toLocaleString()}</span>
-            </div>
-          </div>
 
-          {/* 杠杆（按钮更大更易触控） */}
-          <div>
-            <label className="text-xs text-gray-500 block mb-2">杠杆倍数</label>
-            <div className="grid grid-cols-4 gap-2">
-              {asset.leverage_available.slice(0, 4).map((lv) => (
-                <button
-                  key={lv}
-                  onClick={() => setLeverage(lv)}
-                  className={`py-3 rounded-xl text-sm font-bold border transition-all active:scale-95 ${
-                    leverage === lv
-                      ? 'border-amber-400 bg-amber-100 text-amber-700'
-                      : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700'
-                  }`}
-                >
-                  x{lv}
-                </button>
-              ))}
-            </div>
-          </div>
+            <div className="px-4 py-4 space-y-4">
+              {/* 当前价格 */}
+              <div className="flex justify-between text-sm">
+                <span className="text-gray-500">当前价格</span>
+                <span className="font-mono text-gray-900">${currentPrice.toFixed(2)}</span>
+              </div>
 
-          {/* 预期收益 vs 风险 */}
-          <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
-              <div className="text-xs text-emerald-600">若押对</div>
-              <div className="text-lg font-bold text-emerald-700 font-mono">+{expectedProfit.toFixed(0)}%</div>
-              <div className="text-xs text-gray-400 mt-1">波动率 {asset.volatility}</div>
-            </div>
-            <div className="p-3 rounded-xl bg-red-50 border border-red-200">
-              <div className="text-xs text-red-500">最大亏损</div>
-              <div className="text-lg font-bold text-red-600 font-mono">-{Math.min(riskPct, 100).toFixed(0)}%</div>
-              <div className="text-xs text-gray-400 mt-1">风险 {asset.risk_level}/5</div>
-            </div>
-          </div>
+              {/* 投入金额 */}
+              <div>
+                <label className="text-xs text-gray-500 block mb-1.5">投入金额</label>
+                <div className="relative">
+                  <input
+                    type="range"
+                    min={asset.min_invest}
+                    max={Math.max(maxAmount, asset.min_invest)}
+                    step={10000}
+                    value={Math.min(amount, Math.max(maxAmount, asset.min_invest))}
+                    onChange={(e) => setAmount(Number(e.target.value))}
+                    className="w-full accent-amber-500 h-8"
+                  />
+                </div>
+                <div className="flex justify-between text-xs text-gray-400 mt-1">
+                  <span>${asset.min_invest.toLocaleString()}</span>
+                  <span className="font-mono text-amber-600 font-bold text-sm">${amount.toLocaleString()}</span>
+                  <span>${maxAmount.toLocaleString()}</span>
+                </div>
+              </div>
 
-          {/* 确认按钮（加大触控区域） */}
-          <button
-            disabled={amount > cash}
-            onClick={handleConfirm}
-            className="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98] shadow-lg"
-          >
-            确认开仓 −${amount.toLocaleString()}
-          </button>
-        </div>
+              {/* 杠杆 */}
+              <div>
+                <label className="text-xs text-gray-500 block mb-2">杠杆倍数</label>
+                <div className="grid grid-cols-4 gap-2">
+                  {asset.leverage_available.slice(0, 4).map((lv) => (
+                    <button
+                      key={lv}
+                      onClick={() => setLeverage(lv)}
+                      className={`py-3 rounded-xl text-sm font-bold border transition-all active:scale-95 ${
+                        leverage === lv
+                          ? 'border-amber-400 bg-amber-100 text-amber-700'
+                          : 'border-gray-200 text-gray-500 hover:border-gray-300 hover:text-gray-700'
+                      }`}
+                    >
+                      x{lv}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* 预期收益 vs 风险 */}
+              <div className="grid grid-cols-2 gap-3">
+                <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200">
+                  <div className="text-xs text-emerald-600">若押对</div>
+                  <div className="text-lg font-bold text-emerald-700 font-mono flex items-center gap-1">
+                    <span>▲</span>
+                    <span>+{expectedProfit.toFixed(0)}%</span>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">波动率 {asset.volatility}</div>
+                </div>
+                <div className="p-3 rounded-xl bg-red-50 border border-red-200">
+                  <div className="text-xs text-red-500">最大亏损</div>
+                  <div className="text-lg font-bold text-red-600 font-mono flex items-center gap-1">
+                    <span>▼</span>
+                    <span>-{Math.min(riskPct, 100).toFixed(0)}%</span>
+                  </div>
+                  <div className="text-xs text-gray-400 mt-1">风险 {asset.risk_level}/5</div>
+                </div>
+              </div>
+
+              {/* 确认按钮 */}
+              <button
+                disabled={amount > cash}
+                onClick={handleFirstConfirm}
+                className="w-full py-4 rounded-xl bg-amber-500 hover:bg-amber-400 text-white font-bold text-base disabled:opacity-50 disabled:cursor-not-allowed transition-all active:scale-[0.98] shadow-lg"
+              >
+                确认开仓 −${amount.toLocaleString()}
+              </button>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
@@ -365,8 +444,9 @@ export function TradingTerminal({ market, positions, cash, govLog, turn, onTrade
                   <div className="text-xs text-gray-400">投入 ${pos.amount.toLocaleString()} · x{pos.leverage}</div>
                 </div>
                 <div className="text-right">
-                  <div className={`font-mono font-bold text-sm ${pos.pnl >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
-                    {pos.pnl >= 0 ? '+' : ''}{pos.pnl_pct.toFixed(1)}%
+                  <div className={`font-mono font-bold text-sm flex items-center gap-0.5 ${pos.pnl >= 0 ? 'text-emerald-600' : 'text-red-500'}`}>
+                    <span>{pos.pnl >= 0 ? '▲' : '▼'}</span>
+                    <span>{pos.pnl >= 0 ? '+' : ''}{pos.pnl_pct.toFixed(1)}%</span>
                   </div>
                   <button
                     onClick={() => onClose(pos.id)}

@@ -215,7 +215,7 @@ export function SpecActionHub({
         </div>
 
         {/* 结束回合按钮 */}
-        <div className="rounded-2xl border border-gray-200 bg-white p-4">
+        <div className="rounded-2xl border border-gray-200 bg-white p-4" style={{ paddingBottom: `calc(1rem + env(safe-area-inset-bottom))` }}>
           <div className="text-xs text-gray-500 leading-relaxed text-center mb-3">
             ⏳ 确认操作后结束本月
           </div>

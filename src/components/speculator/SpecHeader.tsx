@@ -68,8 +68,9 @@ function PositionTooltip({ pos }: { pos: Position }) {
       <div className="text-gray-400">买入价格</div>
       <div className="text-gray-900 font-mono">{pos.buy_price.toFixed(4)}</div>
       <div className="text-gray-400">当前盈亏</div>
-      <div className={`font-mono font-bold ${pnlPositive ? 'text-emerald-600' : 'text-red-600'}`}>
-        {pnlPositive ? '+' : ''}{pos.pnl.toFixed(0)} ({pnlPositive ? '+' : ''}{pos.pnl_pct.toFixed(1)}%)
+      <div className={`font-mono font-bold flex items-center gap-1 ${pnlPositive ? 'text-emerald-600' : 'text-red-600'}`}>
+        <span>{pnlPositive ? '▲' : '▼'}</span>
+        <span>{pnlPositive ? '+' : ''}{pos.pnl.toFixed(0)} ({pnlPositive ? '+' : ''}{pos.pnl_pct.toFixed(1)}%)</span>
       </div>
       <div className="text-gray-400">杠杆</div>
       <div className="text-amber-600 font-mono">x{pos.leverage}</div>

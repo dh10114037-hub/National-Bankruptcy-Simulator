@@ -18,23 +18,20 @@ interface SparklineProps {
 }
 
 function Sparkline({ data, color, height = 40, width = 160 }: SparklineProps) {
+  // 数据不足时提供虚拟初始值（取第一个值的80%作为起点）
+  let chartData = data;
   if (data.length < 2) {
-    return (
-      <svg width={width} height={height}>
-        <text x={width / 2} y={height / 2 + 4} textAnchor="middle" fill="#9CA3AF" fontSize="9">
-          数据不足
-        </text>
-      </svg>
-    );
+    // 提供两个虚拟数据点使图表可见
+    chartData = data.length === 1 ? [data[0] * 0.9, data[0]] : [50, 50];
   }
 
-  const min = Math.min(...data);
-  const max = Math.max(...data);
+  const min = Math.min(...chartData);
+  const max = Math.max(...chartData);
   const range = max - min || 1;
   const pad = 4;
 
-  const points = data.map((val, i) => {
-    const x = pad + (i / (data.length - 1)) * (width - pad * 2);
+  const points = chartData.map((val, i) => {
+    const x = pad + (i / (chartData.length - 1)) * (width - pad * 2);
     const y = pad + ((1 - (val - min) / range) * (height - pad * 2));
     return { x, y, val };
   });
@@ -111,7 +108,17 @@ function RiskAlerts({ gameState }: { gameState: GameState }) {
     <ul className="space-y-1.5">
       {alerts.map((a, i) => (
         <li key={i} className={`flex items-start gap-2 text-xs ${a.severity === 'critical' ? 'text-red-400' : 'text-amber-400'}`}>
-          <span className="flex-shrink-0 mt-0.5">{a.severity === 'critical' ? '🔴' : '🟡'}</span>
+          <span className="flex-shrink-0 mt-0.5">
+            {a.severity === 'critical' ? (
+              <svg className="w-3.5 h-3.5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            ) : (
+              <svg className="w-3.5 h-3.5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
+                <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
+              </svg>
+            )}
+          </span>
           {a.text}
         </li>
       ))}
@@ -125,6 +132,21 @@ function MarketCard({ gameState, marketFlash }: { gameState: GameState; marketFl
   const erColor = market.exchange_rate < 0.7 ? 'text-red-600' : market.exchange_rate < 0.9 ? 'text-amber-600' : 'text-emerald-600';
   const infColor = market.inflation > 60 ? 'text-red-600' : market.inflation > 40 ? 'text-amber-600' : 'text-gray-600';
   const volColor = market.volatility > 0.7 ? 'text-red-600' : market.volatility > 0.4 ? 'text-amber-600' : 'text-emerald-600';
+
+  // 涨跌图标和文字标注（色盲友好）
+  const getExchangeTrend = () => {
+    if (marketFlash?.exchange_rate === 'up') return { icon: '▲', text: '涨', color: 'text-emerald-500' };
+    if (marketFlash?.exchange_rate === 'down') return { icon: '▼', text: '跌', color: 'text-red-500' };
+    return null;
+  };
+  const getInflationTrend = () => {
+    if (marketFlash?.inflation === 'up') return { icon: '▲', text: '涨', color: 'text-red-500' };
+    if (marketFlash?.inflation === 'down') return { icon: '▼', text: '跌', color: 'text-emerald-500' };
+    return null;
+  };
+
+  const erTrend = getExchangeTrend();
+  const infTrend = getInflationTrend();
 
   return (
     <div className="rounded-xl border border-gray-200 bg-gray-50 p-4">
@@ -145,8 +167,7 @@ function MarketCard({ gameState, marketFlash }: { gameState: GameState; marketFl
             transition={{ duration: 0.3 }}
           >
             {market.exchange_rate.toFixed(3)}
-            {marketFlash?.exchange_rate === 'up' && <span className="ml-1 text-[8px] text-emerald-500">▲</span>}
-            {marketFlash?.exchange_rate === 'down' && <span className="ml-1 text-[8px] text-red-500">▼</span>}
+            {erTrend && <span className={`ml-1 text-[8px] font-bold ${erTrend.color}`}>{erTrend.icon} {erTrend.text}</span>}
           </motion.span>
         </div>
         {/* 通胀 */}
@@ -159,8 +180,7 @@ function MarketCard({ gameState, marketFlash }: { gameState: GameState; marketFl
             transition={{ duration: 0.3 }}
           >
             {market.inflation.toFixed(0)}%
-            {marketFlash?.inflation === 'up' && <span className="ml-1 text-[8px] text-red-500">▲</span>}
-            {marketFlash?.inflation === 'down' && <span className="ml-1 text-[8px] text-emerald-500">▼</span>}
+            {infTrend && <span className={`ml-1 text-[8px] font-bold ${infTrend.color}`}>{infTrend.icon} {infTrend.text}</span>}
           </motion.span>
         </div>
         {/* 波动率 */}
@@ -278,10 +298,12 @@ export function DataPanel({
             {lastSpeculatorEffects && (
               <div className="flex flex-wrap gap-1.5 pl-4">
                 {Object.entries(lastSpeculatorEffects).map(([k, v]) => {
-                  const sign = v > 0 ? '+' : '';
+                  const sign = v > 0;
                   return (
-                    <span key={k} className="text-[10px] font-mono text-red-600 bg-red-50 border border-red-200 px-1.5 py-0.5 rounded">
-                      {statNames[k]} {sign}{v}
+                    <span key={k} className={`text-[10px] font-mono border px-1.5 py-0.5 rounded flex items-center gap-1 ${
+                      sign ? 'text-emerald-700 bg-emerald-50 border-emerald-200' : 'text-red-700 bg-red-50 border-red-200'
+                    }`}>
+                      {sign ? '▲' : '▼'} {statNames[k]} {sign ? '+' : ''}{v}
                     </span>
                   );
                 })}

@@ -508,13 +508,14 @@ export function SaviorActionHub(props: SaviorActionHubProps) {
           <button
             onClick={onNextRound}
             className="w-full py-3.5 rounded-xl bg-emerald-600 text-white font-semibold shadow-lg active:scale-[0.98] transition-transform"
+            style={{ paddingBottom: 'calc(0.875rem + env(safe-area-inset-bottom))' }}
           >
             结束回合 →
           </button>
         )}
 
-        {/* 底部留白 */}
-        <div className="h-4" />
+        {/* 底部留白 + iOS安全区域 */}
+        <div className="h-4" style={{ height: `calc(1rem + env(safe-area-inset-bottom))` }} />
       </div>
 
       {/* ── 底部弹层 ──────────────────────────────────── */}

@@ -219,9 +219,9 @@ export function VersusView({ onBack }: VersusViewProps) {
       />
 
       {/* 主体布局 - 统一响应式 */}
-      {/* PC: 双栏 grid-cols-[1fr_300px] | H5: 单栏 grid-cols-1 */}
-      <div className="max-w-[1500px] mx-auto px-3 sm:px-4 lg:px-6 py-4 lg:py-5">
-        <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-4 lg:gap-5 items-start">
+      {/* PC: 双栏 grid-cols-[1fr_320px] | H5: 单栏 grid-cols-1 */}
+      <div className="max-w-[1600px] mx-auto px-3 sm:px-4 lg:px-6 py-4 lg:py-5">
+        <div className="grid grid-cols-1 lg:grid-cols-[1fr_320px] gap-4 lg:gap-6 items-start">
 
           {/* ── 左侧：主操作区 ── */}
           <div className="space-y-4 order-1">

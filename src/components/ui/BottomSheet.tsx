@@ -85,7 +85,7 @@ export function BottomSheet({ isOpen, onClose, children, height = '80%', title }
             onDragStart={() => setIsDragging(true)}
             onDragEnd={handleDragEnd}
             className="fixed bottom-0 left-0 right-0 z-50 rounded-t-3xl bg-white shadow-2xl"
-            style={{ height: heightMap[height], maxHeight: heightMap[height] }}
+            style={{ height: heightMap[height], maxHeight: heightMap[height], paddingBottom: 'env(safe-area-inset-bottom)' }}
           >
             {/* 拖拽手柄 */}
             <div

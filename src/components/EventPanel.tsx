@@ -68,11 +68,14 @@ function EffectTags({ effects }: { effects: Record<string, number> }) {
   return (
     <div className="flex flex-wrap gap-2 mt-2">
       {Object.entries(effects).map(([k, v]) => {
-        const sign = v > 0 ? '+' : '';
-        const color = v > 0 ? 'text-emerald-700 bg-emerald-50 border border-emerald-200' : 'text-red-600 bg-red-50 border border-red-200';
+        const isPositive = v > 0;
+        const color = isPositive
+          ? 'text-emerald-700 bg-emerald-50 border border-emerald-200'
+          : 'text-red-600 bg-red-50 border border-red-200';
         return (
-          <span key={k} className={`${color} text-xs font-mono px-2 py-0.5 rounded`}>
-            {names[k]} {sign}{v}
+          <span key={k} className={`${color} text-xs font-mono px-2 py-0.5 rounded flex items-center gap-1`}>
+            <span className="font-bold">{isPositive ? '▲' : '▼'}</span>
+            <span>{names[k]} {isPositive ? '+' : ''}{v}</span>
           </span>
         );
       })}

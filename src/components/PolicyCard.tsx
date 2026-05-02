@@ -22,11 +22,14 @@ export function PolicyCard({ policy, onClick, disabled }: PolicyCardProps) {
       public_support: '民心',
       credit_rating: '信用',
     };
-    const sign = (val as number) > 0 ? '+' : '';
-    const color = (val as number) > 0 ? 'text-emerald-600' : 'text-red-500';
+    const numVal = val as number;
+    const isPositive = numVal > 0;
+    const color = isPositive ? 'text-emerald-600' : 'text-red-500';
+    const bgColor = isPositive ? 'bg-emerald-50 border-emerald-200' : 'bg-red-50 border-red-200';
     return (
-      <span key={key} className={`${color} text-xs font-mono`}>
-        {names[key]}{sign}{val as number}
+      <span key={key} className={`${bgColor} border text-xs font-mono px-1.5 py-0.5 rounded flex items-center gap-0.5`}>
+        <span className={color}>{isPositive ? '▲' : '▼'}</span>
+        <span className={color}>{names[key]} {isPositive ? '+' : ''}{numVal}</span>
       </span>
     );
   });
