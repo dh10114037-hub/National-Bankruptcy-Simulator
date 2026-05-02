@@ -104,6 +104,7 @@ function AchievementBadge({ onClick }: { onClick?: () => void }) {
   return (
     <button
       onClick={onClick}
+      aria-label="查看成就"
       className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-amber-50 border border-amber-200 text-amber-600 hover:bg-amber-100 transition-colors"
       title="查看成就"
     >
@@ -139,6 +140,7 @@ export function Header({ gameState, crisisLevel, trendHistory, lastDelta, onBack
             {onBack && (
               <button
                 onClick={onBack}
+                aria-label="返回主菜单"
                 className="relative px-2.5 py-1.5 rounded-lg bg-gray-100 border border-gray-200 text-gray-600 hover:text-gray-900 text-xs transition-all hover:bg-gray-200"
               >
                 ← 返回

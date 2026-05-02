@@ -16,6 +16,15 @@ interface Props {
 
 // ─── 游戏说明弹层 ────────────────────────────────────────────
 function HowToPlayModal({ onClose }: { onClose: () => void }) {
+  // ESC键关闭支持（低优先级问题1.2.2）
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -41,6 +50,7 @@ function HowToPlayModal({ onClose }: { onClose: () => void }) {
           </div>
           <button
             onClick={onClose}
+            aria-label="关闭游戏说明"
             className="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-sm transition-colors"
           >
             ✕

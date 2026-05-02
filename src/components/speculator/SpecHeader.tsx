@@ -106,6 +106,7 @@ export function SpecHeader({ assets, market, turn, maxTurns, marketFlash, initia
           {onBack && (
             <button
               onClick={onBack}
+              aria-label="返回主菜单"
               className="shrink-0 px-2 py-1.5 rounded-lg bg-gray-100 border border-gray-200 text-gray-600 hover:text-gray-900 text-xs transition-all hover:bg-gray-200"
             >
               ← 返回

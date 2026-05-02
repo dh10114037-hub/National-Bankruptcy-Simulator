@@ -139,6 +139,15 @@ export function TutorialOverlay({ role, onClose }: TutorialProps) {
     }
   }, [role, onClose]);
 
+  // ESC键关闭支持（低优先级问题1.2.2）
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
+
   const STEPS_SAVIOR = [
     {
       title:   '你是国家的最后防线',

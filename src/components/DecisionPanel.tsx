@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { Policy } from '../types/game';
 import { CausalChainAnimation } from './CausalChainAnimation';
@@ -40,10 +40,27 @@ function ConfirmModal({
   onConfirm: () => void;
   onCancel: () => void;
 }) {
+  // ESC键关闭支持（低优先级问题1.2.2）
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onCancel();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [onCancel]);
+
   const sides = sideEffectMap[policy.id] ?? [];
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
       <div className="pop-in w-full max-w-sm rounded-2xl border border-gray-200 bg-white p-6 shadow-xl">
+        {/* 关闭按钮 */}
+        <button
+          onClick={onCancel}
+          className="absolute top-4 right-4 w-8 h-8 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-400 hover:text-gray-600 transition-colors"
+          aria-label="关闭"
+        >
+          ×
+        </button>
         <div className="text-4xl text-center mb-3">{policy.icon}</div>
         <h3 className="text-gray-900 font-bold text-center text-lg mb-1">
           确认执行：{policy.name}？
@@ -181,10 +198,10 @@ function PolicyCard({
           ${disabled
             ? 'border-gray-200 bg-gray-50 opacity-40 cursor-not-allowed'
             : isRecommended
-              ? 'border-emerald-400 bg-emerald-50/40 cursor-pointer hover:border-emerald-500 hover:shadow-md ring-1 ring-emerald-300'
+              ? 'border-emerald-400 bg-emerald-50/40 cursor-pointer hover:border-emerald-500 hover:shadow-lg hover:bg-emerald-50/60 ring-1 ring-emerald-300 active:scale-[0.98]'
               : policy.tag === '新手推荐'
-                ? 'border-blue-300 bg-blue-50/30 cursor-pointer hover:border-blue-400 hover:shadow-md ring-1 ring-blue-200'
-                : 'border-gray-200 bg-white cursor-pointer active:scale-[0.99] hover:border-blue-300 hover:shadow-md'
+                ? 'border-blue-300 bg-blue-50/30 cursor-pointer hover:border-blue-400 hover:shadow-lg hover:bg-blue-50/50 active:scale-[0.98]'
+                : 'border-gray-200 bg-white cursor-pointer active:scale-[0.98] hover:border-blue-300 hover:shadow-lg hover:bg-gray-50'
           }
         `}
         whileTap={disabled ? {} : { scale: 0.98 }}

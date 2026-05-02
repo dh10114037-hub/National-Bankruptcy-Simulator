@@ -224,6 +224,15 @@ export function SaveLoadModal({
     refreshSlots();
   }, []);
 
+  // ESC键关闭支持（低优先级问题1.2.2）
+  useEffect(() => {
+    const handleEsc = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') onClose();
+    };
+    document.addEventListener('keydown', handleEsc);
+    return () => document.removeEventListener('keydown', handleEsc);
+  }, [onClose]);
+
   const handleSave = (slotIndex: number) => {
     if (!onSave) return;
     onSave(slotIndex);
@@ -267,6 +276,7 @@ export function SaveLoadModal({
           </div>
           <button
             onClick={onClose}
+            aria-label="关闭存档界面"
             className="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-sm text-gray-500 transition-colors"
           >
             ✕
